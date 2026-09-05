@@ -11,7 +11,7 @@
     "extraction_revision": {"type": "string", "minLength": 1},
     "dispositions": {
       "type": "array",
-      "items": {"$ref": "turn-disposition.v1.schema.json"}
+      "items": {"$ref": "pir.turn-disposition.v1.schema.json"}
     }
   }
 }
