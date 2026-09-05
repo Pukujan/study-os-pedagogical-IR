@@ -79,8 +79,8 @@
           "state": "satisfied",
           "evidence": [
             {
-              "kind": "issue",
-              "locator": "Pukujan/study-os-benchmarker#2",
+              "kind": "file",
+              "locator": "Pukujan/study-os-benchmarker/specs/HOLDOUT_PROTOCOL.md",
               "note": "Blind/masked/sealed protocol forbids oracle material in candidate or agent-visible workspaces."
             },
             {
@@ -104,9 +104,9 @@
           "state": "satisfied",
           "evidence": [
             {
-              "kind": "issue",
-              "locator": "Pukujan/study-os-benchmarker#1",
-              "note": "Defines historical fidelity, mutation, ablation, prospective, and holdout claims separately."
+              "kind": "file",
+              "locator": "Pukujan/study-os-benchmarker/specs/PDD.md",
+              "note": "Defines the narrow benchmark claim, evidence classes, trust boundary, non-goals, and first success gate."
             }
           ],
           "rationale": null
@@ -122,9 +122,9 @@
           "state": "satisfied",
           "evidence": [
             {
-              "kind": "issue",
-              "locator": "Pukujan/study-os-benchmarker#2",
-              "note": "Defines visible regression, masked regression, sealed withheld calibration, prospective unseen, and contamination retirement lanes."
+              "kind": "file",
+              "locator": "Pukujan/study-os-benchmarker/specs/HOLDOUT_PROTOCOL.md",
+              "note": "Defines visible regression, masked regression, sealed withheld calibration, prospective unseen evaluation, and contamination retirement."
             }
           ],
           "rationale": null
