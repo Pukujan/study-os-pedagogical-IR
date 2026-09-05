@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Pukujan/project-assurance-modules
-          ref: a10ad56b7088c1e101e80914a9e00357dbef9120
+          ref: 03fc55ae4036a9704cdb929fb3ae6dc520ae2183
           path: .pam
 
       - name: Set up Python
