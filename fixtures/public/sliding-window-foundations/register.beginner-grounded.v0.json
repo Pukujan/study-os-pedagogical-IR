@@ -1,0 +1,19 @@
+{
+  "schema_version": "pir.experimental-lexical-register.v0",
+  "register_id": "sep4.beginner-grounded.v0",
+  "description": "Acquisition register evidenced by the September-4 sliding-window foundations trajectory. Keeps the learner-grounded numbers/box vocabulary until later explicit source-term restoration.",
+  "rules": [
+    {
+      "concept_id": "array_value",
+      "preferred_term": "number",
+      "allowed_terms": ["number", "numbers", "number(a)", "numbers(a)"],
+      "forbidden_terms": ["element", "elements", "value", "values", "entry", "entries"]
+    },
+    {
+      "concept_id": "selected_group",
+      "preferred_term": "box",
+      "allowed_terms": ["box"],
+      "forbidden_terms": ["window", "slice", "segment"]
+    }
+  ]
+}
