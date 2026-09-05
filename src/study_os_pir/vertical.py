@@ -15,15 +15,25 @@ class VerticalStepKind(StrEnum):
     COMPARE = "compare"
 
 
+class VerticalLearnerOutcomeKind(StrEnum):
+    CORRECT = "correct"
+    META = "meta"
+
+
 class VerticalViolationCode(StrEnum):
     DUPLICATE_STEP_ID = "DUPLICATE_STEP_ID"
     DUPLICATE_REPRESENTATION_ID = "DUPLICATE_REPRESENTATION_ID"
+    DUPLICATE_LEARNER_OUTCOME_ID = "DUPLICATE_LEARNER_OUTCOME_ID"
     UNKNOWN_REPRESENTATION = "UNKNOWN_REPRESENTATION"
     MISSING_PRESERVED_REPRESENTATION = "MISSING_PRESERVED_REPRESENTATION"
     FORBIDDEN_CONCEPT_DISCLOSED = "FORBIDDEN_CONCEPT_DISCLOSED"
     ANSWER_LITERAL_LEAKED = "ANSWER_LITERAL_LEAKED"
+    UNKNOWN_LEARNER_OUTCOME_ANCHOR = "UNKNOWN_LEARNER_OUTCOME_ANCHOR"
+    UNKNOWN_LEARNER_OUTCOME_NEXT_STEP = "UNKNOWN_LEARNER_OUTCOME_NEXT_STEP"
+    INVALID_LEARNER_OUTCOME_ROUTE = "INVALID_LEARNER_OUTCOME_ROUTE"
     UNKNOWN_REJECTED_MOVE_ANCHOR = "UNKNOWN_REJECTED_MOVE_ANCHOR"
     UNKNOWN_REJECTED_MOVE_REPAIR = "UNKNOWN_REJECTED_MOVE_REPAIR"
+    INVALID_REJECTED_MOVE_REPAIR_ROUTE = "INVALID_REJECTED_MOVE_REPAIR_ROUTE"
     EXECUTION_MISSING_STEP = "EXECUTION_MISSING_STEP"
     EXECUTION_UNEXPECTED_STEP = "EXECUTION_UNEXPECTED_STEP"
     EXECUTION_ORDER_MISMATCH = "EXECUTION_ORDER_MISMATCH"
@@ -43,7 +53,7 @@ class VerticalWindowBox(StrictFrozenModel):
 class VerticalRepresentation(StrictFrozenModel):
     representation_id: str = Field(min_length=1)
     rows: tuple[VerticalRow, ...] = Field(min_length=1)
-    box: VerticalWindowBox
+    box: VerticalWindowBox | None = None
     annotations: tuple[str, ...] = ()
     visible_components: tuple[str, ...] = Field(min_length=1)
 
@@ -68,11 +78,22 @@ class VerticalStep(StrictFrozenModel):
     evidence_note: str = Field(min_length=1)
 
 
+class VerticalLearnerOutcome(StrictFrozenModel):
+    outcome_id: str = Field(min_length=1)
+    after_step_id: str = Field(min_length=1)
+    kind: VerticalLearnerOutcomeKind
+    summary: str = Field(min_length=1)
+    next_step_id: str | None = Field(default=None, min_length=1)
+    exit_target: str | None = Field(default=None, min_length=1)
+    evidence_note: str = Field(min_length=1)
+
+
 class ObservedRejectedMove(StrictFrozenModel):
     move_id: str = Field(min_length=1)
     after_step_id: str = Field(min_length=1)
     description: str = Field(min_length=1)
-    repaired_by_step_id: str = Field(min_length=1)
+    repaired_by_step_id: str | None = Field(default=None, min_length=1)
+    repair_exit_target: str | None = Field(default=None, min_length=1)
     evidence_note: str = Field(min_length=1)
 
 
@@ -82,6 +103,7 @@ class ExperimentalVerticalSlice(StrictFrozenModel):
     source_locator: str = Field(min_length=1)
     representations: tuple[VerticalRepresentation, ...] = Field(min_length=1)
     steps: tuple[VerticalStep, ...] = Field(min_length=1)
+    learner_outcomes: tuple[VerticalLearnerOutcome, ...] = ()
     rejected_moves: tuple[ObservedRejectedMove, ...] = ()
 
 
@@ -90,14 +112,23 @@ class VerticalViolation(StrictFrozenModel):
     detail: str = Field(min_length=1)
 
 
+def _duplicate_values(values: tuple[str, ...]) -> tuple[str, ...]:
+    return tuple(sorted({value for value in values if values.count(value) > 1}))
+
+
+def _route_is_exclusive(first: str | None, second: str | None) -> bool:
+    return (first is None) != (second is None)
+
+
 def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[VerticalViolation, ...]:
     violations: list[VerticalViolation] = []
     step_ids = tuple(step.step_id for step in slice_.steps)
     representation_ids = tuple(rep.representation_id for rep in slice_.representations)
+    outcome_ids = tuple(outcome.outcome_id for outcome in slice_.learner_outcomes)
     step_id_set = set(step_ids)
     representation_by_id = {rep.representation_id: rep for rep in slice_.representations}
 
-    for duplicate in sorted({value for value in step_ids if step_ids.count(value) > 1}):
+    for duplicate in _duplicate_values(step_ids):
         violations.append(
             VerticalViolation(
                 code=VerticalViolationCode.DUPLICATE_STEP_ID,
@@ -105,13 +136,19 @@ def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[Vertical
             )
         )
 
-    for duplicate in sorted(
-        {value for value in representation_ids if representation_ids.count(value) > 1}
-    ):
+    for duplicate in _duplicate_values(representation_ids):
         violations.append(
             VerticalViolation(
                 code=VerticalViolationCode.DUPLICATE_REPRESENTATION_ID,
                 detail=f"duplicate representation id: {duplicate}",
+            )
+        )
+
+    for duplicate in _duplicate_values(outcome_ids):
+        violations.append(
+            VerticalViolation(
+                code=VerticalViolationCode.DUPLICATE_LEARNER_OUTCOME_ID,
+                detail=f"duplicate learner outcome id: {duplicate}",
             )
         )
 
@@ -166,6 +203,35 @@ def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[Vertical
                     )
                 )
 
+    for outcome in slice_.learner_outcomes:
+        if outcome.after_step_id not in step_id_set:
+            violations.append(
+                VerticalViolation(
+                    code=VerticalViolationCode.UNKNOWN_LEARNER_OUTCOME_ANCHOR,
+                    detail=f"{outcome.outcome_id} anchors to unknown step {outcome.after_step_id}",
+                )
+            )
+        if not _route_is_exclusive(outcome.next_step_id, outcome.exit_target):
+            violations.append(
+                VerticalViolation(
+                    code=VerticalViolationCode.INVALID_LEARNER_OUTCOME_ROUTE,
+                    detail=(
+                        f"{outcome.outcome_id} must select exactly one of next_step_id "
+                        "or exit_target"
+                    ),
+                )
+            )
+        elif outcome.next_step_id is not None and outcome.next_step_id not in step_id_set:
+            violations.append(
+                VerticalViolation(
+                    code=VerticalViolationCode.UNKNOWN_LEARNER_OUTCOME_NEXT_STEP,
+                    detail=(
+                        f"{outcome.outcome_id} routes to unknown step "
+                        f"{outcome.next_step_id}"
+                    ),
+                )
+            )
+
     for move in slice_.rejected_moves:
         if move.after_step_id not in step_id_set:
             violations.append(
@@ -174,7 +240,17 @@ def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[Vertical
                     detail=f"{move.move_id} anchors to unknown step {move.after_step_id}",
                 )
             )
-        if move.repaired_by_step_id not in step_id_set:
+        if not _route_is_exclusive(move.repaired_by_step_id, move.repair_exit_target):
+            violations.append(
+                VerticalViolation(
+                    code=VerticalViolationCode.INVALID_REJECTED_MOVE_REPAIR_ROUTE,
+                    detail=(
+                        f"{move.move_id} must select exactly one repair step "
+                        "or repair exit target"
+                    ),
+                )
+            )
+        elif move.repaired_by_step_id is not None and move.repaired_by_step_id not in step_id_set:
             violations.append(
                 VerticalViolation(
                     code=VerticalViolationCode.UNKNOWN_REJECTED_MOVE_REPAIR,
@@ -224,17 +300,18 @@ def validate_vertical_execution(
 
 def _render_representation(representation: VerticalRepresentation) -> str:
     label_width = max(len(row.label) for row in representation.rows)
-    value_count = max(len(row.values) for row in representation.rows)
     lines = [
         f"{row.label:<{label_width}}: " + " ".join(f"{value:>3}" for value in row.values)
         for row in representation.rows
     ]
-    end = representation.box.start_index + representation.box.width
-    markers = [
-        "^^^" if representation.box.start_index <= index < end else "   "
-        for index in range(value_count)
-    ]
-    lines.append(f"{'window':<{label_width}}: " + " ".join(markers))
+    if representation.box is not None:
+        value_count = max(len(row.values) for row in representation.rows)
+        end = representation.box.start_index + representation.box.width
+        markers = [
+            "^^^" if representation.box.start_index <= index < end else "   "
+            for index in range(value_count)
+        ]
+        lines.append(f"{'window':<{label_width}}: " + " ".join(markers))
     lines.extend(f"{'':<{label_width}}  {annotation}" for annotation in representation.annotations)
     return "\n".join(lines)
 
@@ -268,13 +345,28 @@ def render_vertical_slice(slice_: ExperimentalVerticalSlice) -> str:
             )
         lines.extend([f"Evidence note: {step.evidence_note}", ""])
 
+    if slice_.learner_outcomes:
+        lines.append("Learner outcomes:")
+        for outcome in slice_.learner_outcomes:
+            route = outcome.next_step_id or f"exit:{outcome.exit_target}"
+            lines.extend(
+                [
+                    f"- {outcome.outcome_id} after {outcome.after_step_id}",
+                    f"  Kind: {outcome.kind.value}",
+                    f"  Summary: {outcome.summary}",
+                    f"  Route: {route}",
+                    f"  Evidence note: {outcome.evidence_note}",
+                ]
+            )
+
     lines.append("Observed rejected moves:")
     for move in slice_.rejected_moves:
+        repair = move.repaired_by_step_id or f"exit:{move.repair_exit_target}"
         lines.extend(
             [
                 f"- {move.move_id} after {move.after_step_id}",
                 f"  Rejected: {move.description}",
-                f"  Repair: {move.repaired_by_step_id}",
+                f"  Repair: {repair}",
                 f"  Evidence note: {move.evidence_note}",
             ]
         )
