@@ -1,0 +1,10 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.restore-after-code.v0",
+  "assessments": [
+    {"step_id": "restore_probe_s2", "kind": "integer", "expected_values": [8]},
+    {"step_id": "restore_probe_s3", "kind": "integer", "expected_values": [14]},
+    {"step_id": "restore_retry_s3_changed", "kind": "integer", "expected_values": [9]},
+    {"step_id": "restore_verify_s2_changed", "kind": "integer", "expected_values": [11]}
+  ]
+}
