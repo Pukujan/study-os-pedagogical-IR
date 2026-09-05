@@ -18,6 +18,7 @@ from .vertical import VerticalRepresentation, VerticalStepKind
 class AssessmentKind(StrEnum):
     INTEGER = "integer"
     INTEGER_SEQUENCE = "integer_sequence"
+    TEXT = "text"
 
 
 class AssessmentViolationCode(StrEnum):
@@ -27,6 +28,8 @@ class AssessmentViolationCode(StrEnum):
     ASSESSMENT_FOR_NON_PROBE = "ASSESSMENT_FOR_NON_PROBE"
     MISSING_PROBE_ASSESSMENT = "MISSING_PROBE_ASSESSMENT"
     INVALID_INTEGER_ASSESSMENT = "INVALID_INTEGER_ASSESSMENT"
+    INVALID_INTEGER_SEQUENCE_ASSESSMENT = "INVALID_INTEGER_SEQUENCE_ASSESSMENT"
+    INVALID_TEXT_ASSESSMENT = "INVALID_TEXT_ASSESSMENT"
 
 
 class ReplayPhase(StrEnum):
@@ -38,8 +41,9 @@ class ReplayPhase(StrEnum):
 class AssessmentSpec(StrictFrozenModel):
     step_id: str = Field(min_length=1)
     kind: AssessmentKind
-    expected_values: tuple[int, ...] = Field(min_length=1)
+    expected_values: tuple[int, ...] = ()
     partial_values: tuple[int, ...] = ()
+    expected_text: tuple[str, ...] = ()
 
 
 class AssessmentRegistry(StrictFrozenModel):
@@ -143,11 +147,33 @@ def validate_assessment_registry(
                     detail=f"assessment targets non-probe step: {spec.step_id}",
                 )
             )
-        if spec.kind == AssessmentKind.INTEGER and len(spec.expected_values) != 1:
+        if spec.kind == AssessmentKind.INTEGER:
+            if len(spec.expected_values) != 1 or spec.expected_text:
+                violations.append(
+                    AssessmentViolation(
+                        code=AssessmentViolationCode.INVALID_INTEGER_ASSESSMENT,
+                        detail=f"integer assessment must contain one integer value: {spec.step_id}",
+                    )
+                )
+        elif spec.kind == AssessmentKind.INTEGER_SEQUENCE:
+            if not spec.expected_values or spec.expected_text:
+                violations.append(
+                    AssessmentViolation(
+                        code=AssessmentViolationCode.INVALID_INTEGER_SEQUENCE_ASSESSMENT,
+                        detail=(
+                            "integer-sequence assessment must contain integer values: "
+                            f"{spec.step_id}"
+                        ),
+                    )
+                )
+        elif not spec.expected_text or spec.expected_values or spec.partial_values:
             violations.append(
                 AssessmentViolation(
-                    code=AssessmentViolationCode.INVALID_INTEGER_ASSESSMENT,
-                    detail=f"integer assessment must contain one expected value: {spec.step_id}",
+                    code=AssessmentViolationCode.INVALID_TEXT_ASSESSMENT,
+                    detail=(
+                        "text assessment must contain only expected_text alternatives: "
+                        f"{spec.step_id}"
+                    ),
                 )
             )
 
@@ -187,6 +213,10 @@ def _parse_integer_sequence(response: str) -> tuple[int, ...]:
     return tuple(values)
 
 
+def _normalize_text(response: str) -> str:
+    return re.sub(r"\s+", "", response.strip())
+
+
 def _matches_partial(spec: AssessmentSpec, response: str) -> bool:
     if not spec.partial_values:
         return False
@@ -198,6 +228,12 @@ def _matches_partial(spec: AssessmentSpec, response: str) -> bool:
 
 
 def classify_response(spec: AssessmentSpec, response: str) -> TrajectoryOutcomeKind:
+    if spec.kind == AssessmentKind.TEXT:
+        observed_text = _normalize_text(response)
+        if any(observed_text == _normalize_text(expected) for expected in spec.expected_text):
+            return TrajectoryOutcomeKind.CORRECT
+        return TrajectoryOutcomeKind.INCORRECT
+
     try:
         if spec.kind == AssessmentKind.INTEGER:
             observed = _parse_integer(response)
