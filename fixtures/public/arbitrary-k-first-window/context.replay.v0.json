@@ -4,7 +4,7 @@
   "persistent_text": [
     "Find the largest sum of any k numbers next to each other in the array.",
     "The outer loop, stop condition, first/later-box split, sliding recurrence, and max update are already grounded.",
-    "This slice changes only how the first S[i] is built when k is not fixed at 3.",
-    "Keep S as the existing box-sum state; do not introduce a second accumulator variable."
+    "This replay changes only how the first S[i] is built when k is not fixed at 3.",
+    "Keep S as the existing box-sum state; use no additional variable for that box sum."
   ]
 }
