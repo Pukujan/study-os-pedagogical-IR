@@ -1,0 +1,8 @@
+{
+  "schema_version": "pir.compiler-policy.v0",
+  "policy_id": "compiler-p3",
+  "policy_version": "0.1.0",
+  "strategy": "one_transition",
+  "prompt_template": "Given the raw problem and current learner evidence, propose exactly one next pedagogical transition in the structured compiler schema. State what is introduced, what must be preserved, the representation requirement, and the assessment target. Do not generate a full lesson.",
+  "max_new_concepts_per_step": 1
+}
