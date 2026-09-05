@@ -1,0 +1,206 @@
+{
+  "schema_version": "pir.experimental-vertical-slice.v0",
+  "slice_id": "sep4.enumerate-calibration.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part05.md",
+  "representations": [
+    {
+      "representation_id": "r.explain",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["4", "7", "2", "6", "1", "9"]},
+        {"row_id": "pair_row", "label": "enumerate gives", "values": ["(0,4)", "(1,7)", "(2,2)", "(3,6)", "(4,1)", "(5,9)"]}
+      ],
+      "box": null,
+      "annotations": ["enumerate(a): each loop turn gives the current index and number"],
+      "visible_components": ["numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation"]
+    },
+    {
+      "representation_id": "r.probe6",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 6"],
+      "visible_components": ["numbers_row", "index_row", "number_row", "enumerate_relation"]
+    },
+    {
+      "representation_id": "r.validate6",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "1", "9"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "[3]", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["4", "7", "2", "[6]", "1", "9"]},
+        {"row_id": "pair_row", "label": "enumerate gives", "values": ["(0,4)", "(1,7)", "(2,2)", "[(3,6)]", "(4,1)", "(5,9)"]}
+      ],
+      "box": null,
+      "annotations": ["index 3 lines up with number 6, so enumerate gives (3,6)"],
+      "visible_components": ["numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"]
+    },
+    {
+      "representation_id": "r.probe7",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "2", "8", "4", "7", "1"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["5", "2", "8", "4", "7", "1"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 7"],
+      "visible_components": ["numbers_row", "index_row", "number_row", "enumerate_relation"]
+    },
+    {
+      "representation_id": "r.validate7",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "2", "8", "4", "[7]", "1"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "[4]", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["5", "2", "8", "4", "[7]", "1"]},
+        {"row_id": "pair_row", "label": "enumerate gives", "values": ["(0,5)", "(1,2)", "(2,8)", "(3,4)", "[(4,7)]", "(5,1)"]}
+      ],
+      "box": null,
+      "annotations": ["index 4 lines up with number 7, so enumerate gives (4,7)"],
+      "visible_components": ["numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "explain_enumerate_in_chart",
+      "kind": "explain",
+      "goal": "Explain enumerate(a) as one current index plus one current number on each loop turn, using the aligned chart.",
+      "representation_id": "r.explain",
+      "preserve_components": ["numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "introduce the relation between index(i), number(num), and the pair returned by enumerate(a)",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "sliding_recurrence", "max_sum"],
+      "probe": null,
+      "evidence_note": "After the learner rejected an under-explained probe, the tutor explicitly explained that enumerate goes through a and gives both the current index and number."
+    },
+    {
+      "step_id": "probe_pair_for_6",
+      "kind": "probe",
+      "goal": "Ask the learner to produce the enumerate pair for the number 6 without showing that pair anywhere on the learner-visible surface.",
+      "representation_id": "r.probe6",
+      "preserve_components": ["numbers_row", "index_row", "number_row", "enumerate_relation"],
+      "forbidden_components": ["window_box", "pair_row"],
+      "active_delta": "apply the explained enumerate relation to one current number",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "sliding_recurrence", "max_sum"],
+      "probe": {
+        "target": "enumerate pair corresponding to a = 6",
+        "prompt": "When the loop reaches a = 6, what pair does enumerate(a) give us?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["(3,6)", "(3, 6)", "3,6", "3, 6"]
+      },
+      "evidence_note": "The learner explicitly rejected the earlier display of (3,6) before the question and requested this question form. The later changed-example probe establishes the non-leaking representation pattern."
+    },
+    {
+      "step_id": "validate_pair_36_same_chart",
+      "kind": "validate",
+      "goal": "Show why the learner's (3,6) answer is correct by highlighting index 3, number 6, and their pair in the same chart.",
+      "representation_id": "r.validate6",
+      "preserve_components": ["numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "validate the learner answer by making the index-number alignment visually explicit",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "sliding_recurrence", "max_sum"],
+      "probe": null,
+      "evidence_note": "After the tutor said correct and tried to move on, the learner explicitly restored the rule: show in the chart why the answer is right or wrong."
+    },
+    {
+      "step_id": "probe_pair_for_7_changed_chart",
+      "kind": "probe",
+      "goal": "Test the same enumerate relation on a changed array without showing the target pair.",
+      "representation_id": "r.probe7",
+      "preserve_components": ["numbers_row", "index_row", "number_row", "enumerate_relation"],
+      "forbidden_components": ["window_box", "pair_row"],
+      "active_delta": "hold the enumerate relation constant while changing the array values and target number",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "sliding_recurrence", "max_sum"],
+      "probe": {
+        "target": "enumerate pair corresponding to a = 7 in the changed array",
+        "prompt": "In this changed array, when the loop reaches a = 7, what pair does enumerate(a) give us?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["(4,7)", "(4, 7)", "4,7", "4, 7"]
+      },
+      "evidence_note": "The tutor used a changed array, withheld the pair row, and asked for the pair corresponding to number 7."
+    },
+    {
+      "step_id": "validate_pair_47_same_chart",
+      "kind": "validate",
+      "goal": "Validate the learner's (4,7) answer in the same changed chart before any further exercise or concept transition.",
+      "representation_id": "r.validate7",
+      "preserve_components": ["numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "validate the second changed-example answer by highlighting index 4, number 7, and pair (4,7)",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "sliding_recurrence", "max_sum"],
+      "probe": null,
+      "evidence_note": "The tutor validated the second answer in the changed chart; the learner then explicitly said two examples were enough and requested append."
+    }
+  ],
+  "learner_outcomes": [
+    {
+      "outcome_id": "meta.request_calibrated_question_form",
+      "after_step_id": "explain_enumerate_in_chart",
+      "kind": "meta",
+      "summary": "Learner requests the question form: when the loop reaches a specific number, ask what enumerate(a) gives.",
+      "next_step_id": "probe_pair_for_6",
+      "exit_target": null,
+      "evidence_note": "Learner explicitly supplied the desired question form before the first calibrated enumerate probe."
+    },
+    {
+      "outcome_id": "correct.pair_36",
+      "after_step_id": "probe_pair_for_6",
+      "kind": "correct",
+      "summary": "Learner answers 3,6.",
+      "next_step_id": "validate_pair_36_same_chart",
+      "exit_target": null,
+      "evidence_note": "Learner response at source sequence 592."
+    },
+    {
+      "outcome_id": "correct.pair_47",
+      "after_step_id": "probe_pair_for_7_changed_chart",
+      "kind": "correct",
+      "summary": "Learner answers 4,7.",
+      "next_step_id": "validate_pair_47_same_chart",
+      "exit_target": null,
+      "evidence_note": "Learner response at source sequence 596."
+    },
+    {
+      "outcome_id": "meta.two_is_enough",
+      "after_step_id": "validate_pair_47_same_chart",
+      "kind": "meta",
+      "summary": "Learner says two enumerate exercises are enough and requests moving to append.",
+      "next_step_id": null,
+      "exit_target": "append",
+      "evidence_note": "Learner: no 2 is enough go to append."
+    }
+  ],
+  "rejected_moves": [
+    {
+      "move_id": "reject.answer_leak_before_pair_probe",
+      "after_step_id": "explain_enumerate_in_chart",
+      "description": "The target pair (3,6) was displayed before the learner was asked to produce it.",
+      "repaired_by_step_id": "probe_pair_for_6",
+      "repair_exit_target": null,
+      "evidence_note": "Learner explicitly said the answer had already been written and asked for another question/place."
+    },
+    {
+      "move_id": "reject.move_on_before_same_chart_validation",
+      "after_step_id": "probe_pair_for_6",
+      "description": "The tutor said correct and immediately moved to another exercise without showing why the answer was correct in the chart.",
+      "repaired_by_step_id": "validate_pair_36_same_chart",
+      "repair_exit_target": null,
+      "evidence_note": "Learner explicitly restored the same-chart validation rule."
+    },
+    {
+      "move_id": "reject.unnecessary_third_enumerate_exercise",
+      "after_step_id": "validate_pair_47_same_chart",
+      "description": "The tutor asked whether to do one more enumerate exercise after two successful probes.",
+      "repaired_by_step_id": null,
+      "repair_exit_target": "append",
+      "evidence_note": "Learner explicitly said two were enough and directed the lesson to append."
+    }
+  ]
+}
