@@ -1,0 +1,10 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.enumerate-append.v0",
+  "assessments": [
+    {"step_id": "enumerate_probe6", "kind": "integer_sequence", "expected_values": [3, 6]},
+    {"step_id": "enumerate_probe7_changed", "kind": "integer_sequence", "expected_values": [4, 7]},
+    {"step_id": "append_probe_simple", "kind": "text", "expected_text": ["S.append(S[i-1] + a[i])"]},
+    {"step_id": "append_probe_changed", "kind": "text", "expected_text": ["S.append(S[i-1] - a[i-1] + a[i+2])"]}
+  ]
+}
