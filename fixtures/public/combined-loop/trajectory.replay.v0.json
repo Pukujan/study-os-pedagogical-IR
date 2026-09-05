@@ -369,7 +369,7 @@
         "target": "if i > len(a)-k: break",
         "prompt": "Write the Python if + break lines that stop once i goes past the last valid box.",
         "answer_reveal_allowed": false,
-        "forbidden_answer_literals": ["if i > len(a) - k:", "break"]
+        "forbidden_answer_literals": ["if i > len(a) - k:"]
       },
       "evidence_turn_refs": ["part08:break-changed-exercise"]
     },
@@ -391,6 +391,7 @@
     {"transition_id": "auto.else.later", "from_step_id": "else_bridge_explain", "next_step_id": "later_box_full_probe", "exit_target": null, "evidence_turn_refs": ["part08:accepted-else-explanation-continue"]},
     {"transition_id": "auto.append.repair", "from_step_id": "append_conversion_correction", "next_step_id": "append_retry_probe", "exit_target": null, "evidence_turn_refs": ["part08:retry-append-policy"]},
     {"transition_id": "auto.later.boundary", "from_step_id": "later_box_validate", "next_step_id": "boundary_intro", "exit_target": null, "evidence_turn_refs": ["part08:learner-asks-break-next"]},
+    {"transition_id": "auto.boundary.len", "from_step_id": "boundary_intro", "next_step_id": "len_probe", "exit_target": null, "evidence_turn_refs": ["part08:len-exercise-after-definition"]},
     {"transition_id": "auto.len.last", "from_step_id": "len_validate", "next_step_id": "last_valid_probe", "exit_target": null, "evidence_turn_refs": ["part08:bring-back-to-box"]},
     {"transition_id": "auto.last.past", "from_step_id": "last_valid_validate", "next_step_id": "past_last_probe", "exit_target": null, "evidence_turn_refs": ["part08:ask-i3-past-boundary"]},
     {"transition_id": "auto.break.explain", "from_step_id": "break_bridge_explain", "next_step_id": "break_code_probe", "exit_target": null, "evidence_turn_refs": ["part08:changed-break-exercise"]},
