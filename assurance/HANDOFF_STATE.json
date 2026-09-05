@@ -7,7 +7,7 @@
     "phase": "PIR-0 extraction and benchmark proof",
     "observed_identity": {
       "kind": "git_commit",
-      "value": "1da192c9fb4341559e12fd6eab020018f8c10f75"
+      "value": "8de9915efd0fc23128d77a2d3fe7ea65077acaea"
     },
     "active_issue": 1
   },
@@ -20,7 +20,7 @@
   },
   "methodology": {
     "repository": "Pukujan/project-assurance-modules",
-    "revision": "a10ad56b7088c1e101e80914a9e00357dbef9120",
+    "revision": "03fc55ae4036a9704cdb929fb3ae6dc520ae2183",
     "modules": [
       {
         "module_id": "continuity.structured-handoff",
@@ -39,11 +39,11 @@
       "locator": "Pukujan/study-os-benchmarker",
       "observed_identity": {
         "kind": "git_commit",
-        "value": "aaa0415aa261c7f46b0eb17853a6876ea5a663f1"
+        "value": "d7b55a359fe98315ca9878c655c195e1ad5ead86"
       },
       "tested_identity": {
         "kind": "git_commit",
-        "value": "aaa0415aa261c7f46b0eb17853a6876ea5a663f1"
+        "value": "d7b55a359fe98315ca9878c655c195e1ad5ead86"
       },
       "issue": 2,
       "pr": null
@@ -65,16 +65,20 @@
     "passed": [
       {
         "name": "PIR G1/G1.5 CI",
-        "evidence": "GitHub Actions run 33969394677 succeeded at 5635effae507e25fcb16ec53b6e3812fd4972448 with the current extraction-coverage slice."
+        "evidence": "GitHub Actions run 33969394677 succeeded at 5635effae507e25fcb16ec53b6e3812fd4972448 with the extraction-coverage slice."
       },
       {
-        "name": "Independent benchmarker bootstrap CI",
-        "evidence": "GitHub Actions run 33968016630 succeeded at aaa0415aa261c7f46b0eb17853a6876ea5a663f1."
+        "name": "Independent benchmarker holdout-protocol CI",
+        "evidence": "GitHub Actions run 33974284702 succeeded at d7b55a359fe98315ca9878c655c195e1ad5ead86."
+      },
+      {
+        "name": "Selected PAM revision CI",
+        "evidence": "PAM GitHub Actions run 33700449457 succeeded at 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 and that revision supports pam-handoff/0.2.0 dispatch."
       }
     ],
     "failed": [],
     "not_run": [
-      "Validate assurance/PROJECT_ASSURANCE.json and assurance/HANDOFF_STATE.json with PAM revision a10ad56b7088c1e101e80914a9e00357dbef9120",
+      "Validate assurance/PROJECT_ASSURANCE.json and assurance/HANDOFF_STATE.json with PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183",
       "Complete authoritative September-4 turn extraction and 100-percent coverage receipt",
       "Compile the complete source-backed September-4 golden trajectory",
       "Run the first Luna fresh-subagent masked-regression evaluation",
@@ -114,7 +118,7 @@
       "Re-fetch Pukujan/study-os-pedagogical-IR main, issue #1, and latest CI before mutation.",
       "Re-fetch Pukujan/study-os-benchmarker main, issues #1/#2, and latest CI before relying on evaluator state.",
       "Re-fetch Pukujan/Study-os main and issue #65 before consuming learner-session evidence or changing adopter contracts.",
-      "Verify PAM revision a10ad56b7088c1e101e80914a9e00357dbef9120 before using its manifest or handoff validators."
+      "Verify PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 before using its manifest or handoff validators."
     ],
     "stale_state_behavior": "refresh_and_revalidate"
   },
@@ -125,9 +129,9 @@
   "handoff": {
     "created_from_identity": {
       "kind": "git_commit",
-      "value": "1da192c9fb4341559e12fd6eab020018f8c10f75"
+      "value": "8de9915efd0fc23128d77a2d3fe7ea65077acaea"
     },
-    "created_at": "2026-09-05T15:07:00Z",
+    "created_at": "2026-09-05T15:18:00Z",
     "reason": "material_plan_change"
   }
 }
