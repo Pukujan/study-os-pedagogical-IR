@@ -39,12 +39,19 @@ class AssessmentSpec(StrictFrozenModel):
     step_id: str = Field(min_length=1)
     kind: AssessmentKind
     expected_values: tuple[int, ...] = Field(min_length=1)
+    partial_values: tuple[int, ...] = ()
 
 
 class AssessmentRegistry(StrictFrozenModel):
     schema_version: str = Field(pattern=r"^pir\.experimental-assessment-registry\.v0$")
     trajectory_id: str = Field(min_length=1)
     assessments: tuple[AssessmentSpec, ...] = Field(min_length=1)
+
+
+class ReplayContext(StrictFrozenModel):
+    schema_version: str = Field(pattern=r"^pir\.experimental-replay-context\.v0$")
+    trajectory_id: str = Field(min_length=1)
+    persistent_text: tuple[str, ...] = Field(min_length=1)
 
 
 class AssessmentViolation(StrictFrozenModel):
@@ -65,6 +72,7 @@ class RendererTurnContract(StrictFrozenModel):
     kind: VerticalStepKind
     goal: str = Field(min_length=1)
     representation: VerticalRepresentation
+    persistent_text: tuple[str, ...] = ()
     preserve_components: tuple[str, ...]
     forbidden_components: tuple[str, ...]
     active_delta: str = Field(min_length=1)
@@ -179,13 +187,30 @@ def _parse_integer_sequence(response: str) -> tuple[int, ...]:
     return tuple(values)
 
 
-def classify_response(spec: AssessmentSpec, response: str) -> TrajectoryOutcomeKind:
-    if spec.kind == AssessmentKind.INTEGER:
-        observed = _parse_integer(response)
-    else:
+def _matches_partial(spec: AssessmentSpec, response: str) -> bool:
+    if not spec.partial_values:
+        return False
+    try:
         observed = _parse_integer_sequence(response)
+    except ValueError:
+        return False
+    return observed == spec.partial_values
+
+
+def classify_response(spec: AssessmentSpec, response: str) -> TrajectoryOutcomeKind:
+    try:
+        if spec.kind == AssessmentKind.INTEGER:
+            observed = _parse_integer(response)
+        else:
+            observed = _parse_integer_sequence(response)
+    except ValueError:
+        if _matches_partial(spec, response):
+            return TrajectoryOutcomeKind.PARTIAL
+        raise
     if observed == spec.expected_values:
         return TrajectoryOutcomeKind.CORRECT
+    if _matches_partial(spec, response):
+        return TrajectoryOutcomeKind.PARTIAL
     return TrajectoryOutcomeKind.INCORRECT
 
 
@@ -226,9 +251,12 @@ def _current_step(trajectory: ExperimentalTrajectory, cursor: ReplayCursor) -> T
 def build_renderer_contract(
     trajectory: ExperimentalTrajectory,
     cursor: ReplayCursor,
+    context: ReplayContext | None = None,
 ) -> RendererTurnContract:
     if cursor.phase != ReplayPhase.RENDER:
         raise ValueError("renderer contract is available only in render phase")
+    if context is not None and context.trajectory_id != trajectory.trajectory_id:
+        raise ValueError("replay context trajectory does not match trajectory")
     step = _current_step(trajectory, cursor)
     representation_by_id = {
         representation.representation_id: representation
@@ -249,6 +277,7 @@ def build_renderer_contract(
         kind=step.kind,
         goal=step.goal,
         representation=representation,
+        persistent_text=() if context is None else context.persistent_text,
         preserve_components=step.preserve_components,
         forbidden_components=step.forbidden_components,
         active_delta=step.active_delta,
