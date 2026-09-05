@@ -1,0 +1,168 @@
+{
+  "schema_version": "pam-handoff/0.2.0",
+  "state_kind": "historical_checkpoint",
+  "project": {
+    "name": "Study OS Pedagogical IR Program",
+    "repository": "Pukujan/study-os-pedagogical-IR",
+    "phase": "PIR-0 executable golden replay and runtime/schema falsification",
+    "observed_identity": {
+      "kind": "git_commit",
+      "value": "c31fe82690765a86248ccc65469b2583690c3d36"
+    },
+    "active_issue": 1
+  },
+  "work": {
+    "owning_repository": "Pukujan/study-os-pedagogical-IR",
+    "issue": 1,
+    "branch": "main",
+    "pr": null,
+    "state": "in_progress"
+  },
+  "methodology": {
+    "repository": "Pukujan/project-assurance-modules",
+    "revision": "03fc55ae4036a9704cdb929fb3ae6dc520ae2183",
+    "modules": [
+      {
+        "module_id": "continuity.structured-handoff",
+        "version": "0.1.0"
+      },
+      {
+        "module_id": "benchmark.integrity",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pukujan/study-os-benchmarker",
+      "role": "independent evaluator, adversarial benchmark, and blind-holdout boundary",
+      "locator": "Pukujan/study-os-benchmarker",
+      "observed_identity": {
+        "kind": "git_commit",
+        "value": "a5751661e19f9d00a2c192dd98780c064a285642"
+      },
+      "tested_identity": {
+        "kind": "git_commit",
+        "value": "a5751661e19f9d00a2c192dd98780c064a285642"
+      },
+      "issue": 2,
+      "pr": null
+    },
+    {
+      "name": "Pukujan/Study-os",
+      "role": "adopter/runtime and source of authorized learner-session evidence",
+      "locator": "Pukujan/Study-os",
+      "observed_identity": {
+        "kind": "git_commit",
+        "value": "bef88216d9052eeb7e135916ea7fb6f8d84e0ccc"
+      },
+      "tested_identity": {
+        "kind": "git_commit",
+        "value": "bef88216d9052eeb7e135916ea7fb6f8d84e0ccc"
+      },
+      "issue": 65,
+      "pr": null
+    }
+  ],
+  "validation": {
+    "passed": [
+      {
+        "name": "September-4 evidence/accounting",
+        "evidence": "Pinned Study OS source was deterministically parsed into 887 turns: 443 learner, 444 tutor, with 887 dispositions and zero missing/duplicate/unknown turns. Source-review ranges resolve 36 candidate events, 18 failure-repair regions, and 4 retained unresolved questions."
+      },
+      {
+        "name": "Max-sum and enumerate vertical proofs",
+        "evidence": "PIR and independent benchmark regressions reject bridge deletion, premature advance/comparison, answer leakage, representation loss, enumerate pair-row/window-box leakage, skipped same-chart validation, and unnecessary third exercise. Benchmarker main a5751661e19f9d00a2c192dd98780c064a285642 passed CI run 33980151679."
+      },
+      {
+        "name": "Branching trajectory and deterministic runtime",
+        "evidence": "The source-backed foundations graph supports correct and wrong->correction->changed-retry paths without inventing repeated-error policy. Runtime separates renderer-safe turn contracts from controller-only assessment oracles and deterministically grades current structured text inputs."
+      },
+      {
+        "name": "Current PIR snapshot",
+        "evidence": "CI run 33984923120 succeeded at c31fe82690765a86248ccc65469b2583690c3d36: Ruff clean, strict mypy clean across 21 source files, 151 tests passed, 100% statement/branch coverage across 857 statements and 266 branches."
+      },
+      {
+        "name": "Current PAM handoff validation",
+        "evidence": "PAM assurance run 33984923129 succeeded at c31fe82690765a86248ccc65469b2583690c3d36. Detailed human handoff: assurance/NEXT_SESSION_HANDOFF.md."
+      }
+    ],
+    "failed": [],
+    "not_run": [
+      "Prove persistent full-problem context is learner-visible on every required replay turn",
+      "Extend executable trajectory through i-moves-box and sum[i] with PARTIAL routing",
+      "Freeze complete canonical September-4 golden",
+      "Run lexical/register falsification before adding language-state IR",
+      "Build and score raw problem + learner state -> PIR compiler",
+      "Run Luna masked, sealed, or prospective holdout evaluations"
+    ]
+  },
+  "next_action": {
+    "repository": "Pukujan/study-os-pedagogical-IR",
+    "issue": 1,
+    "action": "Read assurance/NEXT_SESSION_HANDOFF.md, reconcile live main/CI, then wire persistent full-problem context into learner-visible renderer output. Extend the source-backed executable trajectory through i as box start, moved-box exercises, same-chart validation, and sum[i], including the observed PARTIAL path where correct box contents are given without the arithmetic sum. After replay is faithful through sum[i], run a small lexical/register falsification experiment before deciding whether first-class language state is needed.",
+    "acceptance": "The full difficult question remains visibly available where required; correct/incorrect/partial responses route deterministically through source-backed states; the box remains visible through sum[i]; renderer contracts contain no hidden grading answers; all existing regressions stay green. No lexical/register primitive is promoted unless a concrete mutation shows existing concept/representation constraints are insufficient."
+  },
+  "blockers": [
+    "Persistent problem context exists as an artifact but has not yet been proven in actual learner-visible rendering.",
+    "Lexical/register hierarchy is a serious hypothesis, not yet a justified schema addition.",
+    "Complete canonical September-4 golden remains unfinished."
+  ],
+  "scope": {
+    "do_not_start": [
+      "Promote experimental vertical/trajectory/runtime v0 types into stable G2 merely because current slices pass",
+      "Add a broad semantic-wave, CRA, lexical, or pedagogy ontology from theory alone",
+      "Treat 887/887 accounting as semantic completeness",
+      "Let an LLM own progression or see controller-only grading answers",
+      "Treat masked September-4 regression as true hidden generalization evidence",
+      "Expose sealed holdout oracle material",
+      "Claim automatic decomposition quality or learning efficacy from replay tests"
+    ]
+  },
+  "decisions_not_to_reverse": [
+    "Raw source evidence is authority; derived summaries/goldens do not replace it.",
+    "PIR owns pedagogy semantics; benchmarker independently scores; Study OS adopts pinned tested PIR.",
+    "PAM is assurance, not pedagogy or runtime logic.",
+    "Semantic equivalence never permits deletion of an evidenced intermediate pedagogical state.",
+    "Source accounting and semantic understanding are different claims.",
+    "Non-window representations are first-class.",
+    "Historical learner meta-turns are calibration evidence, not automatically literal future runtime gates.",
+    "Deterministic controller owns progression; renderer/model is bounded.",
+    "Renderer-visible contracts never contain hidden grading answers.",
+    "Learner-visible output is a falsification surface; hidden preserve flags are insufficient.",
+    "Language/register may be a separate abstraction axis from representation, but it remains experimental until a concrete source/runtime test proves the need.",
+    "Do not freeze a universal pedagogy ontology from one learner/session."
+  ],
+  "open_questions": [
+    "Should earlier max(S) exploration be executable golden or superseded?",
+    "Should transcript-faithful len ordering stay separate from a later improved-order experiment?",
+    "How should early part-01 attempts be dispositioned relative to later calibration?",
+    "What evidence establishes mastery after final-loop exposure?",
+    "What bounded repeated-error policy should apply after a failed changed retry?",
+    "Is first-class lexical/register state genuinely required?",
+    "How should PARTIAL grading split deterministic structured parsing from bounded natural-language classification?"
+  ],
+  "reconciliation": {
+    "live_state_wins": true,
+    "checks": [
+      "Read assurance/NEXT_SESSION_HANDOFF.md and assurance/HANDOFF_STATE.json before mutation.",
+      "Re-fetch PIR main, issue #1, and latest CI/PAM assurance.",
+      "Re-fetch benchmarker main/issues/CI before relying on evaluator state.",
+      "Keep Study OS evidence pinned to bef88216d9052eeb7e135916ea7fb6f8d84e0ccc unless an explicit source revision is authorized.",
+      "Verify PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 before validation."
+    ],
+    "stale_state_behavior": "refresh_and_revalidate"
+  },
+  "hidden_evaluation": {
+    "agent_visible_hidden_material": false,
+    "policy": "Agent-visible state may describe holdout lanes and contamination status, but never hidden source spans, expected bridges, labels, answers, seeds, oracle files, or scored hidden reports."
+  },
+  "handoff": {
+    "created_from_identity": {
+      "kind": "git_commit",
+      "value": "c31fe82690765a86248ccc65469b2583690c3d36"
+    },
+    "created_at": "2026-09-05T18:44:00Z",
+    "reason": "milestone_transition"
+  }
+}
