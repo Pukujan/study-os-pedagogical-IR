@@ -28,6 +28,18 @@ class ContextKind(StrEnum):
     DERIVED = "derived_context"
 
 
+class PrimaryDisposition(StrEnum):
+    GOLDEN = "golden"
+    FAILURE = "failure"
+    LEARNER_CORRECTION = "learner_correction"
+    REPAIR = "repair"
+    EXERCISE = "exercise"
+    VALIDATION = "validation"
+    META = "meta"
+    DUPLICATE = "duplicate"
+    UNRESOLVED = "unresolved"
+
+
 class EvidenceArtifact(StrictFrozenModel):
     schema_version: str = Field(pattern=r"^pir\.evidence-artifact\.v1$")
     artifact_id: str = Field(min_length=1)
@@ -72,3 +84,34 @@ class ContextFrame(StrictFrozenModel):
     ordered_turn_refs: tuple[str, ...] = ()
     source_span_refs: tuple[str, ...] = ()
     sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class TurnDisposition(StrictFrozenModel):
+    schema_version: str = Field(pattern=r"^pir\.turn-disposition\.v1$")
+    disposition_id: str = Field(min_length=1)
+    extraction_revision: str = Field(min_length=1)
+    turn_id: str = Field(min_length=1)
+    primary_disposition: PrimaryDisposition
+
+
+class ExtractionLedger(StrictFrozenModel):
+    schema_version: str = Field(pattern=r"^pir\.extraction-ledger\.v1$")
+    ledger_id: str = Field(min_length=1)
+    extraction_revision: str = Field(min_length=1)
+    dispositions: tuple[TurnDisposition, ...] = ()
+
+
+class CoverageReport(StrictFrozenModel):
+    schema_version: str = Field(pattern=r"^pir\.coverage-report\.v1$")
+    ledger_id: str = Field(min_length=1)
+    extraction_revision: str = Field(min_length=1)
+    expected_source_turn_count: int = Field(ge=0)
+    disposition_record_count: int = Field(ge=0)
+    unique_disposed_source_turn_count: int = Field(ge=0)
+    missing_turn_ids: tuple[str, ...] = ()
+    duplicate_turn_ids: tuple[str, ...] = ()
+    unknown_turn_ids: tuple[str, ...] = ()
+    duplicate_disposition_ids: tuple[str, ...] = ()
+    revision_mismatched_disposition_ids: tuple[str, ...] = ()
+    duplicate_authoritative_turn_ids: tuple[str, ...] = ()
+    complete: bool
