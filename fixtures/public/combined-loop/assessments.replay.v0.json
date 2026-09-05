@@ -1,0 +1,66 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.combine-window-max.replay.v0",
+  "assessments": [
+    {
+      "step_id": "first_box_combine_probe",
+      "kind": "text",
+      "expected_text": [
+        "S.append(a[i] + a[i+1] + a[i+j])\nmax_sum = S[i]",
+        "S.append(a[i] + a[i+1] + a[i+j])\nmax_sum = s[i]",
+        "s.append(a[i] + a[i+1] + a[i+j])\nmax_sum = s[i]"
+      ]
+    },
+    {
+      "step_id": "later_box_full_probe",
+      "kind": "text",
+      "expected_text": [
+        "S.append(S[i-1] - a[i-1] + a[i+j])\nif S[i] > max_sum:\n    max_sum = S[i]",
+        "s.append(s[i-1] - a[i-1] + a[i+j])\nif s[i] > max_sum:\n    max_sum = s[i]"
+      ],
+      "partial_text": [
+        "S.append(S[i-1] - a[i-1] - a[i+j])\nif S[i] > max_sum:\n    max_sum = S[i]",
+        "s.append(si -1 - ai-1 - ai+j\nif s i > max sum:\nmax sum = s i"
+      ]
+    },
+    {
+      "step_id": "append_retry_probe",
+      "kind": "text",
+      "expected_text": [
+        "S.append(S[i-1] - a[i-1] + a[i+j])",
+        "s.append(s[i-1] - a[i-1] + a[i+j])"
+      ]
+    },
+    {
+      "step_id": "full_else_redo_probe",
+      "kind": "text",
+      "expected_text": [
+        "else:\n    S.append(S[i-1] - a[i-1] + a[i+j])\n    if S[i] > max_sum:\n        max_sum = S[i]",
+        "else:\n    s.append(s[i-1] - a[i-1] + a[i+j])\n    if s[i] > max_sum:\n        max_sum = s[i]"
+      ]
+    },
+    {
+      "step_id": "len_probe",
+      "kind": "integer",
+      "expected_values": [5]
+    },
+    {
+      "step_id": "last_valid_probe",
+      "kind": "integer",
+      "expected_values": [2]
+    },
+    {
+      "step_id": "past_last_probe",
+      "kind": "text",
+      "expected_text": ["yes", "Yes"]
+    },
+    {
+      "step_id": "break_code_probe",
+      "kind": "text",
+      "expected_text": [
+        "if i > len(a) - k:\n    break",
+        "if i > len(a)-k:\n    break"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,411 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.combine-window-max.replay.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part08.md",
+  "entry_step_id": "combine_first_box_intro",
+  "representations": [
+    {
+      "representation_id": "r.first_box_blank",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "S[0] = 12", "if i == 0:", "    [first-window line]", "    [max initialization line]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.first_box_valid",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "S[0] = 12", "S.append(a[i] + a[i+1] + a[i+j])", "max_sum = S[i]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "combined_first_box"]
+    },
+    {
+      "representation_id": "r.else_bridge",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "boxes": [{"start_index": 1, "width": 3}],
+      "annotations": ["i = 0 -> if i == 0 -> first box", "i = 1, 2, 3, ... -> if i != 0 -> else -> later boxes"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "else_bridge"]
+    },
+    {
+      "representation_id": "r.later_box_blank",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["i = 2", "previous S[i-1] = 14", "max_sum = 14", "else:", "    [append new S[i]]", "    [compare S[i] with max_sum]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "max_sum_annotation", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.append_correction",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["S[i] = S[i-1] - a[i-1] + a[i+j]", "S[i] = expression -> S.append(expression)", "the max condition was already structurally right"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "recurrence", "representation_bridge", "preserved_correct_part"]
+    },
+    {
+      "representation_id": "r.append_retry",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "1", "4", "2", "7", "3"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["i = 2", "S[i] = S[i-1] - a[i-1] + a[i+j]", "convert this one recurrence to S.append(...)"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "recurrence"]
+    },
+    {
+      "representation_id": "r.full_else_redo",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "1", "4", "2", "7", "3"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["i = 2", "max_sum = 11", "redo the whole later-box case", "else:"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "max_sum_annotation", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.later_box_valid",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["else:", "    S.append(S[i-1] - a[i-1] + a[i+j])", "    if S[i] > max_sum:", "        max_sum = S[i]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "combined_later_box"]
+    },
+    {
+      "representation_id": "r.len_probe",
+      "rows": [{"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "7", "4", "9", "1"]}],
+      "annotations": ["len means how many items are inside a", "len(a) = ?"],
+      "visible_components": ["numbers_row", "len_concept"]
+    },
+    {
+      "representation_id": "r.last_valid_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "7", "4", "9", "1"]}
+      ],
+      "annotations": ["k = 3", "len(a) = 5", "last valid i = len(a) - k", "5 - 3 = ?"],
+      "visible_components": ["index_row", "numbers_row", "k_annotation", "len_annotation", "boundary_expression"]
+    },
+    {
+      "representation_id": "r.past_last_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "7", "4", "9", "1"]}
+      ],
+      "annotations": ["k = 3", "len(a) - k = 2", "i = 3", "Is 3 > 2?"],
+      "visible_components": ["index_row", "numbers_row", "k_annotation", "boundary_expression", "comparison"]
+    },
+    {
+      "representation_id": "r.break_explain",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "7", "4", "9", "1"]}
+      ],
+      "annotations": ["len(a) - k = 2", "i = 3", "3 > 2", "if i > len(a) - k:", "    break"],
+      "visible_components": ["index_row", "numbers_row", "boundary_expression", "break_code"]
+    },
+    {
+      "representation_id": "r.break_probe_changed",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "1", "6", "2", "8", "3"]}
+      ],
+      "annotations": ["k = 3", "last valid start = 3", "write only the stop if + break lines"],
+      "visible_components": ["index_row", "numbers_row", "k_annotation", "boundary_expression", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.break_valid",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "1", "6", "2", "8", "3"]}
+      ],
+      "annotations": ["if i > len(a) - k:", "    break", "stop check goes before if i == 0 / else"],
+      "visible_components": ["index_row", "numbers_row", "break_code", "combined_control_shape"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "combine_first_box_intro",
+      "kind": "explain",
+      "goal": "Begin combination by aligning the first-window calculation and max initialization at the same box.",
+      "representation_id": "r.first_box_blank",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "code_skeleton"],
+      "active_delta": "show that the first-box branch contains the two already-learned first-box actions",
+      "disclosed_concepts": ["combined_first_box_role"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:combine-first-box-intro"]
+    },
+    {
+      "step_id": "first_box_combine_probe",
+      "kind": "probe",
+      "goal": "Have the learner place the first-window append and max initialization together under i == 0.",
+      "representation_id": "r.first_box_blank",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "code_skeleton"],
+      "active_delta": "write the two first-box lines without exposing later-box or stop logic",
+      "disclosed_concepts": ["combined_first_box_role"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "first-window append plus max initialization",
+        "prompt": "Inside if i == 0, write the two lines: make the first S[i], then initialize max_sum.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S.append(a[i] + a[i+1] + a[i+j])", "max_sum = S[i]"]
+      },
+      "evidence_turn_refs": ["part08:combine-first-box-probe"]
+    },
+    {
+      "step_id": "first_box_combine_validate",
+      "kind": "validate",
+      "goal": "Validate the combined first-box branch before teaching why later boxes use else.",
+      "representation_id": "r.first_box_valid",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "combined_first_box"],
+      "active_delta": "confirm that first-window creation and max initialization happen together at i=0",
+      "disclosed_concepts": ["combined_first_box_role"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:combine-first-box-validated"]
+    },
+    {
+      "step_id": "else_bridge_explain",
+      "kind": "bridge",
+      "goal": "Repair the missing bridge from if i != 0 to else using the accepted two-box explanation.",
+      "representation_id": "r.else_bridge",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "else_bridge"],
+      "active_delta": "show i=0 uses if i==0; later i values satisfy i!=0, and else is the simpler otherwise case",
+      "disclosed_concepts": ["if_not_zero_to_else_bridge"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:accepted-else-bridge"]
+    },
+    {
+      "step_id": "later_box_full_probe",
+      "kind": "probe",
+      "goal": "Exercise the two learned actions that belong after else on a later box.",
+      "representation_id": "r.later_box_blank",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "max_sum_annotation", "code_skeleton"],
+      "active_delta": "write the append conversion and then the max comparison/update",
+      "disclosed_concepts": ["combined_later_box_role"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "later-box append plus max comparison/update",
+        "prompt": "After else:, write the two pieces in order: append the new S[i], then check it against max_sum.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S.append(S[i-1] - a[i-1] + a[i+j])", "if S[i] > max_sum:"]
+      },
+      "evidence_turn_refs": ["part08:later-box-exercise-phone-response"]
+    },
+    {
+      "step_id": "append_conversion_correction",
+      "kind": "explain",
+      "goal": "When only append conversion is wrong, repair that representation change while preserving the correct max condition.",
+      "representation_id": "r.append_correction",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "recurrence", "representation_bridge", "preserved_correct_part"],
+      "active_delta": "restore the plus sign on the entering number and show S[i]=expression -> S.append(expression), without reteaching the max condition",
+      "disclosed_concepts": ["append_conversion_repair"],
+      "forbidden_concepts": ["reteach_max_condition", "boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:append-conversion-specific-repair-rule"]
+    },
+    {
+      "step_id": "append_retry_probe",
+      "kind": "probe",
+      "goal": "Retry only the repaired append conversion on changed data.",
+      "representation_id": "r.append_retry",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "recurrence"],
+      "active_delta": "convert the displayed recurrence into one S.append line",
+      "disclosed_concepts": ["append_conversion_repair"],
+      "forbidden_concepts": ["reteach_max_condition", "boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "correct S.append conversion of the recurrence",
+        "prompt": "Write just the S.append(...) line for this recurrence.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S.append(S[i-1] - a[i-1] + a[i+j])"]
+      },
+      "evidence_turn_refs": ["part08:desired-append-retry-policy"]
+    },
+    {
+      "step_id": "full_else_redo_probe",
+      "kind": "probe",
+      "goal": "After focused append repair, require the learner to reconstruct the complete later-box branch.",
+      "representation_id": "r.full_else_redo",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "max_sum_annotation", "code_skeleton"],
+      "active_delta": "redo the whole else block from the repaired pieces",
+      "disclosed_concepts": ["combined_later_box_role"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "complete else block",
+        "prompt": "Now redo the full else block: append the new S[i], then compare and update max_sum.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S.append(S[i-1] - a[i-1] + a[i+j])", "if S[i] > max_sum:"]
+      },
+      "evidence_turn_refs": ["part08:desired-full-else-redo-after-repair"]
+    },
+    {
+      "step_id": "later_box_validate",
+      "kind": "validate",
+      "goal": "Validate the complete later-box branch without overdrilling a correct response.",
+      "representation_id": "r.later_box_valid",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "combined_later_box"],
+      "active_delta": "lock in append-then-compare ordering for every later box",
+      "disclosed_concepts": ["combined_later_box_role"],
+      "forbidden_concepts": ["boundary_break", "arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:if-right-skip-reteach", "part08:later-box-structure-established"]
+    },
+    {
+      "step_id": "boundary_intro",
+      "kind": "explain",
+      "goal": "Introduce the stop boundary only after the first/later-box combined structure is stable.",
+      "representation_id": "r.len_probe",
+      "preserve_components": ["numbers_row", "len_concept"],
+      "active_delta": "define len(a) as the number of items before using len(a)-k",
+      "disclosed_concepts": ["len"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:learner-asks-what-is-len"]
+    },
+    {
+      "step_id": "len_probe",
+      "kind": "probe",
+      "goal": "Check the concrete meaning of len(a) before boundary arithmetic.",
+      "representation_id": "r.len_probe",
+      "preserve_components": ["numbers_row", "len_concept"],
+      "active_delta": "count the items in a",
+      "disclosed_concepts": ["len"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "len(a)",
+        "prompt": "How many numbers are in a? What is len(a)?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["len(a) = 5"]
+      },
+      "evidence_turn_refs": ["part08:len-exercise"]
+    },
+    {
+      "step_id": "len_validate",
+      "kind": "validate",
+      "goal": "Validate len(a)=5 and connect it to last-valid-start arithmetic.",
+      "representation_id": "r.last_valid_probe",
+      "preserve_components": ["index_row", "numbers_row", "k_annotation", "len_annotation", "boundary_expression"],
+      "active_delta": "show len(a)=5 and ask for len(a)-k with k=3",
+      "disclosed_concepts": ["len", "last_valid_start"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:len-validated"]
+    },
+    {
+      "step_id": "last_valid_probe",
+      "kind": "probe",
+      "goal": "Compute the last valid window start as len(a)-k.",
+      "representation_id": "r.last_valid_probe",
+      "preserve_components": ["index_row", "numbers_row", "k_annotation", "len_annotation", "boundary_expression"],
+      "active_delta": "compute 5-3",
+      "disclosed_concepts": ["last_valid_start"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "last valid start index",
+        "prompt": "What is 5 - 3?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": []
+      },
+      "evidence_turn_refs": ["part08:last-valid-start-exercise"]
+    },
+    {
+      "step_id": "last_valid_validate",
+      "kind": "validate",
+      "goal": "Validate the last valid start before asking whether the next i is out of bounds.",
+      "representation_id": "r.past_last_probe",
+      "preserve_components": ["index_row", "numbers_row", "k_annotation", "boundary_expression", "comparison"],
+      "active_delta": "show last valid i=2 and move attention to i=3",
+      "disclosed_concepts": ["last_valid_start"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:last-valid-start-validated"]
+    },
+    {
+      "step_id": "past_last_probe",
+      "kind": "probe",
+      "goal": "Check that i=3 is past the last valid start 2.",
+      "representation_id": "r.past_last_probe",
+      "preserve_components": ["index_row", "numbers_row", "k_annotation", "boundary_expression", "comparison"],
+      "active_delta": "evaluate whether 3 > 2",
+      "disclosed_concepts": ["boundary_comparison"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "whether i has passed len(a)-k",
+        "prompt": "If i becomes 3, is 3 > len(a) - k?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["yes"]
+      },
+      "evidence_turn_refs": ["part08:past-last-yes"]
+    },
+    {
+      "step_id": "break_bridge_explain",
+      "kind": "bridge",
+      "goal": "Translate the validated boundary comparison into the stop if + break code.",
+      "representation_id": "r.break_explain",
+      "preserve_components": ["index_row", "numbers_row", "boundary_expression", "break_code"],
+      "active_delta": "show that when i > len(a)-k, Python should break",
+      "disclosed_concepts": ["break_condition"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:break-code-introduced"]
+    },
+    {
+      "step_id": "break_code_probe",
+      "kind": "probe",
+      "goal": "Have the learner write the stop condition on changed data.",
+      "representation_id": "r.break_probe_changed",
+      "preserve_components": ["index_row", "numbers_row", "k_annotation", "boundary_expression", "code_skeleton"],
+      "active_delta": "write only the if + break lines",
+      "disclosed_concepts": ["break_condition"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "probe": {
+        "target": "if i > len(a)-k: break",
+        "prompt": "Write the Python if + break lines that stop once i goes past the last valid box.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["if i > len(a) - k:"]
+      },
+      "evidence_turn_refs": ["part08:break-changed-exercise"]
+    },
+    {
+      "step_id": "break_validate",
+      "kind": "validate",
+      "goal": "Validate the stop condition and place it before first/later-box branching.",
+      "representation_id": "r.break_valid",
+      "preserve_components": ["index_row", "numbers_row", "break_code", "combined_control_shape"],
+      "active_delta": "lock in for-loop -> stop check -> if i==0 / else control order",
+      "disclosed_concepts": ["break_condition", "combined_control_shape"],
+      "forbidden_concepts": ["arbitrary_k_first_window", "range_k", "x_loop", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:break-validated-and-full-loop-attempt-begins"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.intro.first", "from_step_id": "combine_first_box_intro", "next_step_id": "first_box_combine_probe", "exit_target": null, "evidence_turn_refs": ["part08:first-box-exercise"]},
+    {"transition_id": "auto.first.else", "from_step_id": "first_box_combine_validate", "next_step_id": "else_bridge_explain", "exit_target": null, "evidence_turn_refs": ["part08:move-to-else-gap"]},
+    {"transition_id": "auto.else.later", "from_step_id": "else_bridge_explain", "next_step_id": "later_box_full_probe", "exit_target": null, "evidence_turn_refs": ["part08:accepted-else-explanation-continue"]},
+    {"transition_id": "auto.append.repair", "from_step_id": "append_conversion_correction", "next_step_id": "append_retry_probe", "exit_target": null, "evidence_turn_refs": ["part08:retry-append-policy"]},
+    {"transition_id": "auto.later.boundary", "from_step_id": "later_box_validate", "next_step_id": "boundary_intro", "exit_target": null, "evidence_turn_refs": ["part08:learner-asks-break-next"]},
+    {"transition_id": "auto.boundary.len", "from_step_id": "boundary_intro", "next_step_id": "len_probe", "exit_target": null, "evidence_turn_refs": ["part08:len-exercise-after-definition"]},
+    {"transition_id": "auto.len.last", "from_step_id": "len_validate", "next_step_id": "last_valid_probe", "exit_target": null, "evidence_turn_refs": ["part08:bring-back-to-box"]},
+    {"transition_id": "auto.last.past", "from_step_id": "last_valid_validate", "next_step_id": "past_last_probe", "exit_target": null, "evidence_turn_refs": ["part08:ask-i3-past-boundary"]},
+    {"transition_id": "auto.break.explain", "from_step_id": "break_bridge_explain", "next_step_id": "break_code_probe", "exit_target": null, "evidence_turn_refs": ["part08:changed-break-exercise"]},
+    {"transition_id": "auto.break.exit", "from_step_id": "break_validate", "next_step_id": null, "exit_target": "arbitrary_k_first_window", "evidence_turn_refs": ["part08:learner-asks-any-k-first-window"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.first.correct", "after_step_id": "first_box_combine_probe", "outcome": "correct", "next_step_id": "first_box_combine_validate", "exit_target": null, "evidence_turn_refs": ["part08:first-box-two-lines-correct"]},
+    {"route_id": "route.later.correct", "after_step_id": "later_box_full_probe", "outcome": "correct", "next_step_id": "later_box_validate", "exit_target": null, "evidence_turn_refs": ["part08:if-right-skip-reteach-policy"]},
+    {"route_id": "route.later.partial", "after_step_id": "later_box_full_probe", "outcome": "partial", "next_step_id": "append_conversion_correction", "exit_target": null, "evidence_turn_refs": ["part08:append-wrong-max-condition-right"]},
+    {"route_id": "route.append.retry.correct", "after_step_id": "append_retry_probe", "outcome": "correct", "next_step_id": "full_else_redo_probe", "exit_target": null, "evidence_turn_refs": ["part08:repair-policy-retry-then-full-else"]},
+    {"route_id": "route.full.else.correct", "after_step_id": "full_else_redo_probe", "outcome": "correct", "next_step_id": "later_box_validate", "exit_target": null, "evidence_turn_refs": ["part08:desired-full-else-redo"]},
+    {"route_id": "route.len.correct", "after_step_id": "len_probe", "outcome": "correct", "next_step_id": "len_validate", "exit_target": null, "evidence_turn_refs": ["part08:len-answer-5"]},
+    {"route_id": "route.last.correct", "after_step_id": "last_valid_probe", "outcome": "correct", "next_step_id": "last_valid_validate", "exit_target": null, "evidence_turn_refs": ["part08:last-valid-answer-2"]},
+    {"route_id": "route.past.correct", "after_step_id": "past_last_probe", "outcome": "correct", "next_step_id": "break_bridge_explain", "exit_target": null, "evidence_turn_refs": ["part08:boundary-yes"]},
+    {"route_id": "route.break.correct", "after_step_id": "break_code_probe", "outcome": "correct", "next_step_id": "break_validate", "exit_target": null, "evidence_turn_refs": ["part08:break-code-correct"]}
+  ]
+}
