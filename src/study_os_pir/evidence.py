@@ -46,7 +46,10 @@ def span_from_artifact(
         raise ValueError("invalid half-open byte span")
 
     resolved_status = evidence_status or artifact.source_status
-    if resolved_status is EvidenceStatus.VERBATIM and artifact.source_status is not EvidenceStatus.VERBATIM:
+    if (
+        resolved_status is EvidenceStatus.VERBATIM
+        and artifact.source_status is not EvidenceStatus.VERBATIM
+    ):
         raise ValueError("reconstructed artifact cannot yield verbatim span")
 
     span_bytes = data[byte_start:byte_end]
@@ -72,7 +75,10 @@ def resolve_span(
         raise ValueError("span artifact_id mismatch")
     if span.byte_end > len(data):
         raise ValueError("span byte_end exceeds artifact length")
-    if span.evidence_status is EvidenceStatus.VERBATIM and artifact.source_status is not EvidenceStatus.VERBATIM:
+    if (
+        span.evidence_status is EvidenceStatus.VERBATIM
+        and artifact.source_status is not EvidenceStatus.VERBATIM
+    ):
         raise ValueError("verbatim span cannot resolve from reconstructed artifact")
 
     value = data[span.byte_start:span.byte_end]
@@ -97,7 +103,10 @@ def reconstruct_turn(
         except KeyError as exc:
             raise ValueError(f"unresolved evidence ref: {exc.args[0]}") from exc
 
-        if turn.evidence_status is EvidenceStatus.VERBATIM and span.evidence_status is not EvidenceStatus.VERBATIM:
+        if (
+            turn.evidence_status is EvidenceStatus.VERBATIM
+            and span.evidence_status is not EvidenceStatus.VERBATIM
+        ):
             raise ValueError("verbatim turn cannot reference reconstructed span")
         chunks.append(resolve_span(artifact=artifact, data=data, span=span))
     return b"".join(chunks)
@@ -137,6 +146,11 @@ def build_context_frame(
         source_span_refs=source_span_refs,
     )
     return ContextFrame(
-        **payload,
+        schema_version="pir.context-frame.v1",
+        context_frame_id=context_frame_id,
+        before_turn_id=before_turn_id,
+        context_kind=context_kind,
+        ordered_turn_refs=ordered_turn_refs,
+        source_span_refs=source_span_refs,
         sha256=canonical_sha256(payload),
     )
