@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://study-os.local/schemas/pir.turn-disposition.v1.schema.json",
+  "title": "PIR TurnDisposition v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "disposition_id",
+    "extraction_revision",
+    "turn_id",
+    "primary_disposition"
+  ],
+  "properties": {
+    "schema_version": {"const": "pir.turn-disposition.v1"},
+    "disposition_id": {"type": "string", "minLength": 1},
+    "extraction_revision": {"type": "string", "minLength": 1},
+    "turn_id": {"type": "string", "minLength": 1},
+    "primary_disposition": {
+      "enum": [
+        "golden",
+        "failure",
+        "learner_correction",
+        "repair",
+        "exercise",
+        "validation",
+        "meta",
+        "duplicate",
+        "unresolved"
+      ]
+    }
+  }
+}
