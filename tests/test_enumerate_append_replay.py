@@ -18,7 +18,11 @@ from study_os_pir.runtime import (
     submit_response,
     validate_assessment_registry,
 )
-from study_os_pir.trajectory import ExperimentalTrajectory, TrajectoryOutcomeKind, validate_trajectory
+from study_os_pir.trajectory import (
+    ExperimentalTrajectory,
+    TrajectoryOutcomeKind,
+    validate_trajectory,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_DIR = ROOT / "fixtures" / "public" / "sliding-window-foundations"
@@ -94,7 +98,9 @@ def test_renderer_contract_never_exposes_expected_text_or_pair_oracle() -> None:
     assert "S.append(S[i-1] + a[i])" not in payload
 
     pair_cursor = cursor.model_copy(update={"current_step_id": "enumerate_probe6"})
-    pair_payload = build_renderer_contract(trajectory, pair_cursor, load_context()).model_dump_json()
+    pair_payload = build_renderer_contract(
+        trajectory, pair_cursor, load_context()
+    ).model_dump_json()
     assert "(3,6)" not in pair_payload
 
 
