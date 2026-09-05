@@ -1,0 +1,13 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.position-index-k.v0",
+  "assessments": [
+    {"step_id": "position_probe6", "kind": "integer", "expected_values": [4]},
+    {"step_id": "position_retry9", "kind": "integer", "expected_values": [6]},
+    {"step_id": "position_confirm7", "kind": "integer", "expected_values": [2]},
+    {"step_id": "index_probe6", "kind": "integer", "expected_values": [3]},
+    {"step_id": "index_probe9", "kind": "integer", "expected_values": [5]},
+    {"step_id": "k_probe3_guided", "kind": "integer_sequence", "expected_values": [4, 7, 2]},
+    {"step_id": "k_probe5_unassisted", "kind": "integer_sequence", "expected_values": [4, 7, 2, 6, 1]}
+  ]
+}
