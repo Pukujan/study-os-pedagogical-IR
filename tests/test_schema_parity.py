@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import cast
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -21,7 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_schema(filename: str) -> dict[str, object]:
-    return json.loads((ROOT / "schemas" / filename).read_text(encoding="utf-8"))
+    raw = json.loads((ROOT / "schemas" / filename).read_text(encoding="utf-8"))
+    return cast(dict[str, object], raw)
 
 
 def validate(filename: str, instance: dict[str, object]) -> None:
