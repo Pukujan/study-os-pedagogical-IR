@@ -6,18 +6,32 @@
   "representations": [
     {
       "representation_id": "r.final_loop",
-      "annotations": [
-        "a = [2, 6, 4, 1, 8]\n\nk = 3\nj = k - 1\nS = []\n\nfor i, num in enumerate(a):\n\n    if i > len(a) - k:\n        break\n\n    if i == 0:\n        S.append(0)\n\n        for x in range(k):\n            S[i] = S[i] + a[i+x]\n\n        max_sum = S[i]\n\n    else:\n        S.append(S[i-1] - a[i-1] + a[i+j])\n\n        if S[i] > max_sum:\n            max_sum = S[i]",
-        "for i through a -> stop if the box no longer fits -> first box builds S[i] with x -> later boxes slide -> update max_sum when the new S[i] is larger"
+      "rows": [
+        {
+          "row_id": "assembled_code",
+          "label": "full combined loop",
+          "values": ["a = [2, 6, 4, 1, 8]\n\nk = 3\nj = k - 1\nS = []\n\nfor i, num in enumerate(a):\n\n    if i > len(a) - k:\n        break\n\n    if i == 0:\n        S.append(0)\n\n        for x in range(k):\n            S[i] = S[i] + a[i+x]\n\n        max_sum = S[i]\n\n    else:\n        S.append(S[i-1] - a[i-1] + a[i+j])\n\n        if S[i] > max_sum:\n            max_sum = S[i]"]
+        },
+        {
+          "row_id": "structure",
+          "label": "structure",
+          "values": ["for i through a -> stop if the box no longer fits -> first box builds S[i] with x -> later boxes slide -> update max_sum when the new S[i] is larger"]
+        }
       ],
       "visible_components": ["full_combined_code", "control_structure_summary"]
     },
     {
       "representation_id": "r.no_mastery_status",
-      "annotations": [
-        "The full loop has been assembled from the pieces already built.",
-        "Independent reconstruction of the full loop was not completed in this historical session.",
-        "Assembly exposure is recorded; mastery is not claimed."
+      "rows": [
+        {
+          "row_id": "status",
+          "label": "historical replay status",
+          "values": [
+            "The full loop has been assembled from the pieces already built.",
+            "Independent reconstruction of the full loop was not completed in this historical session.",
+            "Assembly exposure is recorded; mastery is not claimed."
+          ]
+        }
       ],
       "visible_components": ["assembly_status", "no_mastery_status"]
     }
