@@ -1,0 +1,62 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+from study_os_pir.console import render_turn_text
+from study_os_pir.runtime import (
+    AssessmentRegistry,
+    ReplayPhase,
+    build_renderer_contract,
+    mark_turn_rendered,
+    start_replay,
+    submit_response,
+)
+from study_os_pir.trajectory import ExperimentalTrajectory
+
+
+def _load_trajectory(path: Path) -> ExperimentalTrajectory:
+    return ExperimentalTrajectory.model_validate_json(path.read_text())
+
+
+def _load_registry(path: Path) -> AssessmentRegistry:
+    return AssessmentRegistry.model_validate_json(path.read_text())
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Run an approved experimental PIR trajectory in a local terminal."
+    )
+    parser.add_argument("--trajectory", type=Path, required=True)
+    parser.add_argument("--assessments", type=Path, required=True)
+    args = parser.parse_args()
+
+    trajectory = _load_trajectory(args.trajectory)
+    registry = _load_registry(args.assessments)
+    cursor = start_replay(trajectory, registry)
+
+    while cursor.phase != ReplayPhase.EXITED:
+        if cursor.phase == ReplayPhase.RENDER:
+            contract = build_renderer_contract(trajectory, cursor)
+            print(render_turn_text(contract))
+            print()
+            cursor = mark_turn_rendered(trajectory, cursor)
+            continue
+
+        response = input("> ").strip()
+        if response.lower() in {"q", "quit", "exit"}:
+            print("Replay stopped by learner.")
+            return 0
+        try:
+            result = submit_response(trajectory, registry, cursor, response)
+        except ValueError as exc:
+            print(f"Replay blocked: {exc}")
+            return 2
+        cursor = result.cursor
+
+    print(f"[slice complete: {cursor.exit_target}]")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
