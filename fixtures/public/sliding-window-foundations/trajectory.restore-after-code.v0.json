@@ -1,0 +1,270 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.restore-after-code.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part07.md",
+  "entry_step_id": "restore_original_representation",
+  "representations": [
+    {
+      "representation_id": "r.restore_original_representation",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "14"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "S[0] = 12"},
+      "boxes": [
+        {"start_index": 1, "width": 3, "label": "S[1] = 14"},
+        {"start_index": 2, "width": 3, "label": "S[2] = 8"},
+        {"start_index": 3, "width": 3, "label": "S[3] = 14"}
+      ],
+      "annotations": [
+        "keep the completed Python loop connected to the original array representation",
+        "i=0: 3 + 8 + 1 = 12 -> S[0]",
+        "i=1: 12 - 3 + 5 = 14 -> S[1]",
+        "i=2: 14 - 8 + 2 = 8 -> S[2]",
+        "i=3: 8 - 1 + 7 = 14 -> S[3]"
+      ],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "all_window_boxes", "s_row", "s_i_mapping", "loop_output_mapping"]
+    },
+    {
+      "representation_id": "r.restore_probe_s2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 2, "width": 3, "label": "i = 2"},
+      "boxes": [],
+      "annotations": ["use the original box to decide what the loop stores at S[2]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping"]
+    },
+    {
+      "representation_id": "r.restore_validate_s2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 2, "width": 3, "label": "i = 2"},
+      "boxes": [],
+      "annotations": ["1 + 5 + 2 = 8", "S[2] = 8", "same value through the sliding update: 14 - 8 + 2 = 8"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping"]
+    },
+    {
+      "representation_id": "r.restore_probe_s3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 3, "width": 3, "label": "i = 3"},
+      "boxes": [],
+      "annotations": ["use the same restored array/box representation for S[3]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping"]
+    },
+    {
+      "representation_id": "r.restore_correct_s3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 3, "width": 3, "label": "i = 3"},
+      "boxes": [],
+      "annotations": ["5 + 2 + 7 = 14", "S[3] = 14", "same value through the sliding update: 8 - 1 + 7 = 14"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping", "correction"]
+    },
+    {
+      "representation_id": "r.restore_retry_s3_changed",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "2", "6", "1", "5", "3"]}
+      ],
+      "box": {"start_index": 3, "width": 3, "label": "i = 3"},
+      "boxes": [],
+      "annotations": ["changed array; apply the same box-to-S[i] relation"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.restore_validate_s3_changed",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "2", "6", "1", "5", "3"]}
+      ],
+      "box": {"start_index": 3, "width": 3, "label": "i = 3"},
+      "boxes": [],
+      "annotations": ["1 + 5 + 3 = 9", "S[3] = 9"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.restore_verify_s2_changed",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "3", "2", "8", "1", "4"]}
+      ],
+      "box": {"start_index": 2, "width": 3, "label": "i = 2"},
+      "boxes": [],
+      "annotations": ["second changed array; verify the same mapping once more"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.restore_validate_s2_changed",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "3", "2", "8", "1", "4"]}
+      ],
+      "box": {"start_index": 2, "width": 3, "label": "i = 2"},
+      "boxes": [],
+      "annotations": ["2 + 8 + 1 = 11", "S[2] = 11", "restored representation has survived correction, retry, and verification"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping", "changed_surface_data", "verification_complete"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "restore_original_representation",
+      "kind": "validate",
+      "goal": "Repair the detached S-only validation by restoring the original array, indexes, all four boxes, and each S[i] mapping while keeping the completed loop result in view.",
+      "representation_id": "r.restore_original_representation",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "all_window_boxes", "s_row", "s_i_mapping", "loop_output_mapping"],
+      "forbidden_components": [],
+      "active_delta": "reconnect each loop output to the original box that gives it meaning",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:representation-restoration", "sep4:part07:code-array-boxes-compare"]
+    },
+    {
+      "step_id": "restore_probe_s2",
+      "kind": "probe",
+      "goal": "Check one stored loop value in the restored original representation.",
+      "representation_id": "r.restore_probe_s2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping"],
+      "forbidden_components": [],
+      "active_delta": "ask only what value the i=2 box stores in S[2]",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": {
+        "target": "value stored in S[2] for the restored original array",
+        "prompt": "Which value gets stored in S[2]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[2] = 8", "answer is 8"]
+      },
+      "evidence_turn_refs": ["sep4:part07:restore-probe-s2"]
+    },
+    {
+      "step_id": "restore_validate_s2",
+      "kind": "validate",
+      "goal": "Validate S[2] using the same array and box, including both direct sum and sliding-update views.",
+      "representation_id": "r.restore_validate_s2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping"],
+      "forbidden_components": [],
+      "active_delta": "show why the i=2 box and the recurrence both produce 8",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:restore-validate-s2"]
+    },
+    {
+      "step_id": "restore_probe_s3",
+      "kind": "probe",
+      "goal": "Verify the next stored value without dropping the restored representation.",
+      "representation_id": "r.restore_probe_s3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping"],
+      "forbidden_components": [],
+      "active_delta": "ask only what the i=3 box stores in S[3]",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": {
+        "target": "value stored in S[3] for the original array",
+        "prompt": "What value gets stored in S[3]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[3] = 14", "answer is 14"]
+      },
+      "evidence_turn_refs": ["sep4:part07:restore-probe-s3"]
+    },
+    {
+      "step_id": "restore_correct_s3",
+      "kind": "explain",
+      "goal": "Correct the observed wrong S[3] response in the same array/box representation before retrying on changed data.",
+      "representation_id": "r.restore_correct_s3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping", "correction"],
+      "forbidden_components": [],
+      "active_delta": "show S[3]=14 through both the box sum and sliding update; do not advance",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:restore-correct-s3"]
+    },
+    {
+      "step_id": "restore_retry_s3_changed",
+      "kind": "probe",
+      "goal": "Retry the same S[i]-to-box mapping on a different array after correction.",
+      "representation_id": "r.restore_retry_s3_changed",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "change only the array values while keeping i=3 and k=3",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": {
+        "target": "value stored in S[3] for the changed array",
+        "prompt": "What value gets stored in S[3]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[3] = 9", "answer is 9"]
+      },
+      "evidence_turn_refs": ["sep4:part07:restore-retry-s3-changed"]
+    },
+    {
+      "step_id": "restore_validate_s3_changed",
+      "kind": "validate",
+      "goal": "Validate the changed-array retry in the same box representation.",
+      "representation_id": "r.restore_validate_s3_changed",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "show why the changed i=3 box stores 9",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:restore-validate-s3-changed"]
+    },
+    {
+      "step_id": "restore_verify_s2_changed",
+      "kind": "probe",
+      "goal": "Require a second changed-data verification before unlocking the next concept.",
+      "representation_id": "r.restore_verify_s2_changed",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "s_i_mapping", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "change the array and target i one more time while preserving the box-to-S[i] relation",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": {
+        "target": "value stored in S[2] for the second changed array",
+        "prompt": "What value gets stored in S[2]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[2] = 11", "answer is 11"]
+      },
+      "evidence_turn_refs": ["sep4:part07:restore-second-verification"]
+    },
+    {
+      "step_id": "restore_validate_s2_changed",
+      "kind": "validate",
+      "goal": "Close the representation-restoration gate only after correction, retry, and second verification have succeeded.",
+      "representation_id": "r.restore_validate_s2_changed",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s_i_mapping", "changed_surface_data", "verification_complete"],
+      "forbidden_components": [],
+      "active_delta": "validate S[2]=11 and mark the loop-output mapping ready for the next concept",
+      "disclosed_concepts": ["loop_output_mapping", "s_i_mapping"],
+      "forbidden_concepts": ["largest_window_sum", "max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:restore-gate-complete"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.restore.probe_s2", "from_step_id": "restore_original_representation", "next_step_id": "restore_probe_s2", "exit_target": null, "evidence_turn_refs": ["sep4:part07:restored-output-to-probe"]},
+    {"transition_id": "auto.restore.validate_s2.probe_s3", "from_step_id": "restore_validate_s2", "next_step_id": "restore_probe_s3", "exit_target": null, "evidence_turn_refs": ["sep4:part07:restore-s2-to-s3"]},
+    {"transition_id": "auto.restore.correct_s3.retry", "from_step_id": "restore_correct_s3", "next_step_id": "restore_retry_s3_changed", "exit_target": null, "evidence_turn_refs": ["sep4:part07:wrong-correct-retry"]},
+    {"transition_id": "auto.restore.validate_retry.verify", "from_step_id": "restore_validate_s3_changed", "next_step_id": "restore_verify_s2_changed", "exit_target": null, "evidence_turn_refs": ["sep4:part07:retry-to-second-verification"]},
+    {"transition_id": "auto.restore.validate_verify.exit", "from_step_id": "restore_validate_s2_changed", "next_step_id": null, "exit_target": "largest_window_sum", "evidence_turn_refs": ["sep4:part07:unlock-largest-window-sum"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.restore.s2.correct", "after_step_id": "restore_probe_s2", "outcome": "correct", "next_step_id": "restore_validate_s2", "exit_target": null, "evidence_turn_refs": ["sep4:part07:s2-correct"]},
+    {"route_id": "route.restore.s3.incorrect", "after_step_id": "restore_probe_s3", "outcome": "incorrect", "next_step_id": "restore_correct_s3", "exit_target": null, "evidence_turn_refs": ["sep4:part07:s3-observed-wrong"]},
+    {"route_id": "route.restore.retry_s3.correct", "after_step_id": "restore_retry_s3_changed", "outcome": "correct", "next_step_id": "restore_validate_s3_changed", "exit_target": null, "evidence_turn_refs": ["sep4:part07:s3-retry-correct"]},
+    {"route_id": "route.restore.verify_s2.correct", "after_step_id": "restore_verify_s2_changed", "outcome": "correct", "next_step_id": "restore_validate_s2_changed", "exit_target": null, "evidence_turn_refs": ["sep4:part07:s2-second-verification-correct"]}
+  ]
+}
