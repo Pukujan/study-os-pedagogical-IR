@@ -1,0 +1,331 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.max-sum-loop.replay.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part08.md",
+  "entry_step_id": "comparison_validate_i1",
+  "representations": [
+    {
+      "representation_id": "r.i1",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 1, "width": 3},
+      "annotations": ["i = 1", "S[1] = 14", "max_sum = 12"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"]
+    },
+    {
+      "representation_id": "r.i2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["i = 2", "S[2] = 12", "max_sum = 14"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"]
+    },
+    {
+      "representation_id": "r.i3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 3, "width": 3},
+      "annotations": ["i = 3", "S[i] = 15", "max_sum = 14"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"]
+    },
+    {
+      "representation_id": "r.max_loop_enumerate_blank",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "15"]}
+      ],
+      "annotations": ["max_sum starts from the first value in S", "for i, num in enumerate( _____ ):"],
+      "visible_components": ["i_row", "s_row", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.max_loop_condition_blank",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "15"]}
+      ],
+      "annotations": ["for i, num in enumerate(S):", "    if __________________:", "        max_sum = S[i]"],
+      "visible_components": ["i_row", "s_row", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.max_loop_condition_correction",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "15"]}
+      ],
+      "annotations": ["current max_sum = 14", "new S[i] = 15", "15 > 14", "if S[i] > max_sum:"],
+      "visible_components": ["i_row", "s_row", "comparison", "code_example"]
+    },
+    {
+      "representation_id": "r.max_loop_full_blank",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "15"]}
+      ],
+      "annotations": ["start max_sum from the first value in S", "move through S", "update max_sum when current S[i] is bigger"],
+      "visible_components": ["i_row", "s_row", "assembly_goal"]
+    },
+    {
+      "representation_id": "r.max_loop_init_blank",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "15"]}
+      ],
+      "annotations": ["the loop body is correct", "one initialization line is missing before the loop", "initialize max_sum from the first value in S"],
+      "visible_components": ["i_row", "s_row", "missing_initialization"]
+    },
+    {
+      "representation_id": "r.max_loop_complete",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["12", "14", "8", "15"]}
+      ],
+      "annotations": ["max_sum = S[0]", "for i, num in enumerate(S):", "    if S[i] > max_sum:", "        max_sum = S[i]"],
+      "visible_components": ["i_row", "s_row", "standalone_max_loop"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "comparison_validate_i1",
+      "kind": "validate",
+      "goal": "Validate the first concrete comparison before exposing comparison code.",
+      "representation_id": "r.i1",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"],
+      "active_delta": "confirm that 14 is bigger than 12 and that max_sum is replaced by S[1]",
+      "disclosed_concepts": ["fixed_index_comparison"],
+      "forbidden_concepts": ["symbolic_comparison", "standalone_max_loop", "combined_loop"],
+      "evidence_turn_refs": ["part08:first-comparison-yes"]
+    },
+    {
+      "step_id": "fixed_index_probe_i2",
+      "kind": "probe",
+      "goal": "Have the learner write the fixed-index comparison/update block on the next box.",
+      "representation_id": "r.i2",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"],
+      "active_delta": "translate the visible i=2 comparison into Python without symbolic generalization",
+      "forbidden_concepts": ["symbolic_comparison", "standalone_max_loop", "combined_loop"],
+      "probe": {
+        "target": "fixed-index if block using S[2]",
+        "prompt": "Write the Python if code for this box using S[2].",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["if S[2] > max_sum:", "max_sum = S[2]"]
+      },
+      "evidence_turn_refs": ["part08:fixed-index-i2-probe"]
+    },
+    {
+      "step_id": "fixed_index_validate_i2",
+      "kind": "validate",
+      "goal": "Validate the learner-written S[2] comparison before changing notation.",
+      "representation_id": "r.i2",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"],
+      "active_delta": "confirm the fixed-index block and that max_sum stays 14 because 12 is not bigger",
+      "disclosed_concepts": ["fixed_index_comparison"],
+      "forbidden_concepts": ["symbolic_comparison", "standalone_max_loop", "combined_loop"],
+      "evidence_turn_refs": ["part08:fixed-index-i2-validated"]
+    },
+    {
+      "step_id": "symbolic_bridge_i2",
+      "kind": "bridge",
+      "goal": "Bridge S[2] to S[i] while i is visibly 2 before asking for generalized code.",
+      "representation_id": "r.i2",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"],
+      "active_delta": "state only that at i=2, S[2] and S[i] name the same current sum",
+      "disclosed_concepts": ["fixed_to_symbolic_index_bridge"],
+      "forbidden_concepts": ["standalone_max_loop", "combined_loop"],
+      "evidence_turn_refs": ["part08:s2-to-si-bridge"]
+    },
+    {
+      "step_id": "symbolic_probe_i3",
+      "kind": "probe",
+      "goal": "Have the learner generalize the fixed-index comparison to S[i] on the moved box.",
+      "representation_id": "r.i3",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"],
+      "active_delta": "write the same comparison/update block using S[i] instead of S[3]",
+      "disclosed_concepts": ["fixed_to_symbolic_index_bridge"],
+      "forbidden_concepts": ["standalone_max_loop", "combined_loop"],
+      "probe": {
+        "target": "symbolic comparison/update block using S[i]",
+        "prompt": "Write the same if code, but use S[i] instead of S[3].",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["if S[i] > max_sum:", "max_sum = S[i]"]
+      },
+      "evidence_turn_refs": ["part08:symbolic-i3-probe"]
+    },
+    {
+      "step_id": "symbolic_validate_i3",
+      "kind": "validate",
+      "goal": "Validate the generalized S[i] comparison before constructing a loop around it.",
+      "representation_id": "r.i3",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation"],
+      "active_delta": "confirm the generalized block and update max_sum to 15",
+      "disclosed_concepts": ["symbolic_comparison"],
+      "forbidden_concepts": ["standalone_max_loop", "combined_loop"],
+      "evidence_turn_refs": ["part08:symbolic-i3-validated", "part08:learner-accelerate-no-repeat"]
+    },
+    {
+      "step_id": "max_loop_enumerate_probe",
+      "kind": "probe",
+      "goal": "Build the standalone max loop by first choosing what enumerate traverses.",
+      "representation_id": "r.max_loop_enumerate_blank",
+      "preserve_components": ["i_row", "s_row", "code_skeleton"],
+      "active_delta": "reuse known enumerate structure but traverse S instead of a",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "probe": {
+        "target": "argument to enumerate in the standalone max loop",
+        "prompt": "For i, num in enumerate( _____ ): what goes in the blank?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["enumerate(S)"]
+      },
+      "evidence_turn_refs": ["part08:max-loop-enumerate-blank"]
+    },
+    {
+      "step_id": "max_loop_enumerate_validate",
+      "kind": "validate",
+      "goal": "Validate enumerate(S) before asking for the comparison condition.",
+      "representation_id": "r.max_loop_condition_blank",
+      "preserve_components": ["i_row", "s_row", "code_skeleton"],
+      "active_delta": "lock in traversal of S while leaving the comparison condition blank",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "evidence_turn_refs": ["part08:max-loop-enumerate-S-validated"]
+    },
+    {
+      "step_id": "max_loop_condition_probe",
+      "kind": "probe",
+      "goal": "Have the learner supply the max-update condition inside the S loop.",
+      "representation_id": "r.max_loop_condition_blank",
+      "preserve_components": ["i_row", "s_row", "code_skeleton"],
+      "active_delta": "fill only the comparison condition",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "probe": {
+        "target": "condition that updates max_sum when S[i] is larger",
+        "prompt": "Fill in only the if condition inside this loop.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["if S[i] > max_sum:"]
+      },
+      "evidence_turn_refs": ["part08:max-loop-condition-reversed"]
+    },
+    {
+      "step_id": "max_loop_condition_correction",
+      "kind": "explain",
+      "goal": "Correct the observed reversed comparison direction using concrete values.",
+      "representation_id": "r.max_loop_condition_correction",
+      "preserve_components": ["i_row", "s_row", "comparison", "code_example"],
+      "active_delta": "show that the new S[i] must be on the left: 15 > 14",
+      "disclosed_concepts": ["comparison_direction_correction"],
+      "forbidden_concepts": ["combined_loop"],
+      "evidence_turn_refs": ["part08:max-loop-condition-correction"]
+    },
+    {
+      "step_id": "max_loop_condition_retry",
+      "kind": "probe",
+      "goal": "Retry the corrected comparison condition without showing it again in the prompt surface.",
+      "representation_id": "r.max_loop_condition_blank",
+      "preserve_components": ["i_row", "s_row", "code_skeleton"],
+      "active_delta": "write the corrected if condition after the concrete direction repair",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "probe": {
+        "target": "corrected comparison condition",
+        "prompt": "Now fill the if condition yourself.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["if S[i] > max_sum:"]
+      },
+      "evidence_turn_refs": ["part08:max-loop-condition-retry"]
+    },
+    {
+      "step_id": "max_loop_condition_validate",
+      "kind": "validate",
+      "goal": "Validate the corrected condition before asking for loop assembly.",
+      "representation_id": "r.max_loop_full_blank",
+      "preserve_components": ["i_row", "s_row", "assembly_goal"],
+      "active_delta": "confirm the condition while removing the obvious answer from the next exercise",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "evidence_turn_refs": ["part08:do-not-show-obvious-answer"]
+    },
+    {
+      "step_id": "max_loop_full_probe",
+      "kind": "probe",
+      "goal": "Ask for the standalone max loop including initialization, traversal, comparison, and update.",
+      "representation_id": "r.max_loop_full_blank",
+      "preserve_components": ["i_row", "s_row", "assembly_goal"],
+      "active_delta": "assemble the known max-loop pieces without showing target code",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "probe": {
+        "target": "complete standalone max loop",
+        "prompt": "Write the full Python max loop: initialize max_sum from the first S value, move through S, and update it when needed.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["max_sum = S[0]", "for i, num in enumerate(S):", "if S[i] > max_sum:"]
+      },
+      "evidence_turn_refs": ["part08:max-loop-full-probe-body-only-response"]
+    },
+    {
+      "step_id": "max_loop_missing_init_explain",
+      "kind": "explain",
+      "goal": "Treat the observed loop-body-only answer as partial and isolate the missing initialization line.",
+      "representation_id": "r.max_loop_init_blank",
+      "preserve_components": ["i_row", "s_row", "missing_initialization"],
+      "active_delta": "acknowledge that the loop body is correct and identify only the missing pre-loop initialization",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "evidence_turn_refs": ["part08:max-loop-missing-one-line"]
+    },
+    {
+      "step_id": "max_loop_init_probe",
+      "kind": "probe",
+      "goal": "Have the learner supply the one missing initialization line.",
+      "representation_id": "r.max_loop_init_blank",
+      "preserve_components": ["i_row", "s_row", "missing_initialization"],
+      "active_delta": "write only the initialization line before the loop",
+      "disclosed_concepts": ["standalone_max_loop_construction"],
+      "forbidden_concepts": ["combined_loop"],
+      "probe": {
+        "target": "max_sum initialization from first S value",
+        "prompt": "Write the one missing line before the loop.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["max_sum = S[0]"]
+      },
+      "evidence_turn_refs": ["part08:max-loop-init-line-response"]
+    },
+    {
+      "step_id": "max_loop_complete_validate",
+      "kind": "validate",
+      "goal": "Validate the complete standalone max loop before combining it with the window loop.",
+      "representation_id": "r.max_loop_complete",
+      "preserve_components": ["i_row", "s_row", "standalone_max_loop"],
+      "active_delta": "show the complete max loop assembled from learner-produced pieces",
+      "disclosed_concepts": ["standalone_max_loop"],
+      "forbidden_concepts": ["combined_loop"],
+      "evidence_turn_refs": ["part08:max-loop-complete"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.compare.fixed", "from_step_id": "comparison_validate_i1", "next_step_id": "fixed_index_probe_i2", "exit_target": null, "evidence_turn_refs": ["part08:move-to-i2"]},
+    {"transition_id": "auto.fixed.bridge", "from_step_id": "fixed_index_validate_i2", "next_step_id": "symbolic_bridge_i2", "exit_target": null, "evidence_turn_refs": ["part08:fixed-i2-to-bridge"]},
+    {"transition_id": "auto.bridge.symbolic", "from_step_id": "symbolic_bridge_i2", "next_step_id": "symbolic_probe_i3", "exit_target": null, "evidence_turn_refs": ["part08:move-to-i3"]},
+    {"transition_id": "auto.symbolic.enumerate", "from_step_id": "symbolic_validate_i3", "next_step_id": "max_loop_enumerate_probe", "exit_target": null, "evidence_turn_refs": ["part08:learner-accelerate-build-max-loop"]},
+    {"transition_id": "auto.enumerate.condition", "from_step_id": "max_loop_enumerate_validate", "next_step_id": "max_loop_condition_probe", "exit_target": null, "evidence_turn_refs": ["part08:condition-blank"]},
+    {"transition_id": "auto.correction.retry", "from_step_id": "max_loop_condition_correction", "next_step_id": "max_loop_condition_retry", "exit_target": null, "evidence_turn_refs": ["part08:condition-retry"]},
+    {"transition_id": "auto.condition.full", "from_step_id": "max_loop_condition_validate", "next_step_id": "max_loop_full_probe", "exit_target": null, "evidence_turn_refs": ["part08:full-loop-probe"]},
+    {"transition_id": "auto.partial.init", "from_step_id": "max_loop_missing_init_explain", "next_step_id": "max_loop_init_probe", "exit_target": null, "evidence_turn_refs": ["part08:ask-missing-init"]},
+    {"transition_id": "auto.complete.exit", "from_step_id": "max_loop_complete_validate", "next_step_id": null, "exit_target": "combine_window_and_max_loops", "evidence_turn_refs": ["part08:learner-next-combine-loops"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.fixed.correct", "after_step_id": "fixed_index_probe_i2", "outcome": "correct", "next_step_id": "fixed_index_validate_i2", "exit_target": null, "evidence_turn_refs": ["part08:fixed-index-correct"]},
+    {"route_id": "route.symbolic.correct", "after_step_id": "symbolic_probe_i3", "outcome": "correct", "next_step_id": "symbolic_validate_i3", "exit_target": null, "evidence_turn_refs": ["part08:symbolic-correct"]},
+    {"route_id": "route.enumerate.correct", "after_step_id": "max_loop_enumerate_probe", "outcome": "correct", "next_step_id": "max_loop_enumerate_validate", "exit_target": null, "evidence_turn_refs": ["part08:enumerate-S-correct"]},
+    {"route_id": "route.condition.wrong", "after_step_id": "max_loop_condition_probe", "outcome": "incorrect", "next_step_id": "max_loop_condition_correction", "exit_target": null, "evidence_turn_refs": ["part08:reversed-condition"]},
+    {"route_id": "route.condition.retry.correct", "after_step_id": "max_loop_condition_retry", "outcome": "correct", "next_step_id": "max_loop_condition_validate", "exit_target": null, "evidence_turn_refs": ["part08:condition-correct-after-repair"]},
+    {"route_id": "route.full.partial", "after_step_id": "max_loop_full_probe", "outcome": "partial", "next_step_id": "max_loop_missing_init_explain", "exit_target": null, "evidence_turn_refs": ["part08:body-correct-init-missing"]},
+    {"route_id": "route.init.correct", "after_step_id": "max_loop_init_probe", "outcome": "correct", "next_step_id": "max_loop_complete_validate", "exit_target": null, "evidence_turn_refs": ["part08:init-line-correct"]}
+  ]
+}
