@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://study-os.local/schemas/pir.extraction-ledger.v1.schema.json",
+  "title": "PIR ExtractionLedger v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ledger_id", "extraction_revision", "dispositions"],
+  "properties": {
+    "schema_version": {"const": "pir.extraction-ledger.v1"},
+    "ledger_id": {"type": "string", "minLength": 1},
+    "extraction_revision": {"type": "string", "minLength": 1},
+    "dispositions": {
+      "type": "array",
+      "items": {"$ref": "turn-disposition.v1.schema.json"}
+    }
+  }
+}
