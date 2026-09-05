@@ -53,7 +53,10 @@ def render_until_blocked(cursor: ReplayCursor) -> ReplayCursor:
     return current
 
 
-def answer_and_render(cursor: ReplayCursor, response: str) -> tuple[TrajectoryOutcomeKind, ReplayCursor]:
+def answer_and_render(
+    cursor: ReplayCursor,
+    response: str,
+) -> tuple[TrajectoryOutcomeKind, ReplayCursor]:
     result = submit_response(load_trajectory(), load_registry(), cursor, response)
     return result.outcome, render_until_blocked(result.cursor)
 
