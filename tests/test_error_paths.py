@@ -100,5 +100,8 @@ def test_direct_verbatim_span_cannot_resolve_from_reconstructed_artifact() -> No
         byte_end=3,
         evidence_status=EvidenceStatus.VERBATIM,
     )
-    with pytest.raises(ValueError, match="verbatim span cannot resolve from reconstructed artifact"):
+    with pytest.raises(
+        ValueError,
+        match="verbatim span cannot resolve from reconstructed artifact",
+    ):
         resolve_span(artifact=artifact, data=data, span=span)
