@@ -1,0 +1,19 @@
+{
+  "schema_version": "pir.compiler-input.v0",
+  "case_id": "dev.dsa.two-pointers.v0",
+  "domain": "dsa",
+  "problem_text": "Given a sorted array of integers and a target sum, return whether two distinct values add to the target using one pointer from each end.",
+  "learner_evidence": [
+    {"concept_id": "array_value_lookup", "level": "unaided_success", "evidence_refs": ["synthetic-dev-evidence"]},
+    {"concept_id": "index", "level": "unaided_success", "evidence_refs": ["synthetic-dev-evidence"]},
+    {"concept_id": "pointer_role", "level": "unknown", "evidence_refs": []},
+    {"concept_id": "coordinated_pointer_move", "level": "unknown", "evidence_refs": []}
+  ],
+  "current_representation": ["array", "indexes"],
+  "public_constraints": [
+    "do not assume unknown prerequisites are known",
+    "keep left and right roles distinct",
+    "do not reveal probe answers"
+  ],
+  "policy_ref": "compiler-p4@0.1.0"
+}
