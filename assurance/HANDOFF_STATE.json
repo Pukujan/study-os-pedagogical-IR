@@ -1,0 +1,133 @@
+{
+  "schema_version": "pam-handoff/0.2.0",
+  "state_kind": "current",
+  "project": {
+    "name": "Study OS Pedagogical IR Program",
+    "repository": "Pukujan/study-os-pedagogical-IR",
+    "phase": "PIR-0 extraction and benchmark proof",
+    "observed_identity": {
+      "kind": "git_commit",
+      "value": "1da192c9fb4341559e12fd6eab020018f8c10f75"
+    },
+    "active_issue": 1
+  },
+  "work": {
+    "owning_repository": "Pukujan/study-os-pedagogical-IR",
+    "issue": 1,
+    "branch": "main",
+    "pr": null,
+    "state": "in_progress"
+  },
+  "methodology": {
+    "repository": "Pukujan/project-assurance-modules",
+    "revision": "a10ad56b7088c1e101e80914a9e00357dbef9120",
+    "modules": [
+      {
+        "module_id": "continuity.structured-handoff",
+        "version": "0.1.0"
+      },
+      {
+        "module_id": "benchmark.integrity",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pukujan/study-os-benchmarker",
+      "role": "independent evaluator, adversarial benchmark, and blind-holdout boundary",
+      "locator": "Pukujan/study-os-benchmarker",
+      "observed_identity": {
+        "kind": "git_commit",
+        "value": "aaa0415aa261c7f46b0eb17853a6876ea5a663f1"
+      },
+      "tested_identity": {
+        "kind": "git_commit",
+        "value": "aaa0415aa261c7f46b0eb17853a6876ea5a663f1"
+      },
+      "issue": 2,
+      "pr": null
+    },
+    {
+      "name": "Pukujan/Study-os",
+      "role": "adopter/runtime and source of authorized learner-session evidence",
+      "locator": "Pukujan/Study-os",
+      "observed_identity": {
+        "kind": "git_commit",
+        "value": "bef88216d9052eeb7e135916ea7fb6f8d84e0ccc"
+      },
+      "tested_identity": null,
+      "issue": 65,
+      "pr": null
+    }
+  ],
+  "validation": {
+    "passed": [
+      {
+        "name": "PIR G1/G1.5 CI",
+        "evidence": "GitHub Actions run 33969394677 succeeded at 5635effae507e25fcb16ec53b6e3812fd4972448 with the current extraction-coverage slice."
+      },
+      {
+        "name": "Independent benchmarker bootstrap CI",
+        "evidence": "GitHub Actions run 33968016630 succeeded at aaa0415aa261c7f46b0eb17853a6876ea5a663f1."
+      }
+    ],
+    "failed": [],
+    "not_run": [
+      "Validate assurance/PROJECT_ASSURANCE.json and assurance/HANDOFF_STATE.json with PAM revision a10ad56b7088c1e101e80914a9e00357dbef9120",
+      "Complete authoritative September-4 turn extraction and 100-percent coverage receipt",
+      "Compile the complete source-backed September-4 golden trajectory",
+      "Run the first Luna fresh-subagent masked-regression evaluation",
+      "Run any sealed or prospective hidden-holdout evaluation"
+    ]
+  },
+  "next_action": {
+    "repository": "Pukujan/study-os-pedagogical-IR",
+    "issue": 1,
+    "action": "Produce the first real proof artifact: compile the complete authorized September-4 source into the extraction ledger, require exact source-turn coverage, and emit a source-backed golden/UNRESOLVED report before expanding G2 schemas.",
+    "acceptance": "The authorized run reports exact source artifact identities, N source turns = N dispositions, zero missing/duplicate/unknown turns, every accepted golden event resolves to source evidence, unsupported edges remain UNRESOLVED, and the receipt pins PIR/compiler/input revisions."
+  },
+  "blockers": [],
+  "scope": {
+    "do_not_start": [
+      "Broad G2 pedagogy ontology expansion before the September-4 extraction receipt exists",
+      "Production tutoring controller or renderer integration",
+      "Donor-model/package integration before the common compiler/runtime benchmark exists",
+      "Treat masked September-4 regressions as true hidden generalization evidence",
+      "Expose sealed holdout oracle material in public repositories, agent-visible handoffs, or candidate workspaces"
+    ]
+  },
+  "decisions_not_to_reverse": [
+    "Raw/source evidence is authority; derived summaries and goldens cannot replace it.",
+    "PIR owns pedagogy semantics; study-os-benchmarker owns independent scoring; Study OS adopts pinned tested PIR revisions.",
+    "PAM is a pinned assurance methodology and validation shell, not a runtime dependency and not pedagogy logic.",
+    "Visible regression, masked regression, sealed holdout, and prospective evaluation are distinct evidence classes.",
+    "A hidden case opened for debugging is permanently contaminated and must be retired into regression.",
+    "The immediate program objective is proof-producing extraction and benchmark output, not additional architecture for its own sake."
+  ],
+  "open_questions": [
+    "Identify and hash the exact authorized local/private September-4 source bundle that will be treated as authoritative for the first full extraction run."
+  ],
+  "reconciliation": {
+    "live_state_wins": true,
+    "checks": [
+      "Re-fetch Pukujan/study-os-pedagogical-IR main, issue #1, and latest CI before mutation.",
+      "Re-fetch Pukujan/study-os-benchmarker main, issues #1/#2, and latest CI before relying on evaluator state.",
+      "Re-fetch Pukujan/Study-os main and issue #65 before consuming learner-session evidence or changing adopter contracts.",
+      "Verify PAM revision a10ad56b7088c1e101e80914a9e00357dbef9120 before using its manifest or handoff validators."
+    ],
+    "stale_state_behavior": "refresh_and_revalidate"
+  },
+  "hidden_evaluation": {
+    "agent_visible_hidden_material": false,
+    "policy": "Agent-visible state may describe holdout lanes, contamination status, and opaque case identities, but never hidden source spans, expected bridges, labels, answers, seeds, oracle files, or scored hidden reports."
+  },
+  "handoff": {
+    "created_from_identity": {
+      "kind": "git_commit",
+      "value": "1da192c9fb4341559e12fd6eab020018f8c10f75"
+    },
+    "created_at": "2026-09-05T15:07:00Z",
+    "reason": "material_plan_change"
+  }
+}
