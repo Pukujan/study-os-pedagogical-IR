@@ -1,0 +1,284 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.max-sum-s0-to-si.replay.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part08.md",
+  "entry_step_id": "explain_first_window_max_init",
+  "representations": [
+    {
+      "representation_id": "r.init",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "3", "5", "2", "8", "1"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 12", "no window comparison has happened yet", "initialize max_sum from the first window"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "first_window_initialization"]
+    },
+    {
+      "representation_id": "r.value_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "5", "4", "7", "1", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 11", "max_sum = S[0]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment"]
+    },
+    {
+      "representation_id": "r.value_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "5", "4", "7", "1", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 11", "max_sum = S[0] = 11"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment", "max_sum_annotation"]
+    },
+    {
+      "representation_id": "r.s0_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "2", "3", "5", "1", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 11", "write the assignment that saves S[0] into max_sum"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation"]
+    },
+    {
+      "representation_id": "r.s0_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "2", "3", "5", "1", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 11", "max_sum = S[0]", "max_sum = 11"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment", "max_sum_annotation"]
+    },
+    {
+      "representation_id": "r.s0_to_si_bridge",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["6", "2", "3", "5", "1", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 11", "you already wrote max_sum = S[0]", "hint: because i = 0, S[0] and S[i] name the same current entry"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment", "s0_to_si_hint"]
+    },
+    {
+      "representation_id": "r.si_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[0] = 12", "hint: S[0] and S[i] refer to the same entry while i = 0"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_to_si_hint", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.si_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "first box"},
+      "boxes": [],
+      "annotations": ["i = 0", "S[i] = 12", "max_sum = S[i]", "max_sum = 12"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "si_assignment", "max_sum_annotation", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.first_comparison_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 1, "width": 3, "label": "next box"},
+      "boxes": [],
+      "annotations": ["i = 1", "S[i] = 14", "current max_sum = 12"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation", "comparison_operands"]
+    },
+    {
+      "representation_id": "r.first_comparison_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 1, "width": 3, "label": "next box"},
+      "boxes": [],
+      "annotations": ["i = 1", "S[i] = 14", "current max_sum = 12", "14 > 12 is true", "the new window value should replace max_sum"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation", "comparison_operands", "comparison_result"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "explain_first_window_max_init",
+      "kind": "explain",
+      "goal": "Establish that before any comparison, max_sum starts from the first window value S[0].",
+      "representation_id": "r.init",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "first_window_initialization"],
+      "forbidden_components": [],
+      "active_delta": "move max_sum from whole-list max(S) semantics to first-window initialization inside the loop",
+      "disclosed_concepts": ["max_sum_initialization"],
+      "forbidden_concepts": ["s0_to_si_bridge", "comparison", "comparison_code", "max_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part08:first-window-initialization"]
+    },
+    {
+      "step_id": "probe_first_window_value",
+      "kind": "probe",
+      "goal": "Check the concrete value carried by max_sum = S[0] on changed data.",
+      "representation_id": "r.value_probe",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment"],
+      "forbidden_components": [],
+      "active_delta": "read the value assigned from S[0] without advancing to S[i] or comparison",
+      "disclosed_concepts": ["max_sum_initialization"],
+      "forbidden_concepts": ["s0_to_si_bridge", "comparison", "comparison_code", "max_loop"],
+      "probe": {
+        "target": "concrete max_sum value when max_sum = S[0]",
+        "prompt": "If max_sum = S[0], what is the value of max_sum?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["max_sum = 11", "answer is 11"]
+      },
+      "evidence_turn_refs": ["sep4:part08:first-window-value-probe"]
+    },
+    {
+      "step_id": "validate_first_window_value",
+      "kind": "validate",
+      "goal": "Show why the learner's 11 answer is correct in the same chart before asking for code.",
+      "representation_id": "r.value_validate",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment", "max_sum_annotation"],
+      "forbidden_components": [],
+      "active_delta": "validate S[0]=11 therefore max_sum=11",
+      "disclosed_concepts": ["max_sum_initialization"],
+      "forbidden_concepts": ["s0_to_si_bridge", "comparison", "comparison_code", "max_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part08:value-validation-before-code"]
+    },
+    {
+      "step_id": "probe_s0_assignment",
+      "kind": "probe",
+      "goal": "Have the learner write the Python assignment that saves S[0] into max_sum.",
+      "representation_id": "r.s0_probe",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation"],
+      "forbidden_components": [],
+      "active_delta": "translate the established first-window relation into code",
+      "disclosed_concepts": ["max_sum_initialization"],
+      "forbidden_concepts": ["s0_to_si_bridge", "comparison", "comparison_code", "max_loop"],
+      "probe": {
+        "target": "Python assignment from S[0] to max_sum",
+        "prompt": "Write the Python line that saves S[0] into max_sum.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["max_sum = S[0]", "max_sum=S[0]"]
+      },
+      "evidence_turn_refs": ["sep4:part08:s0-assignment-probe"]
+    },
+    {
+      "step_id": "validate_s0_assignment",
+      "kind": "validate",
+      "goal": "Validate the learner-produced S[0] assignment against the same first-window chart.",
+      "representation_id": "r.s0_validate",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment", "max_sum_annotation"],
+      "forbidden_components": [],
+      "active_delta": "confirm max_sum=S[0] still means max_sum=11",
+      "disclosed_concepts": ["max_sum_initialization"],
+      "forbidden_concepts": ["comparison", "comparison_code", "max_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part08:s0-assignment-validation"]
+    },
+    {
+      "step_id": "bridge_s0_to_si",
+      "kind": "bridge",
+      "goal": "Give only the hint that S[0] and S[i] are equivalent while i=0, without leaking the target assignment.",
+      "representation_id": "r.s0_to_si_bridge",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_assignment", "s0_to_si_hint"],
+      "forbidden_components": ["si_assignment"],
+      "active_delta": "replace fixed index 0 with current index i under the explicit condition i=0",
+      "disclosed_concepts": ["max_sum_initialization", "s0_to_si_bridge"],
+      "forbidden_concepts": ["comparison", "comparison_code", "max_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part08:s0-to-si-hint", "sep4:part08:rejected-si-answer-leak"]
+    },
+    {
+      "step_id": "probe_si_assignment",
+      "kind": "probe",
+      "goal": "On changed data, have the learner independently rewrite the initialization using S[i].",
+      "representation_id": "r.si_probe",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "s0_to_si_hint", "changed_surface_data"],
+      "forbidden_components": ["si_assignment"],
+      "active_delta": "produce the generalized assignment after the hint-only bridge",
+      "disclosed_concepts": ["max_sum_initialization", "s0_to_si_bridge"],
+      "forbidden_concepts": ["comparison", "comparison_code", "max_loop"],
+      "probe": {
+        "target": "Python assignment using S[i] instead of S[0]",
+        "prompt": "Since i = 0 and S[0] means the same current entry as S[i], write the max_sum line using S[i].",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["max_sum = S[i]", "max_sum=S[i]"]
+      },
+      "evidence_turn_refs": ["sep4:part08:repaired-si-assignment-probe"]
+    },
+    {
+      "step_id": "validate_si_assignment",
+      "kind": "validate",
+      "goal": "Validate max_sum = S[i] in the same changed first-window chart before moving the box.",
+      "representation_id": "r.si_validate",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "si_assignment", "max_sum_annotation", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "show that with i=0, S[i]=12 and max_sum therefore holds 12",
+      "disclosed_concepts": ["max_sum_initialization", "s0_to_si_bridge"],
+      "forbidden_concepts": ["comparison_code", "max_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part08:si-assignment-validation"]
+    },
+    {
+      "step_id": "probe_first_comparison",
+      "kind": "probe",
+      "goal": "Only after the S[i] assignment is produced and validated, move to the next window and ask the first concrete comparison.",
+      "representation_id": "r.first_comparison_probe",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation", "comparison_operands"],
+      "forbidden_components": [],
+      "active_delta": "compare the current S[i]=14 against max_sum=12 without yet asking for comparison code",
+      "disclosed_concepts": ["max_sum_initialization", "s0_to_si_bridge", "comparison"],
+      "forbidden_concepts": ["comparison_code", "max_loop"],
+      "probe": {
+        "target": "whether the next window value is larger than current max_sum",
+        "prompt": "Is S[i] = 14 bigger than max_sum = 12?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["yes", "true", "14 > 12"]
+      },
+      "evidence_turn_refs": ["sep4:part08:first-comparison-probe"]
+    },
+    {
+      "step_id": "validate_first_comparison",
+      "kind": "validate",
+      "goal": "Validate the first concrete comparison in the same moved-box chart without yet exposing the Python if condition.",
+      "representation_id": "r.first_comparison_validate",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "sum_annotation", "max_sum_annotation", "comparison_operands", "comparison_result"],
+      "forbidden_components": [],
+      "active_delta": "show 14>12 is true and that max_sum should be replaced by the new window value",
+      "disclosed_concepts": ["max_sum_initialization", "s0_to_si_bridge", "comparison"],
+      "forbidden_concepts": ["comparison_code", "max_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part08:first-comparison-validation"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.max.init.value", "from_step_id": "explain_first_window_max_init", "next_step_id": "probe_first_window_value", "exit_target": null, "evidence_turn_refs": ["sep4:part08:init-to-value"]},
+    {"transition_id": "auto.max.value.validate.s0", "from_step_id": "validate_first_window_value", "next_step_id": "probe_s0_assignment", "exit_target": null, "evidence_turn_refs": ["sep4:part08:validation-before-code"]},
+    {"transition_id": "auto.max.s0.validate.bridge", "from_step_id": "validate_s0_assignment", "next_step_id": "bridge_s0_to_si", "exit_target": null, "evidence_turn_refs": ["sep4:part08:s0-to-si-request"]},
+    {"transition_id": "auto.max.bridge.si_probe", "from_step_id": "bridge_s0_to_si", "next_step_id": "probe_si_assignment", "exit_target": null, "evidence_turn_refs": ["sep4:part08:hint-to-changed-probe"]},
+    {"transition_id": "auto.max.si.validate.compare", "from_step_id": "validate_si_assignment", "next_step_id": "probe_first_comparison", "exit_target": null, "evidence_turn_refs": ["sep4:part08:si-validation-to-comparison"]},
+    {"transition_id": "auto.max.compare.validate.exit", "from_step_id": "validate_first_comparison", "next_step_id": null, "exit_target": "max_sum_fixed_index_condition", "evidence_turn_refs": ["sep4:part08:comparison-to-code"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.max.value.correct", "after_step_id": "probe_first_window_value", "outcome": "correct", "next_step_id": "validate_first_window_value", "exit_target": null, "evidence_turn_refs": ["sep4:part08:learner-11"]},
+    {"route_id": "route.max.s0.correct", "after_step_id": "probe_s0_assignment", "outcome": "correct", "next_step_id": "validate_s0_assignment", "exit_target": null, "evidence_turn_refs": ["sep4:part08:learner-s0-assignment"]},
+    {"route_id": "route.max.si.correct", "after_step_id": "probe_si_assignment", "outcome": "correct", "next_step_id": "validate_si_assignment", "exit_target": null, "evidence_turn_refs": ["sep4:part08:learner-si-assignment"]},
+    {"route_id": "route.max.compare.correct", "after_step_id": "probe_first_comparison", "outcome": "correct", "next_step_id": "validate_first_comparison", "exit_target": null, "evidence_turn_refs": ["sep4:part08:learner-yes"]}
+  ]
+}

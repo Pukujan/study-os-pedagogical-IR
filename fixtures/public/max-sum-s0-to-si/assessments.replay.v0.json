@@ -1,0 +1,18 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.max-sum-s0-to-si.replay.v0",
+  "assessments": [
+    {"step_id": "probe_first_window_value", "kind": "integer", "expected_values": [11]},
+    {
+      "step_id": "probe_s0_assignment",
+      "kind": "text",
+      "expected_text": ["max_sum = S[0]", "max_sum=S[0]", "max_sum = s[0]", "max_sum=s[0]"]
+    },
+    {
+      "step_id": "probe_si_assignment",
+      "kind": "text",
+      "expected_text": ["max_sum = S[i]", "max_sum=S[i]", "max_sum = s[i]", "max_sum=s[i]"]
+    },
+    {"step_id": "probe_first_comparison", "kind": "text", "expected_text": ["yes", "y"]}
+  ]
+}
