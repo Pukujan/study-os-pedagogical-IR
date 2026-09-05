@@ -4,10 +4,10 @@
   "project": {
     "name": "Study OS Pedagogical IR Program",
     "repository": "Pukujan/study-os-pedagogical-IR",
-    "phase": "PIR-0 executable golden replay and runtime/schema falsification",
+    "phase": "PIR-0 executable replay through sum[i] with experimental lexical/register control",
     "observed_identity": {
       "kind": "git_commit",
-      "value": "c31fe82690765a86248ccc65469b2583690c3d36"
+      "value": "305cf09fa739160e8369bb16144720be2355bc64"
     },
     "active_issue": 1
   },
@@ -79,20 +79,23 @@
         "evidence": "The source-backed foundations graph supports correct and wrong->correction->changed-retry paths without inventing repeated-error policy. Runtime separates renderer-safe turn contracts from controller-only assessment oracles and deterministically grades current structured text inputs."
       },
       {
-        "name": "Current PIR snapshot",
-        "evidence": "CI run 33984923120 succeeded at c31fe82690765a86248ccc65469b2583690c3d36: Ruff clean, strict mypy clean across 21 source files, 151 tests passed, 100% statement/branch coverage across 857 statements and 266 branches."
+        "name": "Persistent i-to-sum replay with PARTIAL routing",
+        "evidence": "PR #2 landed at 18ba153e4cda92d5ce45b951b53943d4ec50c918. Main CI run 33991808838 passed after proving learner-visible persistent problem rendering, source-backed i-as-box-start -> same-chart validation -> sum[i] progression, wrong-answer recovery, PARTIAL preservation of correct box contents, and renderer/oracle isolation."
       },
       {
-        "name": "Current PAM handoff validation",
-        "evidence": "PAM assurance run 33984923129 succeeded at c31fe82690765a86248ccc65469b2583690c3d36. Detailed human handoff: assurance/NEXT_SESSION_HANDOFF.md."
+        "name": "Lexical/register falsification and control",
+        "evidence": "The semantic trajectory validator accepted a semantics-preserving numbers/box -> elements/window mutation, demonstrating a real blind spot. PR #3 then landed an experimental source-backed lexical/register profile and deterministic surface validator at 305cf09fa739160e8369bb16144720be2355bc64. Main CI run 33992105583 passed with Ruff clean, strict mypy clean across 24 source files, 168 tests, and 100% statement/branch coverage across 951 statements and 300 branches."
+      },
+      {
+        "name": "Documentation synchronization gate",
+        "evidence": "The main CI receipts for both replay and lexical milestones ended with documentation synchronization: PASS; machine-owned status remains checked separately from human-reviewed semantic specifications."
       }
     ],
     "failed": [],
     "not_run": [
-      "Prove persistent full-problem context is learner-visible on every required replay turn",
-      "Extend executable trajectory through i-moves-box and sum[i] with PARTIAL routing",
+      "Encode and falsify an explicit source-restoration register transition from grounded box language to authentic window terminology",
+      "Extend executable trajectory beyond sum[i] into successive sums and later sliding-window bridges",
       "Freeze complete canonical September-4 golden",
-      "Run lexical/register falsification before adding language-state IR",
       "Build and score raw problem + learner state -> PIR compiler",
       "Run Luna masked, sealed, or prospective holdout evaluations"
     ]
@@ -100,20 +103,20 @@
   "next_action": {
     "repository": "Pukujan/study-os-pedagogical-IR",
     "issue": 1,
-    "action": "Read assurance/NEXT_SESSION_HANDOFF.md, reconcile live main/CI, then wire persistent full-problem context into learner-visible renderer output. Extend the source-backed executable trajectory through i as box start, moved-box exercises, same-chart validation, and sum[i], including the observed PARTIAL path where correct box contents are given without the arithmetic sum. After replay is faithful through sum[i], run a small lexical/register falsification experiment before deciding whether first-class language state is needed.",
-    "acceptance": "The full difficult question remains visibly available where required; correct/incorrect/partial responses route deterministically through source-backed states; the box remains visible through sum[i]; renderer contracts contain no hidden grading answers; all existing regressions stay green. No lexical/register primitive is promoted unless a concrete mutation shows existing concept/representation constraints are insufficient."
+    "action": "Extend the pinned September-4 replay from sum[i] into the next source-backed successive-sum bridge while preserving persistent problem context, same-chart validation, deterministic correction/retry semantics, and oracle isolation. In parallel, make register progression explicit: keep the beginner grounded profile during acquisition, then add a separate source-restoration profile/transition at the evidenced point where authentic window terminology is deliberately restored. Falsify both directions: premature window terminology must fail before restoration, while the restored source register must be legal after the transition.",
+    "acceptance": "The next successive-sum states are source-backed and replayable; the active register is explicit and versioned; premature technical terminology is rejected before restoration; authentic source terminology is accepted only after the explicit restoration transition; no universal vocabulary hierarchy is inferred; current 100% coverage, renderer/oracle separation, and existing regressions remain green."
   },
   "blockers": [
-    "Persistent problem context exists as an artifact but has not yet been proven in actual learner-visible rendering.",
-    "Lexical/register hierarchy is a serious hypothesis, not yet a justified schema addition.",
-    "Complete canonical September-4 golden remains unfinished."
+    "The complete canonical September-4 golden remains unfinished beyond the current sum[i] frontier.",
+    "A source-restoration register profile and explicit transition have not yet been encoded or falsified.",
+    "Automatic raw problem plus learner state -> PIR compilation has not yet been built or scored."
   ],
   "scope": {
     "do_not_start": [
-      "Promote experimental vertical/trajectory/runtime v0 types into stable G2 merely because current slices pass",
-      "Add a broad semantic-wave, CRA, lexical, or pedagogy ontology from theory alone",
+      "Promote experimental vertical/trajectory/runtime or lexical-register v0 types into stable G2 merely because current slices pass",
+      "Add a broad semantic-wave, CRA, language-level hierarchy, or pedagogy ontology from theory alone",
       "Treat 887/887 accounting as semantic completeness",
-      "Let an LLM own progression or see controller-only grading answers",
+      "Let an LLM own progression, vocabulary authority, or controller-only grading answers",
       "Treat masked September-4 regression as true hidden generalization evidence",
       "Expose sealed holdout oracle material",
       "Claim automatic decomposition quality or learning efficacy from replay tests"
@@ -130,7 +133,7 @@
     "Deterministic controller owns progression; renderer/model is bounded.",
     "Renderer-visible contracts never contain hidden grading answers.",
     "Learner-visible output is a falsification surface; hidden preserve flags are insufficient.",
-    "Language/register may be a separate abstraction axis from representation, but it remains experimental until a concrete source/runtime test proves the need.",
+    "For the evidenced September-4 trajectory, language/register is an independent learner-facing control axis from semantic meaning and visual representation; control it with versioned source-backed profiles and explicit restoration, without universalizing the specific lexicon.",
     "Do not freeze a universal pedagogy ontology from one learner/session."
   ],
   "open_questions": [
@@ -139,7 +142,7 @@
     "How should early part-01 attempts be dispositioned relative to later calibration?",
     "What evidence establishes mastery after final-loop exposure?",
     "What bounded repeated-error policy should apply after a failed changed retry?",
-    "Is first-class lexical/register state genuinely required?",
+    "How should register restoration and later terminology progression be represented without assuming a universal fixed language hierarchy?",
     "How should PARTIAL grading split deterministic structured parsing from bounded natural-language classification?"
   ],
   "reconciliation": {
@@ -160,9 +163,9 @@
   "handoff": {
     "created_from_identity": {
       "kind": "git_commit",
-      "value": "c31fe82690765a86248ccc65469b2583690c3d36"
+      "value": "305cf09fa739160e8369bb16144720be2355bc64"
     },
-    "created_at": "2026-09-05T18:44:00Z",
-    "reason": "session_end"
+    "created_at": "2026-09-05T21:08:30Z",
+    "reason": "milestone_transition"
   }
 }
