@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from study_os_pir.console import render_turn_text
 from study_os_pir.runtime import (
     AssessmentRegistry,
     ReplayContext,
@@ -69,11 +70,13 @@ def test_first_window_probe_hides_expression_and_preserves_box() -> None:
     cursor = start_replay(trajectory, load_registry())
     contract = build_renderer_contract(trajectory, cursor, load_context())
     payload = contract.model_dump_json()
+    rendered = render_turn_text(contract)
     assert contract.representation.box is not None
     assert contract.representation.box.start_index == 0
     assert contract.representation.box.width == 3
     assert "a[i] + a[i+1] + a[i+j]" not in payload
-    assert "max_sum" not in payload
+    assert "max_sum" not in rendered
+    assert contract.forbidden_concepts == ("max_sum",)
 
 
 def test_source_backed_loop_path_reaches_representation_restoration() -> None:
