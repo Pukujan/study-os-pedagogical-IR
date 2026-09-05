@@ -1,0 +1,326 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.first-python-loop.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part07.md",
+  "entry_step_id": "loop_first_window_probe",
+  "representations": [
+    {
+      "representation_id": "r.loop_first_window_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "box"},
+      "boxes": [],
+      "annotations": [
+        "i = 0; k = 3; j = k - 1 = 2; S[0] = 12",
+        "S = []",
+        "for i, num in enumerate(a):",
+        "    if i == 0:",
+        "        S.append( ??? )"
+      ],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_label", "k_label", "j_label", "sum_i_label", "loop_skeleton", "first_case"]
+    },
+    {
+      "representation_id": "r.loop_first_window_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "box"},
+      "boxes": [],
+      "annotations": [
+        "i = 0; j = 2",
+        "a[i] + a[i+1] + a[i+j] = a[0] + a[1] + a[2] = 3 + 8 + 1 = 12",
+        "S.append(a[i] + a[i+1] + a[i+j])"
+      ],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_label", "j_label", "first_window_expression", "append_form"]
+    },
+    {
+      "representation_id": "r.loop_later_case_bridge",
+      "rows": [
+        {"row_id": "algebra_row", "label": "formula", "values": ["S[i] = S[i-1] - a[i-1] + a[i+j]"]},
+        {"row_id": "append_row", "label": "append", "values": ["S.append(S[i-1] - a[i-1] + a[i+j])"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["for later boxes, the recurrence is the same; only storage uses append"],
+      "visible_components": ["problem_anchor", "recurrence_equation", "storage_mapping", "rhs_preserved", "later_case"]
+    },
+    {
+      "representation_id": "r.loop_two_cases",
+      "rows": [
+        {"row_id": "case0", "label": "i == 0", "values": ["S.append(a[i] + a[i+1] + a[i+j])"]},
+        {"row_id": "later", "label": "later", "values": ["S.append(S[i-1] - a[i-1] + a[i+j])"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["for i, num in enumerate(a):", "    if i == 0: first case", "    else: later case"],
+      "visible_components": ["problem_anchor", "loop_skeleton", "first_case", "later_case", "append_form"]
+    },
+    {
+      "representation_id": "r.loop_boundary_intro",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]},
+        {"row_id": "valid_row", "label": "valid i", "values": ["0", "1", "2", "3", "-", "-"]}
+      ],
+      "box": {"start_index": 3, "width": 3, "label": "last box"},
+      "boxes": [],
+      "annotations": ["k = 3", "last valid i = 3", "at i = 4, a box of 3 no longer fits"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "k_label", "valid_i", "last_valid_i"]
+    },
+    {
+      "representation_id": "r.loop_boundary_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["k = 3", "current i = 4"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "current_i"]
+    },
+    {
+      "representation_id": "r.loop_boundary_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]},
+        {"row_id": "valid_row", "label": "valid i", "values": ["0", "1", "2", "3", "X", "X"]}
+      ],
+      "box": {"start_index": 3, "width": 3, "label": "last box"},
+      "boxes": [],
+      "annotations": ["i = 4 is past the last valid start, so the loop must stop"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "valid_i", "last_valid_i", "boundary_stop"]
+    },
+    {
+      "representation_id": "r.loop_break_probe",
+      "rows": [
+        {"row_id": "condition", "label": "condition", "values": ["if i > len(a) - k:"]},
+        {"row_id": "body", "label": "then", "values": ["???"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["this condition becomes true after the last valid box start"],
+      "visible_components": ["problem_anchor", "boundary_condition", "loop_skeleton"]
+    },
+    {
+      "representation_id": "r.loop_full_unit",
+      "rows": [
+        {"row_id": "code1", "label": "1", "values": ["S = []"]},
+        {"row_id": "code2", "label": "2", "values": ["for i, num in enumerate(a):"]},
+        {"row_id": "code3", "label": "3", "values": ["    if i > len(a) - k:"]},
+        {"row_id": "code4", "label": "4", "values": ["        break"]},
+        {"row_id": "code5", "label": "5", "values": ["    if i == 0:"]},
+        {"row_id": "code6", "label": "6", "values": ["        S.append(a[i] + a[i+1] + a[i+j])"]},
+        {"row_id": "code7", "label": "7", "values": ["    else:"]},
+        {"row_id": "code8", "label": "8", "values": ["        S.append(S[i-1] - a[i-1] + a[i+j])"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["window-sum loop only; max tracking is not introduced yet"],
+      "visible_components": ["problem_anchor", "full_window_loop", "boundary_condition", "break", "first_case", "later_case", "append_form"]
+    },
+    {
+      "representation_id": "r.loop_i3_probe",
+      "rows": [
+        {"row_id": "condition", "label": "condition", "values": ["if i > len(a) - k: break"]},
+        {"row_id": "values", "label": "values", "values": ["i = 3", "len(a) = 6", "k = 3"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["decide what the loop does at i = 3"],
+      "visible_components": ["problem_anchor", "boundary_condition", "boundary_values"]
+    },
+    {
+      "representation_id": "r.loop_i3_validate",
+      "rows": [
+        {"row_id": "comparison", "label": "check", "values": ["3 > 6 - 3", "3 > 3", "false"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["the loop calculates S[3]; it breaks when i = 4"],
+      "visible_components": ["problem_anchor", "boundary_condition", "boundary_values", "boundary_validation"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "loop_first_window_probe",
+      "kind": "probe",
+      "goal": "Bridge the known first box into the first append expression inside the real loop.",
+      "representation_id": "r.loop_first_window_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_label", "k_label", "j_label", "sum_i_label", "loop_skeleton", "first_case"],
+      "forbidden_components": [],
+      "active_delta": "fill only the first-window append expression",
+      "disclosed_concepts": ["enumerate_relation", "append", "first_window_case"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": {
+        "target": "first-window expression inside S.append",
+        "prompt": "What should go inside S.append(...) for this first window?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["a[i] + a[i+1] + a[i+j]", "S.append(a[i] + a[i+1] + a[i+j])"]
+      },
+      "evidence_turn_refs": ["sep4:first-python-loop:first-window", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_first_window_validate",
+      "kind": "validate",
+      "goal": "Validate the first-window expression in the same box before adding the later-window case.",
+      "representation_id": "r.loop_first_window_validate",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "i_label", "j_label", "first_window_expression", "append_form"],
+      "forbidden_components": [],
+      "active_delta": "show why the first append expression equals 12",
+      "disclosed_concepts": ["append", "first_window_case"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:first-window-validation", "golden:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "loop_later_case_bridge",
+      "kind": "bridge",
+      "goal": "Bridge the already-known recurrence into append form for later windows without claiming a new independent learner completion.",
+      "representation_id": "r.loop_later_case_bridge",
+      "preserve_components": ["problem_anchor", "recurrence_equation", "storage_mapping", "rhs_preserved", "later_case"],
+      "forbidden_components": [],
+      "active_delta": "reuse the known recurrence as the later-window append expression",
+      "disclosed_concepts": ["append", "later_window_case"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:later-window", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_two_cases",
+      "kind": "bridge",
+      "goal": "Place the first-window and later-window append forms together inside one loop unit.",
+      "representation_id": "r.loop_two_cases",
+      "preserve_components": ["problem_anchor", "loop_skeleton", "first_case", "later_case", "append_form"],
+      "forbidden_components": [],
+      "active_delta": "combine only the two already-established cases",
+      "disclosed_concepts": ["first_window_case", "later_window_case"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:two-cases", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_boundary_intro",
+      "kind": "explain",
+      "goal": "Show the last valid box start before asking what the loop should do when i becomes invalid.",
+      "representation_id": "r.loop_boundary_intro",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "k_label", "valid_i", "last_valid_i"],
+      "forbidden_components": [],
+      "active_delta": "introduce only the last valid i boundary",
+      "disclosed_concepts": ["last_valid_i"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:last-valid-i", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_boundary_probe",
+      "kind": "probe",
+      "goal": "Ask whether the loop should continue or stop once i = 4 and a box of 3 no longer fits.",
+      "representation_id": "r.loop_boundary_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "current_i"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "decide only whether the loop continues past the valid window boundary",
+      "disclosed_concepts": ["last_valid_i"],
+      "forbidden_concepts": ["break", "max_sum"],
+      "probe": {
+        "target": "loop action at invalid i=4",
+        "prompt": "At i = 4, should the loop continue or stop?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": []
+      },
+      "evidence_turn_refs": ["sep4:first-python-loop:stop-probe", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_boundary_validate",
+      "kind": "validate",
+      "goal": "Validate stopping at i = 4 in the original array representation.",
+      "representation_id": "r.loop_boundary_validate",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "window_box", "valid_i", "last_valid_i", "boundary_stop"],
+      "forbidden_components": [],
+      "active_delta": "show why a 3-number box cannot start at index 4",
+      "disclosed_concepts": ["last_valid_i"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:stop-validation", "golden:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "loop_break_probe",
+      "kind": "probe",
+      "goal": "Given the learner-proposed boundary condition, ask only for the Python keyword that stops the loop.",
+      "representation_id": "r.loop_break_probe",
+      "preserve_components": ["problem_anchor", "boundary_condition", "loop_skeleton"],
+      "forbidden_components": [],
+      "active_delta": "translate the known stop action into one Python keyword",
+      "disclosed_concepts": ["boundary_condition"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": {
+        "target": "Python loop-stop keyword",
+        "prompt": "What Python keyword goes under this condition to stop the loop?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["break"]
+      },
+      "evidence_turn_refs": ["sep4:first-python-loop:break-probe", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_full_unit",
+      "kind": "bridge",
+      "goal": "Assemble the window-sum loop from the established pieces, without adding max tracking.",
+      "representation_id": "r.loop_full_unit",
+      "preserve_components": ["problem_anchor", "full_window_loop", "boundary_condition", "break", "first_case", "later_case", "append_form"],
+      "forbidden_components": [],
+      "active_delta": "assemble only the already-established loop pieces",
+      "disclosed_concepts": ["python_window_loop", "break"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:assembled-loop", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_i3_probe",
+      "kind": "probe",
+      "goal": "Check the boundary on the last valid start without hiding the explicit branch choices.",
+      "representation_id": "r.loop_i3_probe",
+      "preserve_components": ["problem_anchor", "boundary_condition", "boundary_values"],
+      "forbidden_components": [],
+      "active_delta": "evaluate only whether i=3 calculates or breaks",
+      "disclosed_concepts": ["python_window_loop", "break", "boundary_condition"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": {
+        "target": "branch action at i=3",
+        "prompt": "When i = 3, does the loop calculate S[3] or break?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": []
+      },
+      "evidence_turn_refs": ["sep4:first-python-loop:i3-check", "golden:first_python_window_loop"]
+    },
+    {
+      "step_id": "loop_i3_validate",
+      "kind": "validate",
+      "goal": "Validate that i = 3 is still a legal box start and i = 4 is the first break.",
+      "representation_id": "r.loop_i3_validate",
+      "preserve_components": ["problem_anchor", "boundary_condition", "boundary_values", "boundary_validation"],
+      "forbidden_components": [],
+      "active_delta": "show 3 > 3 is false, so S[3] is calculated",
+      "disclosed_concepts": ["python_window_loop", "break", "boundary_condition"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:first-python-loop:i3-validation", "golden:first_python_window_loop"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.loop.first.validate.later", "from_step_id": "loop_first_window_validate", "next_step_id": "loop_later_case_bridge", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"transition_id": "auto.loop.later.two-cases", "from_step_id": "loop_later_case_bridge", "next_step_id": "loop_two_cases", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"transition_id": "auto.loop.two-cases.boundary", "from_step_id": "loop_two_cases", "next_step_id": "loop_boundary_intro", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"transition_id": "auto.loop.boundary.probe", "from_step_id": "loop_boundary_intro", "next_step_id": "loop_boundary_probe", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"transition_id": "auto.loop.boundary.validate.break", "from_step_id": "loop_boundary_validate", "next_step_id": "loop_break_probe", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"transition_id": "auto.loop.full.i3", "from_step_id": "loop_full_unit", "next_step_id": "loop_i3_probe", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"transition_id": "auto.loop.i3.validate.exit", "from_step_id": "loop_i3_validate", "next_step_id": null, "exit_target": "restore_representation_for_validation", "evidence_turn_refs": ["golden:restore_representation_for_validation"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.loop.first.correct", "after_step_id": "loop_first_window_probe", "outcome": "correct", "next_step_id": "loop_first_window_validate", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"route_id": "route.loop.boundary.correct", "after_step_id": "loop_boundary_probe", "outcome": "correct", "next_step_id": "loop_boundary_validate", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"route_id": "route.loop.break.correct", "after_step_id": "loop_break_probe", "outcome": "correct", "next_step_id": "loop_full_unit", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]},
+    {"route_id": "route.loop.i3.correct", "after_step_id": "loop_i3_probe", "outcome": "correct", "next_step_id": "loop_i3_validate", "exit_target": null, "evidence_turn_refs": ["golden:first_python_window_loop"]}
+  ]
+}
