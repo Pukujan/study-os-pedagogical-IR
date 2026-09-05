@@ -26,6 +26,7 @@ class VerticalViolationCode(StrEnum):
     DUPLICATE_LEARNER_OUTCOME_ID = "DUPLICATE_LEARNER_OUTCOME_ID"
     UNKNOWN_REPRESENTATION = "UNKNOWN_REPRESENTATION"
     MISSING_PRESERVED_REPRESENTATION = "MISSING_PRESERVED_REPRESENTATION"
+    FORBIDDEN_REPRESENTATION_PRESENT = "FORBIDDEN_REPRESENTATION_PRESENT"
     FORBIDDEN_CONCEPT_DISCLOSED = "FORBIDDEN_CONCEPT_DISCLOSED"
     ANSWER_LITERAL_LEAKED = "ANSWER_LITERAL_LEAKED"
     UNKNOWN_LEARNER_OUTCOME_ANCHOR = "UNKNOWN_LEARNER_OUTCOME_ANCHOR"
@@ -71,6 +72,7 @@ class VerticalStep(StrictFrozenModel):
     goal: str = Field(min_length=1)
     representation_id: str = Field(min_length=1)
     preserve_components: tuple[str, ...] = ()
+    forbidden_components: tuple[str, ...] = ()
     active_delta: str = Field(min_length=1)
     disclosed_concepts: tuple[str, ...] = ()
     forbidden_concepts: tuple[str, ...] = ()
@@ -120,6 +122,21 @@ def _route_is_exclusive(first: str | None, second: str | None) -> bool:
     return (first is None) != (second is None)
 
 
+def _representation_features(representation: VerticalRepresentation) -> set[str]:
+    features = set(representation.visible_components)
+    if representation.box is not None:
+        features.add("window_box")
+    return features
+
+
+def _representation_surface_text(representation: VerticalRepresentation) -> str:
+    parts = [row.label for row in representation.rows]
+    for row in representation.rows:
+        parts.extend(row.values)
+    parts.extend(representation.annotations)
+    return "\n".join(parts)
+
+
 def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[VerticalViolation, ...]:
     violations: list[VerticalViolation] = []
     step_ids = tuple(step.step_id for step in slice_.steps)
@@ -166,12 +183,25 @@ def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[Vertical
             )
             continue
 
-        missing = sorted(set(step.preserve_components) - set(representation.visible_components))
+        representation_features = _representation_features(representation)
+        missing = sorted(set(step.preserve_components) - representation_features)
         if missing:
             violations.append(
                 VerticalViolation(
                     code=VerticalViolationCode.MISSING_PRESERVED_REPRESENTATION,
                     detail=f"{step.step_id} missing preserved component(s): {', '.join(missing)}",
+                )
+            )
+
+        forbidden_present = sorted(set(step.forbidden_components).intersection(representation_features))
+        if forbidden_present:
+            violations.append(
+                VerticalViolation(
+                    code=VerticalViolationCode.FORBIDDEN_REPRESENTATION_PRESENT,
+                    detail=(
+                        f"{step.step_id} contains forbidden representation feature(s): "
+                        f"{', '.join(forbidden_present)}"
+                    ),
                 )
             )
 
@@ -190,10 +220,13 @@ def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[Vertical
             )
 
         if step.probe is not None and not step.probe.answer_reveal_allowed:
+            learner_visible_surface = (
+                step.probe.prompt + "\n" + _representation_surface_text(representation)
+            )
             leaked = sorted(
                 literal
                 for literal in step.probe.forbidden_answer_literals
-                if literal and literal in step.probe.prompt
+                if literal and literal in learner_visible_surface
             )
             if leaked:
                 violations.append(
