@@ -45,7 +45,7 @@ def test_crlf_and_lf_are_different_artifacts() -> None:
 def test_span_resolves_exact_bytes_including_unicode_encoding() -> None:
     data = "A🙂B\n".encode()
     artifact = artifact_from_bytes(artifact_id="unicode", data=data)
-    start = len("A".encode())
+    start = len(b"A")
     end = start + len("🙂".encode())
     span = span_from_artifact(
         span_id="emoji",
