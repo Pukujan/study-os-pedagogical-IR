@@ -208,7 +208,10 @@ def validate_trajectory(trajectory: ExperimentalTrajectory) -> tuple[TrajectoryV
             violations.append(
                 TrajectoryViolation(
                     code=TrajectoryViolationCode.UNKNOWN_REPRESENTATION,
-                    detail=f"{step.step_id} references unknown representation {step.representation_id}",
+                    detail=(
+                        f"{step.step_id} references unknown representation "
+                        f"{step.representation_id}"
+                    ),
                 )
             )
             continue
