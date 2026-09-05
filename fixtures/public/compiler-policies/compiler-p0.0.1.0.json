@@ -1,0 +1,8 @@
+{
+  "schema_version": "pir.compiler-policy.v0",
+  "policy_id": "compiler-p0",
+  "policy_version": "0.1.0",
+  "strategy": "weak_baseline",
+  "prompt_template": "Decompose the problem for a beginner step by step. Return only the requested structured compiler proposal.",
+  "max_new_concepts_per_step": 3
+}
