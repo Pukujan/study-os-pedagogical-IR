@@ -1,0 +1,26 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.first-python-loop.v0",
+  "assessments": [
+    {
+      "step_id": "loop_first_window_probe",
+      "kind": "text",
+      "expected_text": ["a[i] + a[i+1] + a[i+j]"]
+    },
+    {
+      "step_id": "loop_boundary_probe",
+      "kind": "text",
+      "expected_text": ["stop"]
+    },
+    {
+      "step_id": "loop_break_probe",
+      "kind": "text",
+      "expected_text": ["break"]
+    },
+    {
+      "step_id": "loop_i3_probe",
+      "kind": "text",
+      "expected_text": ["calculate S[3]", "calculate s[3]", "calculate"]
+    }
+  ]
+}
