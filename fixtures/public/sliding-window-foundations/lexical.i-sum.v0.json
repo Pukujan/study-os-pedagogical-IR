@@ -1,0 +1,26 @@
+{
+  "schema_version": "pir.experimental-lexical-policy.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.i-sum.v0",
+  "steps": [
+    {
+      "step_id": "i_intro0",
+      "required_terms": ["numbers(a)", "box"],
+      "forbidden_terms": ["element", "window"]
+    },
+    {
+      "step_id": "i_probe3_unassisted",
+      "required_terms": ["numbers(a)", "box"],
+      "forbidden_terms": ["element", "window"]
+    },
+    {
+      "step_id": "sum_intro2_k3",
+      "required_terms": ["numbers(a)", "box", "sum[i]"],
+      "forbidden_terms": ["element", "window"]
+    },
+    {
+      "step_id": "sum_partial_arithmetic2_k2",
+      "required_terms": ["numbers(a)", "box", "sum[i]"],
+      "forbidden_terms": ["element", "window"]
+    }
+  ]
+}
