@@ -1,0 +1,66 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.final-combined-loop.replay.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part08.md",
+  "entry_step_id": "final_loop_exposure",
+  "representations": [
+    {
+      "representation_id": "r.final_loop",
+      "annotations": [
+        "a = [2, 6, 4, 1, 8]\n\nk = 3\nj = k - 1\nS = []\n\nfor i, num in enumerate(a):\n\n    if i > len(a) - k:\n        break\n\n    if i == 0:\n        S.append(0)\n\n        for x in range(k):\n            S[i] = S[i] + a[i+x]\n\n        max_sum = S[i]\n\n    else:\n        S.append(S[i-1] - a[i-1] + a[i+j])\n\n        if S[i] > max_sum:\n            max_sum = S[i]",
+        "for i through a -> stop if the box no longer fits -> first box builds S[i] with x -> later boxes slide -> update max_sum when the new S[i] is larger"
+      ],
+      "visible_components": ["full_combined_code", "control_structure_summary"]
+    },
+    {
+      "representation_id": "r.no_mastery_status",
+      "annotations": [
+        "The full loop has been assembled from the pieces already built.",
+        "Independent reconstruction of the full loop was not completed in this historical session.",
+        "Assembly exposure is recorded; mastery is not claimed."
+      ],
+      "visible_components": ["assembly_status", "no_mastery_status"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "final_loop_exposure",
+      "kind": "explain",
+      "goal": "Expose the complete combined loop only after every constituent bridge has been grounded.",
+      "representation_id": "r.final_loop",
+      "preserve_components": ["full_combined_code", "control_structure_summary"],
+      "active_delta": "assemble the already-grounded control, boundary, first-box x loop, sliding recurrence, and max update into one complete program",
+      "disclosed_concepts": ["final_combined_loop", "assembled_solution"],
+      "forbidden_concepts": ["mastery_claim", "independent_reconstruction_success"],
+      "evidence_turn_refs": ["part08:learner-asks-full-loop", "part08:full-loop-exposed"]
+    },
+    {
+      "step_id": "no_mastery_boundary",
+      "kind": "validate",
+      "goal": "Record that final assembly was exposed without converting exposure into evidence of independent mastery.",
+      "representation_id": "r.no_mastery_status",
+      "preserve_components": ["assembly_status", "no_mastery_status"],
+      "active_delta": "close the historical replay at assembled-solution exposure because independent full-loop reconstruction was not completed",
+      "disclosed_concepts": ["assembly_complete", "mastery_unproven"],
+      "forbidden_concepts": ["mastery_claim", "independent_reconstruction_success"],
+      "evidence_turn_refs": ["part08:full-loop-exposed", "part08:learner-declines-scratch-reproduction"]
+    }
+  ],
+  "automatic_transitions": [
+    {
+      "transition_id": "auto.exposure.boundary",
+      "from_step_id": "final_loop_exposure",
+      "next_step_id": "no_mastery_boundary",
+      "exit_target": null,
+      "evidence_turn_refs": ["part08:after-full-loop-offer-scratch-reproduction"]
+    },
+    {
+      "transition_id": "auto.boundary.stop",
+      "from_step_id": "no_mastery_boundary",
+      "next_step_id": null,
+      "exit_target": "session_stop_no_mastery",
+      "evidence_turn_refs": ["part08:learner-declines-scratch-reproduction"]
+    }
+  ],
+  "outcome_routes": []
+}
