@@ -96,6 +96,7 @@ def test_renderer_contract_never_exposes_expected_text_or_pair_oracle() -> None:
     assert "expected_text" not in payload
     assert "expected_values" not in payload
     assert "S.append(S[i-1] + a[i])" not in payload
+    assert "S.append(S[i-1] + a[i])" not in render_turn_text(contract)
 
     pair_cursor = cursor.model_copy(update={"current_step_id": "enumerate_probe6"})
     pair_payload = build_renderer_contract(
@@ -113,9 +114,6 @@ def test_full_source_backed_path_reaches_first_python_window_loop() -> None:
 
     cursor = answer_and_render(cursor, "4 7")
     assert cursor.current_step_id == "append_probe_simple"
-    assert "S.append(S[i-1] + a[i])" not in render_turn_text(
-        build_renderer_contract(load_trajectory(), cursor, load_context())
-    )
 
     cursor = answer_and_render(cursor, "S.append( S[i-1] + a[i] )")
     assert cursor.current_step_id == "append_probe_changed"
