@@ -1,0 +1,650 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.i-sum.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:domains/dsa/sliding-window/golden/beginner-progressive-box-index-sum.v0.1.md",
+  "entry_step_id": "i_intro0",
+  "representations": [
+    {
+      "representation_id": "r.i_intro0",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 0, "width": 2},
+      "annotations": ["i = 0", "k = 2", "i tells us where the box starts"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label"]
+    },
+    {
+      "representation_id": "r.i_probe1",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 1, "width": 2},
+      "annotations": ["i = 1", "k = 2"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label"]
+    },
+    {
+      "representation_id": "r.i_validate1",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "[1]", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "[7]", "[2]", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 1, "width": 2},
+      "annotations": ["i = 1 starts the box at 7", "k = 2 means the box holds 7, 2"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.i_probe3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 3", "k = 2"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label"]
+    },
+    {
+      "representation_id": "r.i_validate3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "[3]", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "[1]", "9"]}
+      ],
+      "box": {"start_index": 3, "width": 2},
+      "annotations": ["i = 3 starts the box at 6", "k = 2 means the box holds 6, 1"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.i_correct3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "[3]", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "[1]", "9"]}
+      ],
+      "box": {"start_index": 3, "width": 2},
+      "annotations": ["the right box is 6, 1", "retry the same relation with changed i and k"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.i_retry2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 2", "k = 2"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label"]
+    },
+    {
+      "representation_id": "r.i_validate2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "1", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 2},
+      "annotations": ["i = 2 starts the box at 2", "k = 2 means the box holds 2, 6"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.i_confirm1_k3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 1", "k = 3"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label"]
+    },
+    {
+      "representation_id": "r.i_validate1_k3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "[1]", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "[7]", "[2]", "[6]", "1", "9"]}
+      ],
+      "box": {"start_index": 1, "width": 3},
+      "annotations": ["i = 1 starts the box at 7", "k = 3 means the box holds 7, 2, 6"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_intro2_k3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "[1]", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["i = 2", "k = 3", "sum[i=2]", "sum[i] means add the numbers inside this box"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_probe2_k3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["i = 2", "k = 3", "sum[i=2]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label"]
+    },
+    {
+      "representation_id": "r.sum_validate9",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "[1]", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["sum[i=2] = 2 + 6 + 1 = 9"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_correct9_wrong",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "[1]", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 3},
+      "annotations": ["the right sum is 2 + 6 + 1 = 9", "retry with changed i and k"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_probe2_k2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 2", "k = 2", "sum[i=2]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"]
+    },
+    {
+      "representation_id": "r.sum_partial2_k2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "1", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 2},
+      "annotations": ["those are the right numbers: 2 and 6", "keep the same box and finish only the arithmetic"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_arithmetic2_k2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "1", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 2},
+      "annotations": ["sum[i=2] uses 2 and 6"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_validate8",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "1", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 2},
+      "annotations": ["sum[i=2] = 2 + 6 = 8"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_correct8_wrong",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "[6]", "1", "9"]}
+      ],
+      "box": {"start_index": 2, "width": 2},
+      "annotations": ["the right sum is 2 + 6 = 8", "retry with a different box"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_probe3_k3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 3", "k = 3", "sum[i=3]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"]
+    },
+    {
+      "representation_id": "r.sum_validate16",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "[3]", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "[1]", "[9]"]}
+      ],
+      "box": {"start_index": 3, "width": 3},
+      "annotations": ["sum[i=3] = 6 + 1 + 9 = 16"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.sum_confirm1_k2",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 1", "k = 2", "sum[i=1]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"]
+    },
+    {
+      "representation_id": "r.sum_validate9_confirm",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "[1]", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "[7]", "[2]", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 1, "width": 2},
+      "annotations": ["sum[i=1] = 7 + 2 = 9"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "sum_i_label", "current_box_highlight"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "i_intro0",
+      "kind": "explain",
+      "goal": "Introduce i only as where the box starts while k stays stable.",
+      "representation_id": "r.i_intro0",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box"],
+      "forbidden_components": [],
+      "active_delta": "add only i as the box start",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step4:intro", "sep4:event:i_moves_box"]
+    },
+    {
+      "step_id": "i_probe1_guided",
+      "kind": "probe",
+      "goal": "Move the visible k=2 box to i=1 and ask for its contents as a guided exercise.",
+      "representation_id": "r.i_probe1",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box"],
+      "forbidden_components": [],
+      "active_delta": "move only the box start from i=0 to i=1",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": {
+        "target": "contents of the visible box starting at i=1 with k=2",
+        "prompt": "What numbers are inside the box now?",
+        "answer_reveal_allowed": true,
+        "forbidden_answer_literals": []
+      },
+      "evidence_turn_refs": ["golden:step4:guided", "sep4:event:i_moves_box"]
+    },
+    {
+      "step_id": "i_validate1",
+      "kind": "validate",
+      "goal": "Validate the guided moved-box answer in the same chart.",
+      "representation_id": "r.i_validate1",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show why i=1 and k=2 select 7, 2",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step4:guided-validation", "sep4:event:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "i_probe3_unassisted",
+      "kind": "probe",
+      "goal": "Change i and k and remove box-answer help so the learner must reconstruct the box.",
+      "representation_id": "r.i_probe3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "test i-as-box-start on changed values without answer cues",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": {
+        "target": "contents of the implicit box at i=3 with k=2",
+        "prompt": "With i = 3 and k = 2, what numbers go inside the box?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["box holds 6, 1", "answer is 6, 1"]
+      },
+      "evidence_turn_refs": ["golden:step4:faded", "sep4:event:i_moves_box"]
+    },
+    {
+      "step_id": "i_validate3",
+      "kind": "validate",
+      "goal": "Validate the unassisted moved-box answer in the same array/index/box chart.",
+      "representation_id": "r.i_validate3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "restore the box and show why the correct contents are 6, 1",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step4:validation", "sep4:event:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "i_correct3",
+      "kind": "explain",
+      "goal": "Correct a wrong moved-box answer in the same chart before a changed retry.",
+      "representation_id": "r.i_correct3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "repair only the i-start relation and preserve the correct chart",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule6", "sep4:event:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "i_retry2_after_error",
+      "kind": "probe",
+      "goal": "Retry the moved-box relation on changed i/k after correction without answer cues.",
+      "representation_id": "r.i_retry2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "retry only the repaired i-start relation",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": {
+        "target": "contents of the implicit box at i=2 with k=2",
+        "prompt": "With i = 2 and k = 2, what numbers go inside the box?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["box holds 2, 6", "answer is 2, 6"]
+      },
+      "evidence_turn_refs": ["golden:rule6", "golden:step4:retry"]
+    },
+    {
+      "step_id": "i_validate2_after_error",
+      "kind": "validate",
+      "goal": "Validate the successful changed retry in the same chart.",
+      "representation_id": "r.i_validate2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show why i=2 and k=2 select 2, 6",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule7", "sep4:event:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "i_confirm1_k3",
+      "kind": "probe",
+      "goal": "After recovery from an i/box error, verify once more before sum[i].",
+      "representation_id": "r.i_confirm1_k3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "verify the repaired i-start relation once more",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": {
+        "target": "contents of the implicit box at i=1 with k=3",
+        "prompt": "With i = 1 and k = 3, what numbers go inside the box?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["box holds 7, 2, 6", "answer is 7, 2, 6"]
+      },
+      "evidence_turn_refs": ["golden:rule7", "golden:step4"]
+    },
+    {
+      "step_id": "i_validate1_k3",
+      "kind": "validate",
+      "goal": "Close the recovered i/box gate with one more same-chart validation.",
+      "representation_id": "r.i_validate1_k3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show why i=1 and k=3 select 7, 2, 6",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start"],
+      "forbidden_concepts": ["sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule7", "golden:step4"]
+    },
+    {
+      "step_id": "sum_intro2_k3",
+      "kind": "explain",
+      "goal": "Introduce sum[i] only after box semantics are stable and keep the box visible.",
+      "representation_id": "r.sum_intro2_k3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "add only sum[i] as the total of the current box",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step5:intro", "sep4:event:keep_box_for_sum_intro", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_probe2_k3",
+      "kind": "probe",
+      "goal": "Ask for sum[i=2] while the current box remains visible.",
+      "representation_id": "r.sum_probe2_k3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label"],
+      "forbidden_components": [],
+      "active_delta": "require the learner to total the visible box",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": {
+        "target": "sum of the visible i=2 k=3 box",
+        "prompt": "What is sum[i=2]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i=2] = 9", "answer is 9"]
+      },
+      "evidence_turn_refs": ["golden:step5:first-probe", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_validate9",
+      "kind": "validate",
+      "goal": "Validate the first sum[i] result in the same box chart.",
+      "representation_id": "r.sum_validate9",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show sum[i=2] = 2 + 6 + 1 = 9",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step5:first-validation", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_correct9_wrong",
+      "kind": "explain",
+      "goal": "Correct a wrong first sum[i] answer with the same box before a changed retry.",
+      "representation_id": "r.sum_correct9_wrong",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "repair only the arithmetic over the already-grounded box",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule6", "golden:step5"]
+    },
+    {
+      "step_id": "sum_probe2_k2",
+      "kind": "probe",
+      "goal": "Change i/k and remove box-answer cues so the learner must reconstruct and total the box.",
+      "representation_id": "r.sum_probe2_k2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "test sum[i] on a changed box without revealing its contents",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": {
+        "target": "sum at i=2 with k=2",
+        "prompt": "With i = 2 and k = 2, what is sum[i=2]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i=2] = 8", "2 + 6 = 8", "answer is 8"]
+      },
+      "evidence_turn_refs": ["golden:step5:changed-probe", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_partial_contents2_k2",
+      "kind": "validate",
+      "goal": "Preserve the correct box contents from a partial answer and isolate only the missing arithmetic.",
+      "representation_id": "r.sum_partial2_k2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "confirm 2 and 6 without discarding that correct sub-operation",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step5:partial", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_partial_arithmetic2_k2",
+      "kind": "probe",
+      "goal": "After a partial answer, ask only for the missing arithmetic over the preserved correct box.",
+      "representation_id": "r.sum_arithmetic2_k2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "ask only 2 + 6 while preserving the correct selected numbers",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": {
+        "target": "arithmetic total of the preserved 2 and 6 box",
+        "prompt": "2 + 6 = ?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["2 + 6 = 8", "answer is 8"]
+      },
+      "evidence_turn_refs": ["golden:step5:partial-repair", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_validate8",
+      "kind": "validate",
+      "goal": "Rejoin the main sum[i] path after correct or repaired-partial arithmetic.",
+      "representation_id": "r.sum_validate8",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show sum[i=2] = 2 + 6 = 8 in the same chart",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step5:partial-rejoin", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_correct8_wrong",
+      "kind": "explain",
+      "goal": "Correct a wrong changed sum[i] answer before a changed retry.",
+      "representation_id": "r.sum_correct8_wrong",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show the correct box and sum without introducing a new concept",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule6", "golden:step5"]
+    },
+    {
+      "step_id": "sum_verify3_k3",
+      "kind": "probe",
+      "goal": "Verify sum[i] on another changed i/k after a correct or partial path.",
+      "representation_id": "r.sum_probe3_k3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "verify the same sum[i] relation on a different box",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": {
+        "target": "sum at i=3 with k=3",
+        "prompt": "With i = 3 and k = 3, what is sum[i=3]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i=3] = 16", "6 + 1 + 9 = 16", "answer is 16"]
+      },
+      "evidence_turn_refs": ["golden:step5:verification", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_validate16_final",
+      "kind": "validate",
+      "goal": "Validate the changed sum[i] verification before exiting to successive sums.",
+      "representation_id": "r.sum_validate16",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show sum[i=3] = 6 + 1 + 9 = 16",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step5:verification", "sep4:event:sum_i"]
+    },
+    {
+      "step_id": "sum_retry3_k3_after_error",
+      "kind": "probe",
+      "goal": "Retry sum[i] on a changed box after correction, with no answer cues.",
+      "representation_id": "r.sum_probe3_k3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "retry only the repaired sum[i] relation",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": {
+        "target": "sum at i=3 with k=3 after error correction",
+        "prompt": "With i = 3 and k = 3, what is sum[i=3]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i=3] = 16", "6 + 1 + 9 = 16", "answer is 16"]
+      },
+      "evidence_turn_refs": ["golden:rule6", "golden:step5"]
+    },
+    {
+      "step_id": "sum_validate16_recovery",
+      "kind": "validate",
+      "goal": "Validate a successful sum[i] retry before one more confirmation.",
+      "representation_id": "r.sum_validate16",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show why the changed retry is correct",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule7", "golden:step5"]
+    },
+    {
+      "step_id": "sum_confirm1_k2",
+      "kind": "probe",
+      "goal": "After recovery from a sum[i] error, verify once more before advancing.",
+      "representation_id": "r.sum_confirm1_k2",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "sum_i_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "verify the repaired sum[i] relation one more time",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": {
+        "target": "sum at i=1 with k=2",
+        "prompt": "With i = 1 and k = 2, what is sum[i=1]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i=1] = 9", "7 + 2 = 9", "answer is 9"]
+      },
+      "evidence_turn_refs": ["golden:rule7", "golden:step5"]
+    },
+    {
+      "step_id": "sum_validate9_confirm",
+      "kind": "validate",
+      "goal": "Close the recovered sum[i] gate with one more same-chart validation.",
+      "representation_id": "r.sum_validate9_confirm",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "i_label", "k_label", "box_label", "window_box", "sum_i_label", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "show sum[i=1] = 7 + 2 = 9",
+      "disclosed_concepts": ["index_i", "k", "box_width", "i_as_box_start", "sum_i"],
+      "forbidden_concepts": [],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule7", "golden:step5"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.i_intro0.probe1", "from_step_id": "i_intro0", "next_step_id": "i_probe1_guided", "exit_target": null, "evidence_turn_refs": ["golden:step4"]},
+    {"transition_id": "auto.i_validate1.probe3", "from_step_id": "i_validate1", "next_step_id": "i_probe3_unassisted", "exit_target": null, "evidence_turn_refs": ["golden:step4:fading"]},
+    {"transition_id": "auto.i_validate3.sum_intro", "from_step_id": "i_validate3", "next_step_id": "sum_intro2_k3", "exit_target": null, "evidence_turn_refs": ["golden:step5"]},
+    {"transition_id": "auto.i_correct3.retry2", "from_step_id": "i_correct3", "next_step_id": "i_retry2_after_error", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"transition_id": "auto.i_validate2.confirm", "from_step_id": "i_validate2_after_error", "next_step_id": "i_confirm1_k3", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"transition_id": "auto.i_validate1k3.sum_intro", "from_step_id": "i_validate1_k3", "next_step_id": "sum_intro2_k3", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"transition_id": "auto.sum_intro.probe", "from_step_id": "sum_intro2_k3", "next_step_id": "sum_probe2_k3", "exit_target": null, "evidence_turn_refs": ["golden:step5"]},
+    {"transition_id": "auto.sum_validate9.changed", "from_step_id": "sum_validate9", "next_step_id": "sum_probe2_k2", "exit_target": null, "evidence_turn_refs": ["golden:step5:changed-probe"]},
+    {"transition_id": "auto.sum_correct9.changed", "from_step_id": "sum_correct9_wrong", "next_step_id": "sum_probe2_k2", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"transition_id": "auto.sum_partial.contents.arithmetic", "from_step_id": "sum_partial_contents2_k2", "next_step_id": "sum_partial_arithmetic2_k2", "exit_target": null, "evidence_turn_refs": ["golden:step5:partial-repair"]},
+    {"transition_id": "auto.sum_validate8.verify", "from_step_id": "sum_validate8", "next_step_id": "sum_verify3_k3", "exit_target": null, "evidence_turn_refs": ["golden:step5:verification"]},
+    {"transition_id": "auto.sum_correct8.retry", "from_step_id": "sum_correct8_wrong", "next_step_id": "sum_retry3_k3_after_error", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"transition_id": "auto.sum_validate16.final", "from_step_id": "sum_validate16_final", "next_step_id": null, "exit_target": "successive_sums", "evidence_turn_refs": ["golden:step5:next"]},
+    {"transition_id": "auto.sum_validate16.recovery.confirm", "from_step_id": "sum_validate16_recovery", "next_step_id": "sum_confirm1_k2", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"transition_id": "auto.sum_validate9.confirm.exit", "from_step_id": "sum_validate9_confirm", "next_step_id": null, "exit_target": "successive_sums", "evidence_turn_refs": ["golden:rule7"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.i1.correct", "after_step_id": "i_probe1_guided", "outcome": "correct", "next_step_id": "i_validate1", "exit_target": null, "evidence_turn_refs": ["golden:step4:guided-validation"]},
+    {"route_id": "route.i1.incorrect", "after_step_id": "i_probe1_guided", "outcome": "incorrect", "next_step_id": "i_validate1", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"route_id": "route.i3.correct", "after_step_id": "i_probe3_unassisted", "outcome": "correct", "next_step_id": "i_validate3", "exit_target": null, "evidence_turn_refs": ["golden:step4:validation"]},
+    {"route_id": "route.i3.incorrect", "after_step_id": "i_probe3_unassisted", "outcome": "incorrect", "next_step_id": "i_correct3", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"route_id": "route.i2retry.correct", "after_step_id": "i_retry2_after_error", "outcome": "correct", "next_step_id": "i_validate2_after_error", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"route_id": "route.i1k3confirm.correct", "after_step_id": "i_confirm1_k3", "outcome": "correct", "next_step_id": "i_validate1_k3", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"route_id": "route.sum2k3.correct", "after_step_id": "sum_probe2_k3", "outcome": "correct", "next_step_id": "sum_validate9", "exit_target": null, "evidence_turn_refs": ["golden:step5:first-validation"]},
+    {"route_id": "route.sum2k3.partial", "after_step_id": "sum_probe2_k3", "outcome": "partial", "next_step_id": "sum_validate9", "exit_target": null, "evidence_turn_refs": ["golden:step5:first-validation"]},
+    {"route_id": "route.sum2k3.incorrect", "after_step_id": "sum_probe2_k3", "outcome": "incorrect", "next_step_id": "sum_correct9_wrong", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"route_id": "route.sum2k2.correct", "after_step_id": "sum_probe2_k2", "outcome": "correct", "next_step_id": "sum_validate8", "exit_target": null, "evidence_turn_refs": ["golden:step5:changed-validation"]},
+    {"route_id": "route.sum2k2.partial", "after_step_id": "sum_probe2_k2", "outcome": "partial", "next_step_id": "sum_partial_contents2_k2", "exit_target": null, "evidence_turn_refs": ["golden:step5:partial"]},
+    {"route_id": "route.sum2k2.incorrect", "after_step_id": "sum_probe2_k2", "outcome": "incorrect", "next_step_id": "sum_correct8_wrong", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"route_id": "route.sum.partial_arithmetic.correct", "after_step_id": "sum_partial_arithmetic2_k2", "outcome": "correct", "next_step_id": "sum_validate8", "exit_target": null, "evidence_turn_refs": ["golden:step5:partial-rejoin"]},
+    {"route_id": "route.sum.verify.correct", "after_step_id": "sum_verify3_k3", "outcome": "correct", "next_step_id": "sum_validate16_final", "exit_target": null, "evidence_turn_refs": ["golden:step5:verification"]},
+    {"route_id": "route.sum.retry.correct", "after_step_id": "sum_retry3_k3_after_error", "outcome": "correct", "next_step_id": "sum_validate16_recovery", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"route_id": "route.sum.confirm.correct", "after_step_id": "sum_confirm1_k2", "outcome": "correct", "next_step_id": "sum_validate9_confirm", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]}
+  ]
+}
