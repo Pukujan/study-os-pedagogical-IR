@@ -1,0 +1,369 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.largest-window-sum.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part07.md",
+  "entry_step_id": "largest_locations_probe",
+  "representations": [
+    {
+      "representation_id": "r.largest_locations_probe",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["11", "13", "11", "13"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["find which S entries share the largest value before naming the value itself"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment"]
+    },
+    {
+      "representation_id": "r.largest_locations_validate",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["11", "13", "11", "13"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["S[1] and S[3] are the two largest-value locations"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_locations"]
+    },
+    {
+      "representation_id": "r.largest_value_probe",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["11", "13", "11", "13"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["largest locations: S[1], S[3]"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_locations"]
+    },
+    {
+      "representation_id": "r.largest_value_validate",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["11", "13", "11", "13"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["S[1] = 13", "S[3] = 13", "largest value = 13"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_locations", "max_value"]
+    },
+    {
+      "representation_id": "r.max_builtin_intro",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["11", "13", "11", "13"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["max(S) = 13", "max_sum = max(S)", "max_sum stores the value 13, not the location S[1] or S[3]"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_value", "max_builtin", "max_sum_assignment"]
+    },
+    {
+      "representation_id": "r.changed_location_probe",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["8", "14", "9", "12"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["max_sum = max(S)", "identify the largest entry's location before giving its value"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_builtin", "max_sum_assignment", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.changed_location_validate",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["8", "14", "9", "12"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["S[1] is the largest-value location", "location and stored value are different things"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_builtin", "max_sum_assignment", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.changed_value_probe",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["8", "14", "9", "12"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["largest location: S[1]", "max_sum = max(S)"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_builtin", "max_sum_assignment", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.changed_value_validate",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["8", "14", "9", "12"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["S[1] = 14", "max(S) = 14", "max_sum = 14"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_value", "max_builtin", "max_sum_assignment", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.max_sum_retry_probe",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["10", "7", "15", "9"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["max_sum = max(S)"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_builtin", "max_sum_assignment", "changed_surface_data", "answer_cue_removed"]
+    },
+    {
+      "representation_id": "r.max_sum_retry_validate",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["10", "7", "15", "9"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["S[2] = 15", "max(S) = 15", "max_sum = 15"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_value", "max_builtin", "max_sum_assignment", "changed_surface_data"]
+    },
+    {
+      "representation_id": "r.max_sum_verify_probe",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["6", "11", "8", "9"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["max_sum = max(S)"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_builtin", "max_sum_assignment", "changed_surface_data", "verification_probe"]
+    },
+    {
+      "representation_id": "r.max_sum_verify_validate",
+      "rows": [
+        {"row_id": "i_row", "label": "i", "values": ["0", "1", "2", "3"]},
+        {"row_id": "s_row", "label": "S", "values": ["6", "11", "8", "9"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["S[1] = 11", "max(S) = 11", "max_sum = 11", "the max(S) -> max_sum relation is verified"],
+      "visible_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_value", "max_builtin", "max_sum_assignment", "changed_surface_data", "verification_complete"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "largest_locations_probe",
+      "kind": "probe",
+      "goal": "Separate maximum location from maximum value by asking which S entries share the largest value.",
+      "representation_id": "r.largest_locations_probe",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment"],
+      "forbidden_components": [],
+      "active_delta": "identify only the locations of the largest entries",
+      "disclosed_concepts": ["maximum_location"],
+      "forbidden_concepts": ["max_builtin", "max_sum_assignment", "incremental_max_tracking"],
+      "probe": {
+        "target": "locations in S that contain the largest value",
+        "prompt": "Which entries in S hold the largest value?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[1] and S[3]", "S[1], S[3]"]
+      },
+      "evidence_turn_refs": ["sep4:part07:largest-locations"]
+    },
+    {
+      "step_id": "largest_locations_validate",
+      "kind": "validate",
+      "goal": "Validate the two maximum locations while keeping the i-to-S alignment visible.",
+      "representation_id": "r.largest_locations_validate",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_locations"],
+      "forbidden_components": [],
+      "active_delta": "mark S[1] and S[3] without yet introducing max(S)",
+      "disclosed_concepts": ["maximum_location"],
+      "forbidden_concepts": ["max_builtin", "max_sum_assignment", "incremental_max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:largest-locations-validation"]
+    },
+    {
+      "step_id": "largest_value_probe",
+      "kind": "probe",
+      "goal": "After the locations are known, ask only for the value stored at those locations.",
+      "representation_id": "r.largest_value_probe",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_locations"],
+      "forbidden_components": [],
+      "active_delta": "distinguish the numeric maximum from its locations",
+      "disclosed_concepts": ["maximum_location", "maximum_value"],
+      "forbidden_concepts": ["max_builtin", "max_sum_assignment", "incremental_max_tracking"],
+      "probe": {
+        "target": "largest numeric value in S",
+        "prompt": "What is the value stored at those largest entries?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["largest value = 13", "answer is 13"]
+      },
+      "evidence_turn_refs": ["sep4:part07:largest-value"]
+    },
+    {
+      "step_id": "largest_value_validate",
+      "kind": "validate",
+      "goal": "Validate that both maximum locations store the same value 13.",
+      "representation_id": "r.largest_value_validate",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_locations", "max_value"],
+      "forbidden_components": [],
+      "active_delta": "show S[1]=13 and S[3]=13 as the same maximum value",
+      "disclosed_concepts": ["maximum_location", "maximum_value"],
+      "forbidden_concepts": ["max_builtin", "max_sum_assignment", "incremental_max_tracking"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:largest-value-validation"]
+    },
+    {
+      "step_id": "introduce_max_builtin",
+      "kind": "bridge",
+      "goal": "Bridge the verified largest value to Python max(S) and then save that value in max_sum.",
+      "representation_id": "r.max_builtin_intro",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_components": [],
+      "active_delta": "introduce max(S) -> value -> max_sum without incremental tracking",
+      "disclosed_concepts": ["maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:max-builtin-intro"]
+    },
+    {
+      "step_id": "changed_location_probe",
+      "kind": "probe",
+      "goal": "On changed S values, ask for the maximum location first so location is not confused with max_sum's stored value.",
+      "representation_id": "r.changed_location_probe",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_builtin", "max_sum_assignment", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "identify only the changed maximum location",
+      "disclosed_concepts": ["maximum_location", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": {
+        "target": "location of the largest value in changed S",
+        "prompt": "Which S entry contains the largest value?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[1] is the largest", "S[1] = 14"]
+      },
+      "evidence_turn_refs": ["sep4:part07:changed-location"]
+    },
+    {
+      "step_id": "changed_location_validate",
+      "kind": "validate",
+      "goal": "Validate S[1] as a location without conflating it with the value max_sum stores.",
+      "representation_id": "r.changed_location_validate",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_builtin", "max_sum_assignment", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "state that S[1] is the location and ask for its numeric value next",
+      "disclosed_concepts": ["maximum_location", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:changed-location-validation"]
+    },
+    {
+      "step_id": "changed_value_probe",
+      "kind": "probe",
+      "goal": "Ask for the numeric value at S[1] before saying what max_sum stores.",
+      "representation_id": "r.changed_value_probe",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_builtin", "max_sum_assignment", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "produce only the numeric maximum value",
+      "disclosed_concepts": ["maximum_location", "maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": {
+        "target": "numeric value at the changed maximum location",
+        "prompt": "What value is stored at S[1]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[1] = 14", "max_sum = 14"]
+      },
+      "evidence_turn_refs": ["sep4:part07:changed-value"]
+    },
+    {
+      "step_id": "changed_value_validate",
+      "kind": "validate",
+      "goal": "Validate the changed maximum value and explicitly connect max(S) to max_sum.",
+      "representation_id": "r.changed_value_validate",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_value", "max_builtin", "max_sum_assignment", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "show S[1]=14 -> max(S)=14 -> max_sum=14",
+      "disclosed_concepts": ["maximum_location", "maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:changed-value-validation"]
+    },
+    {
+      "step_id": "max_sum_retry_probe",
+      "kind": "probe",
+      "goal": "Repair the source's answer-revealing exercise by changing S and removing the explicit max result cue before asking what max_sum stores.",
+      "representation_id": "r.max_sum_retry_probe",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_builtin", "max_sum_assignment", "changed_surface_data", "answer_cue_removed"],
+      "forbidden_components": ["max_value"],
+      "active_delta": "test max_sum = max(S) on changed values without displaying the computed result",
+      "disclosed_concepts": ["maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": {
+        "target": "value stored in max_sum for changed S",
+        "prompt": "What value gets stored in max_sum?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[2] = 15", "max(S) = 15", "max_sum = 15"]
+      },
+      "evidence_turn_refs": ["sep4:part07:rejected-answer-leak", "sep4:part07:repaired-max-sum-probe"]
+    },
+    {
+      "step_id": "max_sum_retry_validate",
+      "kind": "validate",
+      "goal": "Validate the repaired changed-data max_sum probe in the same i/S representation.",
+      "representation_id": "r.max_sum_retry_validate",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_value", "max_builtin", "max_sum_assignment", "changed_surface_data"],
+      "forbidden_components": [],
+      "active_delta": "show why max_sum stores 15",
+      "disclosed_concepts": ["maximum_location", "maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:repaired-max-sum-validation"]
+    },
+    {
+      "step_id": "max_sum_verify_probe",
+      "kind": "probe",
+      "goal": "Require one additional changed-data verification before moving from max(S) to incremental max tracking.",
+      "representation_id": "r.max_sum_verify_probe",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_builtin", "max_sum_assignment", "changed_surface_data", "verification_probe"],
+      "forbidden_components": ["max_value"],
+      "active_delta": "verify max_sum = max(S) on a second changed S list",
+      "disclosed_concepts": ["maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": {
+        "target": "value stored in max_sum on second changed S",
+        "prompt": "What value gets stored in max_sum?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[1] = 11", "max(S) = 11", "max_sum = 11"]
+      },
+      "evidence_turn_refs": ["sep4:part07:max-sum-second-verification"]
+    },
+    {
+      "step_id": "max_sum_verify_validate",
+      "kind": "validate",
+      "goal": "Close the max(S)-to-max_sum gate after the second changed-data verification.",
+      "representation_id": "r.max_sum_verify_validate",
+      "preserve_components": ["i_row", "s_row", "i_to_s_alignment", "max_location", "max_value", "max_builtin", "max_sum_assignment", "changed_surface_data", "verification_complete"],
+      "forbidden_components": [],
+      "active_delta": "validate max_sum=11 and authorize the next incremental-initialization concept",
+      "disclosed_concepts": ["maximum_location", "maximum_value", "max_builtin", "max_sum_assignment"],
+      "forbidden_concepts": ["incremental_max_tracking", "comparison_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:part07:max-sum-relation-verified"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.largest.locations.validate.value", "from_step_id": "largest_locations_validate", "next_step_id": "largest_value_probe", "exit_target": null, "evidence_turn_refs": ["sep4:part07:locations-to-value"]},
+    {"transition_id": "auto.largest.value.validate.max", "from_step_id": "largest_value_validate", "next_step_id": "introduce_max_builtin", "exit_target": null, "evidence_turn_refs": ["sep4:part07:value-to-max"]},
+    {"transition_id": "auto.largest.max.changed_location", "from_step_id": "introduce_max_builtin", "next_step_id": "changed_location_probe", "exit_target": null, "evidence_turn_refs": ["sep4:part07:max-to-changed-example"]},
+    {"transition_id": "auto.largest.changed_location.value", "from_step_id": "changed_location_validate", "next_step_id": "changed_value_probe", "exit_target": null, "evidence_turn_refs": ["sep4:part07:location-to-value-repair"]},
+    {"transition_id": "auto.largest.changed_value.retry", "from_step_id": "changed_value_validate", "next_step_id": "max_sum_retry_probe", "exit_target": null, "evidence_turn_refs": ["sep4:part07:answer-leak-repair"]},
+    {"transition_id": "auto.largest.retry.validate.verify", "from_step_id": "max_sum_retry_validate", "next_step_id": "max_sum_verify_probe", "exit_target": null, "evidence_turn_refs": ["sep4:part07:retry-to-verification"]},
+    {"transition_id": "auto.largest.verify.validate.exit", "from_step_id": "max_sum_verify_validate", "next_step_id": null, "exit_target": "max_sum_s0_initialization", "evidence_turn_refs": ["sep4:part07:unlock-incremental-initialization"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.largest.locations.correct", "after_step_id": "largest_locations_probe", "outcome": "correct", "next_step_id": "largest_locations_validate", "exit_target": null, "evidence_turn_refs": ["sep4:part07:learner-locations"]},
+    {"route_id": "route.largest.value.correct", "after_step_id": "largest_value_probe", "outcome": "correct", "next_step_id": "largest_value_validate", "exit_target": null, "evidence_turn_refs": ["sep4:part07:learner-value-13"]},
+    {"route_id": "route.largest.changed_location.correct", "after_step_id": "changed_location_probe", "outcome": "correct", "next_step_id": "changed_location_validate", "exit_target": null, "evidence_turn_refs": ["sep4:part07:learner-s1-location"]},
+    {"route_id": "route.largest.changed_value.correct", "after_step_id": "changed_value_probe", "outcome": "correct", "next_step_id": "changed_value_validate", "exit_target": null, "evidence_turn_refs": ["sep4:part07:learner-value-14"]},
+    {"route_id": "route.largest.retry.correct", "after_step_id": "max_sum_retry_probe", "outcome": "correct", "next_step_id": "max_sum_retry_validate", "exit_target": null, "evidence_turn_refs": ["sep4:part07:learner-max-sum-15"]},
+    {"route_id": "route.largest.verify.correct", "after_step_id": "max_sum_verify_probe", "outcome": "correct", "next_step_id": "max_sum_verify_validate", "exit_target": null, "evidence_turn_refs": ["sep4:part07:learner-max-sum-11"]}
+  ]
+}

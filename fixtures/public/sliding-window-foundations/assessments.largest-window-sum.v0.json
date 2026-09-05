@@ -1,0 +1,20 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.largest-window-sum.v0",
+  "assessments": [
+    {
+      "step_id": "largest_locations_probe",
+      "kind": "text",
+      "expected_text": ["S[1] and S[3]", "s[1] and s[3]", "S1 and S3", "s1 and s3"]
+    },
+    {"step_id": "largest_value_probe", "kind": "integer", "expected_values": [13]},
+    {
+      "step_id": "changed_location_probe",
+      "kind": "text",
+      "expected_text": ["S[1]", "s[1]", "S1", "s1"]
+    },
+    {"step_id": "changed_value_probe", "kind": "integer", "expected_values": [14]},
+    {"step_id": "max_sum_retry_probe", "kind": "integer", "expected_values": [15]},
+    {"step_id": "max_sum_verify_probe", "kind": "integer", "expected_values": [11]}
+  ]
+}
