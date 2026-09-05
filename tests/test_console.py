@@ -5,6 +5,7 @@ from pathlib import Path
 from study_os_pir.console import render_representation_text, render_turn_text
 from study_os_pir.runtime import AssessmentRegistry, build_renderer_contract, start_replay
 from study_os_pir.trajectory import ExperimentalTrajectory
+from study_os_pir.vertical import VerticalRepresentation, VerticalRow, VerticalWindowBox
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_DIR = ROOT / "fixtures" / "public" / "sliding-window-foundations"
@@ -43,6 +44,35 @@ def test_representation_with_box_renders_window_markers() -> None:
     assert "box" in text
     assert "^^^^^" in text
     assert "k = 3" in text
+
+
+def test_representation_can_compare_two_labeled_boxes_on_same_array() -> None:
+    representation = VerticalRepresentation(
+        representation_id="comparison",
+        rows=(
+            VerticalRow(
+                row_id="index",
+                label="index(i)",
+                values=("0", "1", "2", "3", "4", "5"),
+            ),
+            VerticalRow(
+                row_id="numbers",
+                label="numbers(a)",
+                values=("3", "8", "1", "5", "2", "7"),
+            ),
+        ),
+        boxes=(
+            VerticalWindowBox(start_index=0, width=3, label="sum[i]"),
+            VerticalWindowBox(start_index=1, width=3, label="sum[i+1]"),
+        ),
+        annotations=("sum[i] = 12", "sum[i+1] = ?"),
+        visible_components=("index_row", "numbers_row", "box_comparison"),
+    )
+    text = render_representation_text(representation)
+    assert "sum[i]" in text
+    assert "sum[i+1]" in text
+    assert text.count("^^^^^") == 6
+    assert "sum[i+1] = ?" in text
 
 
 def test_non_probe_turn_renders_representation_without_question() -> None:
