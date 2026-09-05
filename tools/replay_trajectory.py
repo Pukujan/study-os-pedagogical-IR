@@ -6,6 +6,7 @@ from pathlib import Path
 from study_os_pir.console import render_turn_text
 from study_os_pir.runtime import (
     AssessmentRegistry,
+    ReplayContext,
     ReplayPhase,
     build_renderer_contract,
     mark_turn_rendered,
@@ -23,21 +24,27 @@ def _load_registry(path: Path) -> AssessmentRegistry:
     return AssessmentRegistry.model_validate_json(path.read_text())
 
 
+def _load_context(path: Path) -> ReplayContext:
+    return ReplayContext.model_validate_json(path.read_text())
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run an approved experimental PIR trajectory in a local terminal."
     )
     parser.add_argument("--trajectory", type=Path, required=True)
     parser.add_argument("--assessments", type=Path, required=True)
+    parser.add_argument("--context", type=Path)
     args = parser.parse_args()
 
     trajectory = _load_trajectory(args.trajectory)
     registry = _load_registry(args.assessments)
+    context = None if args.context is None else _load_context(args.context)
     cursor = start_replay(trajectory, registry)
 
     while cursor.phase != ReplayPhase.EXITED:
         if cursor.phase == ReplayPhase.RENDER:
-            contract = build_renderer_contract(trajectory, cursor)
+            contract = build_renderer_contract(trajectory, cursor, context)
             print(render_turn_text(contract))
             print()
             cursor = mark_turn_rendered(trajectory, cursor)

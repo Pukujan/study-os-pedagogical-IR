@@ -1,0 +1,16 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.i-sum.v0",
+  "assessments": [
+    {"step_id": "i_probe1_guided", "kind": "integer_sequence", "expected_values": [7, 2]},
+    {"step_id": "i_probe3_unassisted", "kind": "integer_sequence", "expected_values": [6, 1]},
+    {"step_id": "i_retry2_after_error", "kind": "integer_sequence", "expected_values": [2, 6]},
+    {"step_id": "i_confirm1_k3", "kind": "integer_sequence", "expected_values": [7, 2, 6]},
+    {"step_id": "sum_probe2_k3", "kind": "integer", "expected_values": [9], "partial_values": [2, 6, 1]},
+    {"step_id": "sum_probe2_k2", "kind": "integer", "expected_values": [8], "partial_values": [2, 6]},
+    {"step_id": "sum_partial_arithmetic2_k2", "kind": "integer", "expected_values": [8]},
+    {"step_id": "sum_verify3_k3", "kind": "integer", "expected_values": [16]},
+    {"step_id": "sum_retry3_k3_after_error", "kind": "integer", "expected_values": [16]},
+    {"step_id": "sum_confirm1_k2", "kind": "integer", "expected_values": [9]}
+  ]
+}
