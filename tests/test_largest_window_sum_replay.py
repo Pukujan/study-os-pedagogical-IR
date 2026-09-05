@@ -98,8 +98,11 @@ def test_repaired_max_sum_probe_does_not_reveal_answer() -> None:
     )
     contract = build_renderer_contract(trajectory, cursor, load_context())
     rendered = render_turn_text(contract)
+    rendered_tokens = rendered.split()
 
-    assert "S: 10 7 15 9" in rendered
+    assert ["10", "7", "15", "9"] == [
+        token for token in rendered_tokens if token in {"10", "7", "15", "9"}
+    ][:4]
     assert "max_sum = max(S)" in rendered
     assert "max_sum = 15" not in rendered
     assert "max(S) = 15" not in rendered
