@@ -1,0 +1,55 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.max-sum-loop.replay.v0",
+  "assessments": [
+    {
+      "step_id": "fixed_index_probe_i2",
+      "kind": "text",
+      "expected_text": [
+        "if S[2] > max_sum:\n    max_sum = S[2]",
+        "if s[2] > max_sum:\n    max_sum = s[2]"
+      ]
+    },
+    {
+      "step_id": "symbolic_probe_i3",
+      "kind": "text",
+      "expected_text": [
+        "if S[i] > max_sum:\n    max_sum = S[i]",
+        "if s[i] > max_sum:\n    max_sum = s[i]"
+      ]
+    },
+    {
+      "step_id": "max_loop_enumerate_probe",
+      "kind": "text",
+      "expected_text": ["S", "s"]
+    },
+    {
+      "step_id": "max_loop_condition_probe",
+      "kind": "text",
+      "expected_text": ["if S[i] > max_sum:", "if s[i] > max_sum:"]
+    },
+    {
+      "step_id": "max_loop_condition_retry",
+      "kind": "text",
+      "expected_text": ["if S[i] > max_sum:", "if s[i] > max_sum:"]
+    },
+    {
+      "step_id": "max_loop_full_probe",
+      "kind": "text",
+      "expected_text": [
+        "max_sum = S[0]\nfor i, num in enumerate(S):\n    if S[i] > max_sum:\n        max_sum = S[i]",
+        "max_sum = s[0]\nfor i, num in enumerate(s):\n    if s[i] > max_sum:\n        max_sum = s[i]"
+      ],
+      "partial_text": [
+        "for i, num in enumerate(S):\n    if S[i] > max_sum:\n        max_sum = S[i]",
+        "for i, num in enumerate(S):\n    if S[i] > max_sum:\n        max_sum = s[i]",
+        "for i, num in enumerate(s):\n    if s[i] > max_sum:\n        max_sum = s[i]"
+      ]
+    },
+    {
+      "step_id": "max_loop_init_probe",
+      "kind": "text",
+      "expected_text": ["max_sum = S[0]", "max_sum = s[0]"]
+    }
+  ]
+}
