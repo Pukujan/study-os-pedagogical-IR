@@ -11,6 +11,8 @@ This document is normative. Every hard PIR invariant must have a concrete verifi
 - **MU** — implementation mutation test (`mutmut`)
 - **R** — historical/private replay
 - **B** — independent `study-os-benchmarker` check
+- **V** — learner-visible replay/output check
+- **C** — continuity/documentation/checkpoint validation
 - **X** — optional CrossHair pure-contract check
 
 ## Evidence invariants
@@ -56,8 +58,10 @@ This document is normative. Every hard PIR invariant must have a concrete verifi
 | S4 | Answer-reveal policy is explicit | U | A/B: leaked target answer rejected |
 | S5 | Realization mode is frozen/parameterized/generative | U | A: mutate immutable frozen wording/question semantics → reject |
 | S6 | Parameter mutation permissions explicit | U/P | A: mutate immutable relation/notation while changing example values → reject |
+| S7 | Required learner-visible context is actually rendered | V | A/V: internal preserve flag exists but full problem/chart disappears from learner output → reject |
+| S8 | Forbidden visual components are enforceable | U/B | A/B: expose enumerate pair row/window box before authorized → reject |
 
-## Learner-evidence invariants
+## Learner-evidence and grading invariants
 
 | ID | Invariant | Positive verification | Negative/adversarial verification |
 |---|---|---|---|
@@ -65,6 +69,8 @@ This document is normative. Every hard PIR invariant must have a concrete verifi
 | L2 | Outcome requires learner evidence | U | A: tutor-only evidence cannot establish `correct` |
 | L3 | Partial/incorrect cannot silently advance | U/A | MU: invert branch/acceptance test and require killed mutation |
 | L4 | Meta/hint request does not imply mastery | U | A: advancement without explicit rule rejected |
+| L5 | Grading oracle is controller-only | U/V | A: serialized renderer-safe turn contains expected answer or forbidden-answer literals → reject |
+| L6 | `partial` preserves established sub-result and targets only missing step when source-backed | U/R/V | A: treat known partial as fully wrong or advance as fully correct → reject |
 
 ## Path/trajectory invariants
 
@@ -75,6 +81,8 @@ This document is normative. Every hard PIR invariant must have a concrete verifi
 | T3 | Correction/retry/verify sequence is first-class | U/R | A: collapse correction directly to advance rejected when branch requires retry/verify |
 | T4 | Alternate paths require explicit acceptance | U | A: mathematically plausible unregistered alternate edge rejected |
 | T5 | Path order deterministic | U/P | M: reorder required path changes semantics/digest |
+| T6 | Unsupported repeated-error/control paths fail closed | U/V | A: invent a second retry policy not established by source/compiled policy → reject |
+| T7 | Historical meta evidence may compile into policy without requiring verbatim reenactment | U/R | A: future learner forced to reproduce historical phrase merely because calibration contained it → reject |
 
 ## September-4 historical regression obligations
 
@@ -93,10 +101,11 @@ These run only in an authorized private/local lane; raw transcript is not commit
 | R9 | correction policies | failure→learner correction→successful repair paths represented |
 | R10 | unsupported ambiguity | emitted unresolved, never invented |
 | R11 | compile replay | same inputs/compiler revision → byte-identical canonical trajectory |
+| R12 | learner-visible replay | required problem/chart context remains visible across authorized runtime transitions |
 
-## Required semantic-compression mutation corpus
+## Required semantic-compression and realization mutation corpus
 
-The compiler/trajectory validator must reject at least:
+The compiler/trajectory/runtime validators must reject at least:
 
 1. delete `enumerate` explanation node;
 2. delete enumerate exercise validation;
@@ -107,17 +116,35 @@ The compiler/trajectory validator must reject at least:
 7. skip `if i != 0` and jump to `else`;
 8. introduce arbitrary-k/range before fixed-window limitation is established;
 9. replace `S[i]` with unauthorized `window_sum` terminology;
-10. reveal target answer in a probe;
-11. invent learner outcome;
-12. invent exercise/experiment;
-13. collapse correction→retry→verify;
-14. promote unresolved edge to accepted.
+10. reveal target answer in a probe prompt;
+11. reveal target answer through a learner-visible chart/annotation;
+12. invent learner outcome;
+13. invent exercise/experiment;
+14. collapse correction→retry→verify;
+15. promote unresolved edge to accepted;
+16. preserve `problem_anchor` internally while dropping it from learner-visible output;
+17. expose controller-only assessment values to the renderer;
+18. invent an unsupported repeated-error branch.
+
+A future lexical/register mutation corpus may add premature `number -> element` or `box -> window` substitutions only after the active falsification experiment demonstrates that language/register needs first-class control.
+
+## Continuity/documentation/checkpoint invariants
+
+| ID | Invariant | Positive verification | Negative/adversarial verification |
+|---|---|---|---|
+| A1 | `HANDOFF_STATE.json` is PAM-valid `current` state | C: pinned PAM validator | A/C: invalid version/state/reason rejected |
+| A2 | archived checkpoint JSON is PAM-valid `historical_checkpoint` state | C: pinned PAM validator over every checkpoint | A/C: malformed checkpoint fails assurance CI |
+| A3 | generated README/status matches durable state inputs | C: `make docs-check` | A/C: edit generated block or change state without sync → CI fails |
+| A4 | historical checkpoint is not treated as current authority | C/reconciliation review | A: stale checkpoint overrides live repo/CI observation → reject process result |
+| A5 | semantic design docs are human-reviewed rather than inferred from status metadata | review | A: status generator silently rewrites PDD/SDD semantics → reject |
 
 ## CI gates by phase
 
 ### Gate G0 — documentation/schema
 
-- docs present;
+- required docs present;
+- generated README/status synchronization passes;
+- current PAM handoff and historical checkpoints validate in assurance CI;
 - JSON Schemas validate their own metaschema;
 - schema fixtures/parity tests pass;
 - lint/type checks pass.
@@ -138,15 +165,26 @@ The compiler/trajectory validator must reject at least:
 - semantic mutation corpus;
 - `mutmut` critical surviving mutants reviewed/zero for designated validators.
 
+### Gate G2.5 — experimental executable replay falsification
+
+This gate is allowed before the complete historical G3 compilation only as a schema/runtime falsification instrument.
+
+- deterministic controller follows only explicit trajectory routes;
+- renderer-safe contract excludes grading oracle data;
+- correct/incorrect/partial fixtures route as specified by the currently encoded source-backed slice;
+- learner-visible representation/context tests pass;
+- no claim of production tutoring, automatic decomposition, or mastery follows from this gate.
+
 ### Gate G3 — historical compilation
 
 - G2;
-- private September-4 R1–R11 pass;
+- private September-4 R1–R12 pass where applicable;
 - deterministic compiled artifact digest recorded;
-- independent benchmarker consumes exact PIR revision and rejects required public mutations.
+- independent benchmarker consumes exact PIR revision and rejects required public mutations;
+- complete source-inspected canonical golden is frozen or explicitly retains unresolved edges.
 
-No production controller work is authorized by PIR until G3.
+Production Study OS controller integration is not authorized by PIR before G3. The experimental replay/controller harness is permitted before G3 only to falsify PIR semantics and validate intended learner-visible behavior.
 
 ## Proof discipline
 
-Passing tests prove only the specified invariants. They do not prove educational efficacy or generalization. Prospective human/donor benchmarking remains a separate evidence layer.
+Passing tests prove only the specified invariants. They do not prove educational efficacy, automatic problem decomposition quality, or generalization. Prospective human/donor benchmarking remains a separate evidence layer.
