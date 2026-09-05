@@ -23,7 +23,10 @@ def render_representation_text(representation: VerticalRepresentation) -> str:
 
 
 def render_turn_text(contract: RendererTurnContract) -> str:
-    lines = [render_representation_text(contract.representation)]
+    lines: list[str] = []
+    if contract.persistent_text:
+        lines.extend([*contract.persistent_text, ""])
+    lines.append(render_representation_text(contract.representation))
     if contract.probe is not None:
         lines.extend(["", contract.probe.prompt])
     return "\n".join(lines)
