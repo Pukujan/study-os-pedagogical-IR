@@ -7,7 +7,7 @@
     "phase": "PIR-0 extraction and benchmark proof",
     "observed_identity": {
       "kind": "git_commit",
-      "value": "8de9915efd0fc23128d77a2d3fe7ea65077acaea"
+      "value": "8dcb12a156706fe7f4c90c315064660bb9793b56"
     },
     "active_issue": 1
   },
@@ -74,11 +74,14 @@
       {
         "name": "Selected PAM revision CI",
         "evidence": "PAM GitHub Actions run 33700449457 succeeded at 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 and that revision supports pam-handoff/0.2.0 dispatch."
+      },
+      {
+        "name": "PIR PAM assurance validation",
+        "evidence": "GitHub Actions PAM assurance run 33974598291 succeeded at 8dcb12a156706fe7f4c90c315064660bb9793b56, validating both PROJECT_ASSURANCE.json and HANDOFF_STATE.json."
       }
     ],
     "failed": [],
     "not_run": [
-      "Validate assurance/PROJECT_ASSURANCE.json and assurance/HANDOFF_STATE.json with PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183",
       "Complete authoritative September-4 turn extraction and 100-percent coverage receipt",
       "Compile the complete source-backed September-4 golden trajectory",
       "Run the first Luna fresh-subagent masked-regression evaluation",
@@ -129,9 +132,9 @@
   "handoff": {
     "created_from_identity": {
       "kind": "git_commit",
-      "value": "8de9915efd0fc23128d77a2d3fe7ea65077acaea"
+      "value": "8dcb12a156706fe7f4c90c315064660bb9793b56"
     },
-    "created_at": "2026-09-05T15:18:00Z",
-    "reason": "material_plan_change"
+    "created_at": "2026-09-05T15:24:00Z",
+    "reason": "validation_transition"
   }
 }
