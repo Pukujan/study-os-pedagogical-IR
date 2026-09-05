@@ -4,10 +4,10 @@
   "project": {
     "name": "Study OS Pedagogical IR Program",
     "repository": "Pukujan/study-os-pedagogical-IR",
-    "phase": "PIR-0 source review and schema falsification",
+    "phase": "PIR-0 executable golden replay and runtime/schema falsification",
     "observed_identity": {
       "kind": "git_commit",
-      "value": "90606c4587069c59d32de8abec2df80eaa80d344"
+      "value": "c31fe82690765a86248ccc65469b2583690c3d36"
     },
     "active_issue": 1
   },
@@ -39,11 +39,11 @@
       "locator": "Pukujan/study-os-benchmarker",
       "observed_identity": {
         "kind": "git_commit",
-        "value": "d5d76e0fb0dc798e5a40b879029220e96c7cf67c"
+        "value": "a5751661e19f9d00a2c192dd98780c064a285642"
       },
       "tested_identity": {
         "kind": "git_commit",
-        "value": "d5d76e0fb0dc798e5a40b879029220e96c7cf67c"
+        "value": "a5751661e19f9d00a2c192dd98780c064a285642"
       },
       "issue": 2,
       "pr": null
@@ -67,100 +67,102 @@
   "validation": {
     "passed": [
       {
-        "name": "PIR G1/G1.5 CI",
-        "evidence": "GitHub Actions run 33969394677 succeeded at 5635effae507e25fcb16ec53b6e3812fd4972448 with the extraction-coverage slice."
+        "name": "September-4 evidence/accounting",
+        "evidence": "Pinned Study OS source was deterministically parsed into 887 turns: 443 learner, 444 tutor, with 887 dispositions and zero missing/duplicate/unknown turns. Source-review ranges resolve 36 candidate events, 18 failure-repair regions, and 4 retained unresolved questions."
       },
       {
-        "name": "Selected PAM revision CI",
-        "evidence": "PAM GitHub Actions run 33700449457 succeeded at 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 and that revision supports pam-handoff/0.2.0 dispatch."
+        "name": "Max-sum and enumerate vertical proofs",
+        "evidence": "PIR and independent benchmark regressions reject bridge deletion, premature advance/comparison, answer leakage, representation loss, enumerate pair-row/window-box leakage, skipped same-chart validation, and unnecessary third exercise. Benchmarker main a5751661e19f9d00a2c192dd98780c064a285642 passed CI run 33980151679."
       },
       {
-        "name": "PIR PAM assurance validation",
-        "evidence": "GitHub Actions PAM assurance run 33974598291 succeeded at 8dcb12a156706fe7f4c90c315064660bb9793b56, validating both PROJECT_ASSURANCE.json and HANDOFF_STATE.json."
+        "name": "Branching trajectory and deterministic runtime",
+        "evidence": "The source-backed foundations graph supports correct and wrong->correction->changed-retry paths without inventing repeated-error policy. Runtime separates renderer-safe turn contracts from controller-only assessment oracles and deterministically grades current structured text inputs."
       },
       {
-        "name": "Experimental max-sum vertical PIR proof",
-        "evidence": "GitHub Actions run 33976147313 succeeded at b077ec878fb872858ef48a8e0c49c56c7317f847: Ruff clean, strict mypy clean, 57 tests passed, and 100-percent statement plus branch coverage across the PIR package."
+        "name": "Current PIR snapshot",
+        "evidence": "CI run 33984923120 succeeded at c31fe82690765a86248ccc65469b2583690c3d36: Ruff clean, strict mypy clean across 21 source files, 151 tests passed, 100% statement/branch coverage across 857 statements and 266 branches."
       },
       {
-        "name": "Independent max-sum vertical benchmark proof",
-        "evidence": "GitHub Actions run 33976070445 succeeded at d5d76e0fb0dc798e5a40b879029220e96c7cf67c: Ruff clean, strict mypy clean, 27 tests passed. New cases reject premature exercise/comparison, bridge deletion, answer leakage, chart loss, redundant S0 repetition, and comparison before Si validation."
-      },
-      {
-        "name": "Complete September-4 byte-addressed source accounting",
-        "evidence": "GitHub Actions run 33977826895 parsed pinned Study OS commit bef88216d9052eeb7e135916ea7fb6f8d84e0ccc into 887 turns and 887 exact spans: 443 learner and 444 tutor turns, 887 disposition records, zero missing/duplicate/unknown turns, and complete coverage. Receipt artifact 9972844407 had ZIP SHA-256 8d890c4e49fb75f6b25d8483c2b9ce81d5219757ee2afa9d5fbc7f7afb88d2f6."
-      },
-      {
-        "name": "September-4 source-review evidence resolution",
-        "evidence": "GitHub Actions run 33978407467 succeeded at 461bf8e70380eae700a61e201fc4de66719c9d9d with 61 tests and 100-percent statement plus branch coverage. The unchanged source-review ledger resolved 36 candidate pedagogical events, 18 explicit failure-repair regions, and 4 retained unresolved questions against real turns in the 887-turn manifest. Receipt artifact 9973007992 has ZIP SHA-256 e36dfb7f61348ebe01c0051faa7626781a38b1930dedaa776d87bafa8d7f4cd6."
+        "name": "Current PAM handoff validation",
+        "evidence": "PAM assurance run 33984923129 succeeded at c31fe82690765a86248ccc65469b2583690c3d36. Detailed human handoff: assurance/NEXT_SESSION_HANDOFF.md."
       }
     ],
     "failed": [],
     "not_run": [
-      "Freeze a complete canonical September-4 golden trajectory with source-inspected turn dispositions",
-      "Run the enumerate(a) second vertical PIR and independent benchmark proof",
-      "Run the first Luna fresh-subagent masked-regression evaluation",
-      "Run any sealed or prospective hidden-holdout evaluation"
+      "Prove persistent full-problem context is learner-visible on every required replay turn",
+      "Extend executable trajectory through i-moves-box and sum[i] with PARTIAL routing",
+      "Freeze complete canonical September-4 golden",
+      "Run lexical/register falsification before adding language-state IR",
+      "Build and score raw problem + learner state -> PIR compiler",
+      "Run Luna masked, sealed, or prospective holdout evaluations"
     ]
   },
   "next_action": {
     "repository": "Pukujan/study-os-pedagogical-IR",
     "issue": 1,
-    "action": "Use the calibrated enumerate(a) segment as the second vertical falsification slice. Make only the smallest evidence-driven representation change needed for a non-window index/number/pair chart, preserve same-chart validation and answer-leak constraints, and run the independent benchmark before promoting any G2 schema.",
-    "acceptance": "The enumerate slice must represent the accepted explanation -> non-answer-revealing probe -> learner answer -> same-chart validation -> changed exercise -> same-chart validation sequence without a fake window box. Known answer-leak, under-explanation, chart-removal, premature-advance, and unnecessary-third-exercise mutations must be rejected. Existing max-sum vertical proofs must remain green."
+    "action": "Read assurance/NEXT_SESSION_HANDOFF.md, reconcile live main/CI, then wire persistent full-problem context into learner-visible renderer output. Extend the source-backed executable trajectory through i as box start, moved-box exercises, same-chart validation, and sum[i], including the observed PARTIAL path where correct box contents are given without the arithmetic sum. After replay is faithful through sum[i], run a small lexical/register falsification experiment before deciding whether first-class language state is needed.",
+    "acceptance": "The full difficult question remains visibly available where required; correct/incorrect/partial responses route deterministically through source-backed states; the box remains visible through sum[i]; renderer contracts contain no hidden grading answers; all existing regressions stay green. No lexical/register primitive is promoted unless a concrete mutation shows existing concept/representation constraints are insufficient."
   },
   "blockers": [
-    "The experimental max-sum VerticalRepresentation requires a window box, but the calibrated enumerate(a) chart has no window box. This falsifies promotion of the current experimental representation type unchanged."
+    "Persistent problem context exists as an artifact but has not yet been proven in actual learner-visible rendering.",
+    "Lexical/register hierarchy is a serious hypothesis, not yet a justified schema addition.",
+    "Complete canonical September-4 golden remains unfinished."
   ],
   "scope": {
     "do_not_start": [
-      "Promote experimental vertical.py types into stable G2 before the enumerate schema-pressure proof passes",
-      "Resolve the four source-review questions by cleanup or preference instead of explicit evidence/experiment",
-      "Treat 887 accounting dispositions as semantic extraction completeness while they remain UNRESOLVED",
-      "Production tutoring controller or renderer integration",
-      "Donor-model/package integration before the common compiler/runtime benchmark exists",
-      "Treat masked September-4 regressions as true hidden generalization evidence",
-      "Expose sealed holdout oracle material in public repositories, agent-visible handoffs, or candidate workspaces"
+      "Promote experimental vertical/trajectory/runtime v0 types into stable G2 merely because current slices pass",
+      "Add a broad semantic-wave, CRA, lexical, or pedagogy ontology from theory alone",
+      "Treat 887/887 accounting as semantic completeness",
+      "Let an LLM own progression or see controller-only grading answers",
+      "Treat masked September-4 regression as true hidden generalization evidence",
+      "Expose sealed holdout oracle material",
+      "Claim automatic decomposition quality or learning efficacy from replay tests"
     ]
   },
   "decisions_not_to_reverse": [
-    "Raw/source evidence is authority; derived summaries and goldens cannot replace it.",
-    "PIR owns pedagogy semantics; study-os-benchmarker owns independent scoring; Study OS adopts pinned tested PIR revisions.",
-    "PAM is a pinned assurance methodology and validation shell, not a runtime dependency and not pedagogy logic.",
-    "Visible regression, masked regression, sealed holdout, and prospective evaluation are distinct evidence classes.",
-    "A hidden case opened for debugging is permanently contaminated and must be retired into regression.",
-    "The immediate program objective is proof-producing extraction and benchmark output, not additional architecture for its own sake.",
-    "The experimental max-sum vertical proof is a falsification/fit test, not permission to freeze a general pedagogy ontology.",
-    "A passing structural test may prove only its stated narrow claim; it does not imply compiler generalization or learning efficacy.",
-    "Source accounting and semantic review are separate claims: 887/887 accounting is complete, while canonical semantic disposition/golden compilation is not yet complete.",
-    "The full transcript has already falsified mandatory-window-box representation as a general PIR assumption; do not reinterpret enumerate as a window merely to preserve the schema."
+    "Raw source evidence is authority; derived summaries/goldens do not replace it.",
+    "PIR owns pedagogy semantics; benchmarker independently scores; Study OS adopts pinned tested PIR.",
+    "PAM is assurance, not pedagogy or runtime logic.",
+    "Semantic equivalence never permits deletion of an evidenced intermediate pedagogical state.",
+    "Source accounting and semantic understanding are different claims.",
+    "Non-window representations are first-class.",
+    "Historical learner meta-turns are calibration evidence, not automatically literal future runtime gates.",
+    "Deterministic controller owns progression; renderer/model is bounded.",
+    "Renderer-visible contracts never contain hidden grading answers.",
+    "Learner-visible output is a falsification surface; hidden preserve flags are insufficient.",
+    "Language/register may be a separate abstraction axis from representation, but it remains experimental until a concrete source/runtime test proves the need.",
+    "Do not freeze a universal pedagogy ontology from one learner/session."
   ],
   "open_questions": [
-    "Should the earlier max(S) detour be executable golden or superseded exploration?",
-    "Should transcript-faithful len ordering remain separate from a later improved prerequisite-order experiment?",
-    "How should early part-01 teaching attempts be dispositioned relative to the later calibrated trajectory?",
-    "Final combined-loop exposure is not independent mastery; what later evidence, if any, should establish mastery?"
+    "Should earlier max(S) exploration be executable golden or superseded?",
+    "Should transcript-faithful len ordering stay separate from a later improved-order experiment?",
+    "How should early part-01 attempts be dispositioned relative to later calibration?",
+    "What evidence establishes mastery after final-loop exposure?",
+    "What bounded repeated-error policy should apply after a failed changed retry?",
+    "Is first-class lexical/register state genuinely required?",
+    "How should PARTIAL grading split deterministic structured parsing from bounded natural-language classification?"
   ],
   "reconciliation": {
     "live_state_wins": true,
     "checks": [
-      "Re-fetch Pukujan/study-os-pedagogical-IR main, issue #1, and latest CI before mutation.",
-      "Re-fetch Pukujan/study-os-benchmarker main, issues #1/#2, and latest CI before relying on evaluator state.",
-      "Re-fetch Pukujan/Study-os at pinned source commit bef88216d9052eeb7e135916ea7fb6f8d84e0ccc before changing source-review claims.",
-      "Verify PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 before using its manifest or handoff validators."
+      "Read assurance/NEXT_SESSION_HANDOFF.md and assurance/HANDOFF_STATE.json before mutation.",
+      "Re-fetch PIR main, issue #1, and latest CI/PAM assurance.",
+      "Re-fetch benchmarker main/issues/CI before relying on evaluator state.",
+      "Keep Study OS evidence pinned to bef88216d9052eeb7e135916ea7fb6f8d84e0ccc unless an explicit source revision is authorized.",
+      "Verify PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 before validation."
     ],
     "stale_state_behavior": "refresh_and_revalidate"
   },
   "hidden_evaluation": {
     "agent_visible_hidden_material": false,
-    "policy": "Agent-visible state may describe holdout lanes, contamination status, and opaque case identities, but never hidden source spans, expected bridges, labels, answers, seeds, oracle files, or scored hidden reports."
+    "policy": "Agent-visible state may describe holdout lanes and contamination status, but never hidden source spans, expected bridges, labels, answers, seeds, oracle files, or scored hidden reports."
   },
   "handoff": {
     "created_from_identity": {
       "kind": "git_commit",
-      "value": "90606c4587069c59d32de8abec2df80eaa80d344"
+      "value": "c31fe82690765a86248ccc65469b2583690c3d36"
     },
-    "created_at": "2026-09-05T16:39:00Z",
-    "reason": "validation_transition"
+    "created_at": "2026-09-05T18:44:00Z",
+    "reason": "session_boundary"
   }
 }
