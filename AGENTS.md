@@ -96,3 +96,28 @@ No best-effort coercion at trust boundaries.
 Core validation/compiler behavior must not depend on current time, randomness, network access, unordered iteration, generated UUIDs, or environment-specific paths.
 
 Volatile metadata may exist outside semantic identity.
+
+## 13. Continuity, generated docs, and PAM checkpoints
+
+Before substantive mutation:
+
+1. read `assurance/HANDOFF_STATE.json` and `assurance/NEXT_SESSION_HANDOFF.md`;
+2. reconcile their observations against live `main`, CI, issues, and referenced component revisions;
+3. let live state win when the handoff is stale.
+
+Documentation rules:
+
+- `docs/repository-state.json`, the current PAM handoff, and archived checkpoints drive machine-owned project-status documentation;
+- run `make docs-sync` after changing those inputs;
+- `make docs-check` is part of `make check` and must remain green;
+- do not hand-edit text inside generated README/status blocks;
+- PDD/SDD/threat/verification specs are human-reviewed semantic documents and must not be rewritten automatically from status metadata.
+
+Checkpoint rules:
+
+- `assurance/HANDOFF_STATE.json` is the single mutable `current` handoff;
+- `assurance/checkpoints/*.json` are immutable `historical_checkpoint` snapshots at material boundaries;
+- never overwrite or retroactively clean up a historical checkpoint;
+- create a new checkpoint when a later milestone materially changes the resumable state;
+- hidden holdout/oracle data is forbidden from current handoffs and historical checkpoints;
+- every checkpoint must validate against the pinned PAM handoff schema in CI.
