@@ -1,0 +1,9 @@
+{
+  "schema_version": "pir.experimental-replay-context.v0",
+  "trajectory_id": "sep4.combine-window-max.replay.v0",
+  "persistent_text": [
+    "The window-sum loop and standalone max loop are already learned separately.",
+    "Combine them without introducing arbitrary-k first-window machinery yet.",
+    "Keep the box chart visible while first-box, later-box, and stop-condition roles are joined."
+  ]
+}
