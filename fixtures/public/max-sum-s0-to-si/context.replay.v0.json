@@ -1,0 +1,9 @@
+{
+  "schema_version": "pir.experimental-replay-context.v0",
+  "trajectory_id": "sep4.max-sum-s0-to-si.replay.v0",
+  "persistent_text": [
+    "The learner has already verified max_sum = max(S).",
+    "Now move the same idea inside the loop: initialize from the first window before any comparison.",
+    "Keep the indexed array and current window box visible; do not compare later windows until the S[0] and S[i] assignments are produced and validated."
+  ]
+}
