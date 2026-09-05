@@ -100,7 +100,6 @@ def validate_lexical_register(
         for representation in trajectory.representations
     }
     persistent_surface = "\n".join(persistent_text)
-    seen: set[tuple[str, str, str]] = set()
     for step in trajectory.steps:
         representation = representation_by_id.get(step.representation_id)
         if representation is None:
@@ -113,10 +112,8 @@ def validate_lexical_register(
         surface = "\n".join(parts)
         for rule in register.rules:
             for term in rule.forbidden_terms:
-                key = (step.step_id, rule.concept_id, term.casefold())
-                if key in seen or not _contains_term(surface, term):
+                if not _contains_term(surface, term):
                     continue
-                seen.add(key)
                 violations.append(
                     LexicalViolation(
                         code=LexicalViolationCode.FORBIDDEN_TERM_PRESENT,
