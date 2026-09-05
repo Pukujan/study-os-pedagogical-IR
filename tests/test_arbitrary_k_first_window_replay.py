@@ -5,6 +5,7 @@ from pathlib import Path
 from study_os_pir.language import (
     LexicalRegister,
     LexicalViolationCode,
+    _assignment_identifiers,
     validate_lexical_register,
 )
 from study_os_pir.runtime import (
@@ -221,7 +222,15 @@ def window_sum_identifier_mutation() -> ExperimentalTrajectory:
     return trajectory.model_copy(update={"representations": representations})
 
 
-def test_existing_lexical_register_rejects_window_sum_alias_semantics_miss() -> None:
+def test_assignment_parser_distinguishes_assignment_from_comparison() -> None:
+    assert _assignment_identifiers("sum = 0\nwindow_sum=1") == (
+        "sum",
+        "window_sum",
+    )
+    assert _assignment_identifiers("if i == 0:\n    pass") == ()
+
+
+def test_assignment_scope_rejects_window_sum_identifier_semantics_miss() -> None:
     mutated = window_sum_identifier_mutation()
     assert validate_trajectory(mutated) == ()
     violations = validate_lexical_register(
@@ -230,38 +239,33 @@ def test_existing_lexical_register_rejects_window_sum_alias_semantics_miss() -> 
         persistent_text=load_context().persistent_text,
     )
     assert any(
-        violation.code == LexicalViolationCode.FORBIDDEN_TERM_PRESENT
+        violation.code
+        == LexicalViolationCode.FORBIDDEN_ASSIGNMENT_IDENTIFIER_PRESENT
         and "'window_sum'" in violation.detail
         for violation in violations
     )
 
 
-def test_source_rejected_sum_identifier_falsifies_global_term_scope() -> None:
+def test_assignment_scope_rejects_sum_identifier_but_allows_sum_in_prose() -> None:
     mutated = sum_identifier_mutation()
     assert validate_trajectory(mutated) == ()
-    assert (
-        validate_lexical_register(
-            mutated,
-            load_register(),
-            persistent_text=load_context().persistent_text,
-        )
-        == ()
-    )
-
-    register = load_register()
-    sum_rule = register.rules[0].model_copy(
-        update={"forbidden_terms": (*register.rules[0].forbidden_terms, "sum")}
-    )
-    strict_register = register.model_copy(
-        update={"rules": (sum_rule, *register.rules[1:])}
-    )
     violations = validate_lexical_register(
-        load_trajectory(),
-        strict_register,
-        persistent_text=(PROBLEM_TEXT,),
+        mutated,
+        load_register(),
+        persistent_text=load_context().persistent_text,
     )
     assert any(
-        violation.code == LexicalViolationCode.FORBIDDEN_TERM_PRESENT
+        violation.code
+        == LexicalViolationCode.FORBIDDEN_ASSIGNMENT_IDENTIFIER_PRESENT
         and "'sum'" in violation.detail
         for violation in violations
+    )
+
+    assert (
+        validate_lexical_register(
+            load_trajectory(),
+            load_register(),
+            persistent_text=(PROBLEM_TEXT,),
+        )
+        == ()
     )

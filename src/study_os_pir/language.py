@@ -15,6 +15,7 @@ class LexicalViolationCode(StrEnum):
     PREFERRED_TERM_NOT_ALLOWED = "PREFERRED_TERM_NOT_ALLOWED"
     ALLOWED_FORBIDDEN_OVERLAP = "ALLOWED_FORBIDDEN_OVERLAP"
     FORBIDDEN_TERM_PRESENT = "FORBIDDEN_TERM_PRESENT"
+    FORBIDDEN_ASSIGNMENT_IDENTIFIER_PRESENT = "FORBIDDEN_ASSIGNMENT_IDENTIFIER_PRESENT"
 
 
 class LexicalRule(StrictFrozenModel):
@@ -22,6 +23,7 @@ class LexicalRule(StrictFrozenModel):
     preferred_term: str = Field(min_length=1)
     allowed_terms: tuple[str, ...] = Field(min_length=1)
     forbidden_terms: tuple[str, ...] = ()
+    forbidden_assignment_identifiers: tuple[str, ...] = ()
 
 
 class LexicalRegister(StrictFrozenModel):
@@ -55,6 +57,13 @@ def _representation_surface(representation: VerticalRepresentation) -> str:
 def _contains_term(surface: str, term: str) -> bool:
     pattern = rf"(?<!\w){re.escape(term)}(?!\w)"
     return re.search(pattern, surface, flags=re.IGNORECASE) is not None
+
+
+_ASSIGNMENT_IDENTIFIER_RE = re.compile(r"(?<![\w.])([A-Za-z_]\w*)\s*=(?!=)")
+
+
+def _assignment_identifiers(surface: str) -> tuple[str, ...]:
+    return tuple(match.group(1).casefold() for match in _ASSIGNMENT_IDENTIFIER_RE.finditer(surface))
 
 
 def validate_lexical_register(
@@ -107,15 +116,18 @@ def validate_lexical_register(
         representation = representation_by_id.get(step.representation_id)
         if representation is None:
             continue
-        parts = [_representation_surface(representation)]
+        learner_parts = [_representation_surface(representation)]
         if step.probe is not None:
-            parts.append(step.probe.prompt)
+            learner_parts.append(step.probe.prompt)
+        learner_surface = "\n".join(learner_parts)
+        term_parts = [learner_surface]
         if persistent_surface:
-            parts.append(persistent_surface)
-        surface = "\n".join(parts)
+            term_parts.append(persistent_surface)
+        term_surface = "\n".join(term_parts)
+        assignment_identifiers = set(_assignment_identifiers(learner_surface))
         for rule in register.rules:
             for term in rule.forbidden_terms:
-                if not _contains_term(surface, term):
+                if not _contains_term(term_surface, term):
                     continue
                 violations.append(
                     LexicalViolation(
@@ -123,6 +135,18 @@ def validate_lexical_register(
                         detail=(
                             f"{step.step_id} uses forbidden {rule.concept_id} term "
                             f"{term!r} under register {register.register_id}"
+                        ),
+                    )
+                )
+            for identifier in rule.forbidden_assignment_identifiers:
+                if identifier.casefold() not in assignment_identifiers:
+                    continue
+                violations.append(
+                    LexicalViolation(
+                        code=LexicalViolationCode.FORBIDDEN_ASSIGNMENT_IDENTIFIER_PRESENT,
+                        detail=(
+                            f"{step.step_id} assigns forbidden {rule.concept_id} identifier "
+                            f"{identifier!r} under register {register.register_id}"
                         ),
                     )
                 )
