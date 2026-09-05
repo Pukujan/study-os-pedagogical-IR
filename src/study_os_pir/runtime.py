@@ -44,6 +44,7 @@ class AssessmentSpec(StrictFrozenModel):
     expected_values: tuple[int, ...] = ()
     partial_values: tuple[int, ...] = ()
     expected_text: tuple[str, ...] = ()
+    partial_text: tuple[str, ...] = ()
 
 
 class AssessmentRegistry(StrictFrozenModel):
@@ -148,7 +149,7 @@ def validate_assessment_registry(
                 )
             )
         if spec.kind == AssessmentKind.INTEGER:
-            if len(spec.expected_values) != 1 or spec.expected_text:
+            if len(spec.expected_values) != 1 or spec.expected_text or spec.partial_text:
                 violations.append(
                     AssessmentViolation(
                         code=AssessmentViolationCode.INVALID_INTEGER_ASSESSMENT,
@@ -156,7 +157,7 @@ def validate_assessment_registry(
                     )
                 )
         elif spec.kind == AssessmentKind.INTEGER_SEQUENCE:
-            if not spec.expected_values or spec.expected_text:
+            if not spec.expected_values or spec.expected_text or spec.partial_text:
                 violations.append(
                     AssessmentViolation(
                         code=AssessmentViolationCode.INVALID_INTEGER_SEQUENCE_ASSESSMENT,
@@ -171,8 +172,8 @@ def validate_assessment_registry(
                 AssessmentViolation(
                     code=AssessmentViolationCode.INVALID_TEXT_ASSESSMENT,
                     detail=(
-                        "text assessment must contain only expected_text alternatives: "
-                        f"{spec.step_id}"
+                        "text assessment must contain expected_text and optional partial_text "
+                        f"alternatives only: {spec.step_id}"
                     ),
                 )
             )
@@ -232,6 +233,8 @@ def classify_response(spec: AssessmentSpec, response: str) -> TrajectoryOutcomeK
         observed_text = _normalize_text(response)
         if any(observed_text == _normalize_text(expected) for expected in spec.expected_text):
             return TrajectoryOutcomeKind.CORRECT
+        if any(observed_text == _normalize_text(partial) for partial in spec.partial_text):
+            return TrajectoryOutcomeKind.PARTIAL
         return TrajectoryOutcomeKind.INCORRECT
 
     try:
