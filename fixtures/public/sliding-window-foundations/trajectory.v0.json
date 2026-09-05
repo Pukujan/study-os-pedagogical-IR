@@ -1,0 +1,500 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.position-index-k.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:domains/dsa/sliding-window/golden/beginner-progressive-box-index-sum.v0.1.md",
+  "entry_step_id": "problem_anchor",
+  "representations": [
+    {
+      "representation_id": "r.problem",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["problem: find the largest sum of any 3 adjacent numbers", "a = numbers"],
+      "visible_components": ["problem_anchor", "numbers_row"]
+    },
+    {
+      "representation_id": "r.position_intro",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["p = 3 points to a = 2"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow"]
+    },
+    {
+      "representation_id": "r.position_probe6",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 6"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row"]
+    },
+    {
+      "representation_id": "r.position_feedback6",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "[4]", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["p = 4 aligns with a = 6"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"]
+    },
+    {
+      "representation_id": "r.position_probe9",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 9"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row"]
+    },
+    {
+      "representation_id": "r.position_validate9",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "[6]"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "[9]"]}
+      ],
+      "box": null,
+      "annotations": ["p = 6 aligns with a = 9"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"]
+    },
+    {
+      "representation_id": "r.position_probe7",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 7"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row"]
+    },
+    {
+      "representation_id": "r.position_validate7",
+      "rows": [
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "[2]", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "[7]", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["p = 2 aligns with a = 7"],
+      "visible_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"]
+    },
+    {
+      "representation_id": "r.index_intro",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "[2]", "3", "4", "5"]},
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "[3]", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "[2]", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["index(i) = position(p) - 1", "i = p - 1"],
+      "visible_components": ["problem_anchor", "index_row", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"]
+    },
+    {
+      "representation_id": "r.index_probe6",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 6"],
+      "visible_components": ["problem_anchor", "index_row", "position_row", "numbers_row"]
+    },
+    {
+      "representation_id": "r.index_validate6",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "[3]", "4", "5"]},
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "[4]", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["i = 3, p = 4, a = 6"],
+      "visible_components": ["problem_anchor", "index_row", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"]
+    },
+    {
+      "representation_id": "r.index_probe9",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "6"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["target number: 9"],
+      "visible_components": ["problem_anchor", "index_row", "position_row", "numbers_row"]
+    },
+    {
+      "representation_id": "r.index_validate9",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "[5]"]},
+        {"row_id": "position_row", "label": "positions(p)", "values": ["1", "2", "3", "4", "5", "[6]"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "[9]"]}
+      ],
+      "box": null,
+      "annotations": ["i = 5, p = 6, a = 9"],
+      "visible_components": ["problem_anchor", "index_row", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"]
+    },
+    {
+      "representation_id": "r.k_intro",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["k = 3", "k means how many numbers go inside the box"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label"]
+    },
+    {
+      "representation_id": "r.k_probe3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["k = 3"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label"]
+    },
+    {
+      "representation_id": "r.k_validate3",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["[4]", "[7]", "[2]", "6", "1", "9"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["k = 3 means the box holds 4, 7, 2"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label", "current_box_highlight"]
+    },
+    {
+      "representation_id": "r.k_probe5",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "annotations": ["k = 5"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label"]
+    },
+    {
+      "representation_id": "r.k_validate5",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["[4]", "[7]", "[2]", "[6]", "[1]", "9"]}
+      ],
+      "box": {"start_index": 0, "width": 5},
+      "annotations": ["k = 5 means the box holds five numbers"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label", "current_box_highlight"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "problem_anchor",
+      "kind": "explain",
+      "goal": "Keep the original difficult problem visible and name the array a before introducing prerequisite notation.",
+      "representation_id": "r.problem",
+      "preserve_components": ["problem_anchor", "numbers_row"],
+      "forbidden_components": ["index_row", "window_box"],
+      "active_delta": "introduce only the original task and numbers(a)",
+      "disclosed_concepts": ["array_a"],
+      "forbidden_concepts": ["position_p", "index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step0", "sep4:event:full_problem_anchor"]
+    },
+    {
+      "step_id": "position_intro",
+      "kind": "explain",
+      "goal": "Introduce human-readable position p with one highlighted array column.",
+      "representation_id": "r.position_intro",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow"],
+      "forbidden_components": ["index_row", "window_box"],
+      "active_delta": "add position(p) while the array and problem remain stable",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step1:intro", "sep4:event:position_p"]
+    },
+    {
+      "step_id": "position_probe6",
+      "kind": "probe",
+      "goal": "Ask for the position of number 6 without arrows or highlights that reveal the answer.",
+      "representation_id": "r.position_probe6",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row"],
+      "forbidden_components": ["answer_arrow", "current_column_highlight", "index_row", "window_box"],
+      "active_delta": "require learner production of one position value",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "position of number 6",
+        "prompt": "What is position(p) of number(a) 6?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["p = 4", "position(p) = 4", "answer is 4"]
+      },
+      "evidence_turn_refs": ["golden:step1:exercise", "sep4:trajectory:position_validation_rule"]
+    },
+    {
+      "step_id": "position_validate6_correct",
+      "kind": "validate",
+      "goal": "If the learner answers 4, show why 4 is correct in the same position/array chart.",
+      "representation_id": "r.position_feedback6",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["index_row", "window_box"],
+      "active_delta": "validate the correct response using the aligned chart",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step1:correct-feedback", "sep4:event:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "position_correct6_wrong",
+      "kind": "explain",
+      "goal": "If the learner is wrong, give the right position and explain it in the same chart before retrying.",
+      "representation_id": "r.position_feedback6",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["index_row", "window_box"],
+      "active_delta": "correct the wrong response without introducing a new concept",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step1:wrong-feedback", "sep4:trajectory:position_validation_rule"]
+    },
+    {
+      "step_id": "position_retry9",
+      "kind": "probe",
+      "goal": "After an error correction, retry the same position concept on a different number without answer arrows.",
+      "representation_id": "r.position_probe9",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row"],
+      "forbidden_components": ["answer_arrow", "current_column_highlight", "index_row", "window_box"],
+      "active_delta": "retry the same relation on changed surface data",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "position of number 9",
+        "prompt": "What is position(p) of number(a) 9?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["p = 6", "position(p) = 6", "answer is 6"]
+      },
+      "evidence_turn_refs": ["golden:step1:changed-retry", "sep4:trajectory:position_validation_rule"]
+    },
+    {
+      "step_id": "position_validate9",
+      "kind": "validate",
+      "goal": "Validate a successful changed retry in the same chart before one more confirmation probe.",
+      "representation_id": "r.position_validate9",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["index_row", "window_box"],
+      "active_delta": "show why the changed-retry answer is correct",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:rule7", "sep4:event:position_p"]
+    },
+    {
+      "step_id": "position_confirm7",
+      "kind": "probe",
+      "goal": "After recovery from an error, ask one more changed position example before advancing.",
+      "representation_id": "r.position_probe7",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row"],
+      "forbidden_components": ["answer_arrow", "current_column_highlight", "index_row", "window_box"],
+      "active_delta": "verify the same position relation once more",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "position of number 7",
+        "prompt": "What is position(p) of number(a) 7?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["p = 2", "position(p) = 2", "answer is 2"]
+      },
+      "evidence_turn_refs": ["golden:rule7", "golden:step1"]
+    },
+    {
+      "step_id": "position_validate7",
+      "kind": "validate",
+      "goal": "Validate the final position confirmation in the same chart before introducing index.",
+      "representation_id": "r.position_validate7",
+      "preserve_components": ["problem_anchor", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["index_row", "window_box"],
+      "active_delta": "close the position evidence gate",
+      "disclosed_concepts": ["position_p"],
+      "forbidden_concepts": ["index_i", "k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step1", "sep4:event:position_p"]
+    },
+    {
+      "step_id": "index_intro",
+      "kind": "explain",
+      "goal": "Introduce index only after position is stable, preserving the aligned array column.",
+      "representation_id": "r.index_intro",
+      "preserve_components": ["problem_anchor", "index_row", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "add index(i) = position(p) - 1",
+      "disclosed_concepts": ["position_p", "index_i"],
+      "forbidden_concepts": ["k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step2:intro", "sep4:event:index_i"]
+    },
+    {
+      "step_id": "index_probe6",
+      "kind": "probe",
+      "goal": "Ask for the index of number 6 without answer arrows or circles.",
+      "representation_id": "r.index_probe6",
+      "preserve_components": ["problem_anchor", "index_row", "position_row", "numbers_row"],
+      "forbidden_components": ["answer_arrow", "current_column_highlight", "window_box"],
+      "active_delta": "require learner production of one index value",
+      "disclosed_concepts": ["position_p", "index_i"],
+      "forbidden_concepts": ["k", "i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "index of number 6",
+        "prompt": "What is the index(i) of number(a) 6?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["i = 3", "index(i) = 3", "answer is 3"]
+      },
+      "evidence_turn_refs": ["golden:step2:exercise", "sep4:event:index_i"]
+    },
+    {
+      "step_id": "index_validate6",
+      "kind": "validate",
+      "goal": "Show why index 3 is correct using the same aligned index/position/number chart.",
+      "representation_id": "r.index_validate6",
+      "preserve_components": ["problem_anchor", "index_row", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "validate the first index response in the same chart",
+      "disclosed_concepts": ["position_p", "index_i"],
+      "forbidden_concepts": ["k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step2:correct-feedback", "sep4:event:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "index_probe9",
+      "kind": "probe",
+      "goal": "Verify index on a second number before introducing k.",
+      "representation_id": "r.index_probe9",
+      "preserve_components": ["problem_anchor", "index_row", "position_row", "numbers_row"],
+      "forbidden_components": ["answer_arrow", "current_column_highlight", "window_box"],
+      "active_delta": "verify the same index relation on changed surface data",
+      "disclosed_concepts": ["position_p", "index_i"],
+      "forbidden_concepts": ["k", "i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "index of number 9",
+        "prompt": "What is the index(i) of number(a) 9?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["i = 5", "index(i) = 5", "answer is 5"]
+      },
+      "evidence_turn_refs": ["golden:step2:repeat", "sep4:event:index_i"]
+    },
+    {
+      "step_id": "index_validate9",
+      "kind": "validate",
+      "goal": "Validate the second index response before k is introduced.",
+      "representation_id": "r.index_validate9",
+      "preserve_components": ["problem_anchor", "index_row", "position_row", "numbers_row", "answer_arrow", "current_column_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "close the index evidence gate",
+      "disclosed_concepts": ["position_p", "index_i"],
+      "forbidden_concepts": ["k", "i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step2", "sep4:event:index_i"]
+    },
+    {
+      "step_id": "k_intro",
+      "kind": "explain",
+      "goal": "Introduce k only as how many numbers are inside the box; do not use i to move the box yet.",
+      "representation_id": "r.k_intro",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label", "window_box"],
+      "forbidden_components": [],
+      "active_delta": "introduce k as box width",
+      "disclosed_concepts": ["index_i", "k", "box_width"],
+      "forbidden_concepts": ["i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step3:intro", "sep4:event:k_and_box"]
+    },
+    {
+      "step_id": "k_probe3_guided",
+      "kind": "probe",
+      "goal": "With the introductory box still visible, ask which numbers are inside the k=3 box.",
+      "representation_id": "r.k_probe3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label", "window_box"],
+      "forbidden_components": [],
+      "active_delta": "identify box contents while k=3 is still scaffolded visually",
+      "disclosed_concepts": ["index_i", "k", "box_width"],
+      "forbidden_concepts": ["i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "contents of the visible k=3 box",
+        "prompt": "What numbers are inside the box?",
+        "answer_reveal_allowed": true,
+        "forbidden_answer_literals": []
+      },
+      "evidence_turn_refs": ["golden:step3:first-probe", "sep4:event:k_and_box"]
+    },
+    {
+      "step_id": "k_validate3",
+      "kind": "validate",
+      "goal": "Show why the guided k=3 box contains 4, 7, 2 using the same box diagram.",
+      "representation_id": "r.k_validate3",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "validate box contents while preserving the box representation",
+      "disclosed_concepts": ["index_i", "k", "box_width"],
+      "forbidden_concepts": ["i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step3", "sep4:event:k_and_box"]
+    },
+    {
+      "step_id": "k_probe5_unassisted",
+      "kind": "probe",
+      "goal": "Change k to 5 and remove the box answer help so the learner identifies the box contents unaided.",
+      "representation_id": "r.k_probe5",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "k_label"],
+      "forbidden_components": ["window_box", "box_label", "current_box_highlight"],
+      "active_delta": "hold the k-as-width relation constant while removing visual answer help",
+      "disclosed_concepts": ["index_i", "k", "box_width"],
+      "forbidden_concepts": ["i_as_box_start", "sum_i"],
+      "probe": {
+        "target": "contents of the implicit k=5 box from the beginning of the array",
+        "prompt": "With k = 5, what numbers go inside the box?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["4 7 2 6 1", "4, 7, 2, 6, 1"]
+      },
+      "evidence_turn_refs": ["golden:step3:faded-probe", "sep4:event:k_and_box"]
+    },
+    {
+      "step_id": "k_validate5",
+      "kind": "validate",
+      "goal": "Restore the box and show why k=5 contains the first five numbers before introducing i as box start.",
+      "representation_id": "r.k_validate5",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_label", "window_box", "current_box_highlight"],
+      "forbidden_components": [],
+      "active_delta": "validate the faded k exercise and close the k-only gate",
+      "disclosed_concepts": ["index_i", "k", "box_width"],
+      "forbidden_concepts": ["i_as_box_start", "sum_i"],
+      "probe": null,
+      "evidence_turn_refs": ["golden:step3", "sep4:event:k_and_box"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.problem.position_intro", "from_step_id": "problem_anchor", "next_step_id": "position_intro", "exit_target": null, "evidence_turn_refs": ["golden:step0-to-step1"]},
+    {"transition_id": "auto.position_intro.probe6", "from_step_id": "position_intro", "next_step_id": "position_probe6", "exit_target": null, "evidence_turn_refs": ["golden:step1"]},
+    {"transition_id": "auto.position_validate6.confirm7", "from_step_id": "position_validate6_correct", "next_step_id": "position_confirm7", "exit_target": null, "evidence_turn_refs": ["golden:rule8"]},
+    {"transition_id": "auto.position_correct6.retry9", "from_step_id": "position_correct6_wrong", "next_step_id": "position_retry9", "exit_target": null, "evidence_turn_refs": ["golden:rule6"]},
+    {"transition_id": "auto.position_validate9.confirm7", "from_step_id": "position_validate9", "next_step_id": "position_confirm7", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"transition_id": "auto.position_validate7.index_intro", "from_step_id": "position_validate7", "next_step_id": "index_intro", "exit_target": null, "evidence_turn_refs": ["golden:step2"]},
+    {"transition_id": "auto.index_intro.probe6", "from_step_id": "index_intro", "next_step_id": "index_probe6", "exit_target": null, "evidence_turn_refs": ["golden:step2"]},
+    {"transition_id": "auto.index_validate6.probe9", "from_step_id": "index_validate6", "next_step_id": "index_probe9", "exit_target": null, "evidence_turn_refs": ["golden:step2:repeat"]},
+    {"transition_id": "auto.index_validate9.k_intro", "from_step_id": "index_validate9", "next_step_id": "k_intro", "exit_target": null, "evidence_turn_refs": ["golden:step3"]},
+    {"transition_id": "auto.k_intro.probe3", "from_step_id": "k_intro", "next_step_id": "k_probe3_guided", "exit_target": null, "evidence_turn_refs": ["golden:step3"]},
+    {"transition_id": "auto.k_validate3.probe5", "from_step_id": "k_validate3", "next_step_id": "k_probe5_unassisted", "exit_target": null, "evidence_turn_refs": ["golden:step3:fading"]},
+    {"transition_id": "auto.k_validate5.exit", "from_step_id": "k_validate5", "next_step_id": null, "exit_target": "i_moves_box", "evidence_turn_refs": ["golden:step4"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.position6.correct", "after_step_id": "position_probe6", "outcome": "correct", "next_step_id": "position_validate6_correct", "exit_target": null, "evidence_turn_refs": ["golden:step1:correct-feedback"]},
+    {"route_id": "route.position6.incorrect", "after_step_id": "position_probe6", "outcome": "incorrect", "next_step_id": "position_correct6_wrong", "exit_target": null, "evidence_turn_refs": ["golden:step1:wrong-feedback"]},
+    {"route_id": "route.position9.correct", "after_step_id": "position_retry9", "outcome": "correct", "next_step_id": "position_validate9", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"route_id": "route.position7.correct", "after_step_id": "position_confirm7", "outcome": "correct", "next_step_id": "position_validate7", "exit_target": null, "evidence_turn_refs": ["golden:rule7"]},
+    {"route_id": "route.index6.correct", "after_step_id": "index_probe6", "outcome": "correct", "next_step_id": "index_validate6", "exit_target": null, "evidence_turn_refs": ["golden:step2:correct-feedback"]},
+    {"route_id": "route.index9.correct", "after_step_id": "index_probe9", "outcome": "correct", "next_step_id": "index_validate9", "exit_target": null, "evidence_turn_refs": ["golden:step2:repeat"]},
+    {"route_id": "route.k3.correct", "after_step_id": "k_probe3_guided", "outcome": "correct", "next_step_id": "k_validate3", "exit_target": null, "evidence_turn_refs": ["golden:step3"]},
+    {"route_id": "route.k5.correct", "after_step_id": "k_probe5_unassisted", "outcome": "correct", "next_step_id": "k_validate5", "exit_target": null, "evidence_turn_refs": ["golden:step3"]}
+  ]
+}
