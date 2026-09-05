@@ -4,10 +4,10 @@
   "project": {
     "name": "Study OS Pedagogical IR Program",
     "repository": "Pukujan/study-os-pedagogical-IR",
-    "phase": "PIR-0 extraction and benchmark proof",
+    "phase": "PIR-0 source review and schema falsification",
     "observed_identity": {
       "kind": "git_commit",
-      "value": "b077ec878fb872858ef48a8e0c49c56c7317f847"
+      "value": "90606c4587069c59d32de8abec2df80eaa80d344"
     },
     "active_issue": 1
   },
@@ -56,7 +56,10 @@
         "kind": "git_commit",
         "value": "bef88216d9052eeb7e135916ea7fb6f8d84e0ccc"
       },
-      "tested_identity": null,
+      "tested_identity": {
+        "kind": "git_commit",
+        "value": "bef88216d9052eeb7e135916ea7fb6f8d84e0ccc"
+      },
       "issue": 65,
       "pr": null
     }
@@ -82,12 +85,20 @@
       {
         "name": "Independent max-sum vertical benchmark proof",
         "evidence": "GitHub Actions run 33976070445 succeeded at d5d76e0fb0dc798e5a40b879029220e96c7cf67c: Ruff clean, strict mypy clean, 27 tests passed. New cases reject premature exercise/comparison, bridge deletion, answer leakage, chart loss, redundant S0 repetition, and comparison before Si validation."
+      },
+      {
+        "name": "Complete September-4 byte-addressed source accounting",
+        "evidence": "GitHub Actions run 33977826895 parsed pinned Study OS commit bef88216d9052eeb7e135916ea7fb6f8d84e0ccc into 887 turns and 887 exact spans: 443 learner and 444 tutor turns, 887 disposition records, zero missing/duplicate/unknown turns, and complete coverage. Receipt artifact 9972844407 had ZIP SHA-256 8d890c4e49fb75f6b25d8483c2b9ce81d5219757ee2afa9d5fbc7f7afb88d2f6."
+      },
+      {
+        "name": "September-4 source-review evidence resolution",
+        "evidence": "GitHub Actions run 33978407467 succeeded at 461bf8e70380eae700a61e201fc4de66719c9d9d with 61 tests and 100-percent statement plus branch coverage. The unchanged source-review ledger resolved 36 candidate pedagogical events, 18 explicit failure-repair regions, and 4 retained unresolved questions against real turns in the 887-turn manifest. Receipt artifact 9973007992 has ZIP SHA-256 e36dfb7f61348ebe01c0051faa7626781a38b1930dedaa776d87bafa8d7f4cd6."
       }
     ],
     "failed": [],
     "not_run": [
-      "Complete authoritative September-4 turn extraction and 100-percent coverage receipt",
-      "Compile the complete source-backed September-4 golden trajectory",
+      "Freeze a complete canonical September-4 golden trajectory with source-inspected turn dispositions",
+      "Run the enumerate(a) second vertical PIR and independent benchmark proof",
       "Run the first Luna fresh-subagent masked-regression evaluation",
       "Run any sealed or prospective hidden-holdout evaluation"
     ]
@@ -95,14 +106,17 @@
   "next_action": {
     "repository": "Pukujan/study-os-pedagogical-IR",
     "issue": 1,
-    "action": "Return to the complete authorized September-4 source and produce the extraction ledger plus source-backed golden/UNRESOLVED receipt. Reuse the experimental max-sum slice only as a behavior probe; do not promote its v0 types into stable G2 merely because the vertical proof passed.",
-    "acceptance": "The authorized run reports exact source artifact identities, N source turns = N dispositions, zero missing/duplicate/unknown turns, every accepted golden event resolves to source evidence, unsupported edges remain UNRESOLVED, and the receipt pins PIR/compiler/input revisions. The resulting golden must still preserve the max-sum validation/bridge sequence demonstrated by the vertical proof."
+    "action": "Use the calibrated enumerate(a) segment as the second vertical falsification slice. Make only the smallest evidence-driven representation change needed for a non-window index/number/pair chart, preserve same-chart validation and answer-leak constraints, and run the independent benchmark before promoting any G2 schema.",
+    "acceptance": "The enumerate slice must represent the accepted explanation -> non-answer-revealing probe -> learner answer -> same-chart validation -> changed exercise -> same-chart validation sequence without a fake window box. Known answer-leak, under-explanation, chart-removal, premature-advance, and unnecessary-third-exercise mutations must be rejected. Existing max-sum vertical proofs must remain green."
   },
-  "blockers": [],
+  "blockers": [
+    "The experimental max-sum VerticalRepresentation requires a window box, but the calibrated enumerate(a) chart has no window box. This falsifies promotion of the current experimental representation type unchanged."
+  ],
   "scope": {
     "do_not_start": [
-      "Promote experimental vertical.py types into stable G2 without full-extraction pressure showing they are the right primitives",
-      "Broad G2 pedagogy ontology expansion before the September-4 extraction receipt exists",
+      "Promote experimental vertical.py types into stable G2 before the enumerate schema-pressure proof passes",
+      "Resolve the four source-review questions by cleanup or preference instead of explicit evidence/experiment",
+      "Treat 887 accounting dispositions as semantic extraction completeness while they remain UNRESOLVED",
       "Production tutoring controller or renderer integration",
       "Donor-model/package integration before the common compiler/runtime benchmark exists",
       "Treat masked September-4 regressions as true hidden generalization evidence",
@@ -117,17 +131,22 @@
     "A hidden case opened for debugging is permanently contaminated and must be retired into regression.",
     "The immediate program objective is proof-producing extraction and benchmark output, not additional architecture for its own sake.",
     "The experimental max-sum vertical proof is a falsification/fit test, not permission to freeze a general pedagogy ontology.",
-    "A passing structural test may prove only its stated narrow claim; it does not imply compiler generalization or learning efficacy."
+    "A passing structural test may prove only its stated narrow claim; it does not imply compiler generalization or learning efficacy.",
+    "Source accounting and semantic review are separate claims: 887/887 accounting is complete, while canonical semantic disposition/golden compilation is not yet complete.",
+    "The full transcript has already falsified mandatory-window-box representation as a general PIR assumption; do not reinterpret enumerate as a window merely to preserve the schema."
   ],
   "open_questions": [
-    "Identify and hash the exact authorized local/private September-4 source bundle that will be treated as authoritative for the first full extraction run."
+    "Should the earlier max(S) detour be executable golden or superseded exploration?",
+    "Should transcript-faithful len ordering remain separate from a later improved prerequisite-order experiment?",
+    "How should early part-01 teaching attempts be dispositioned relative to the later calibrated trajectory?",
+    "Final combined-loop exposure is not independent mastery; what later evidence, if any, should establish mastery?"
   ],
   "reconciliation": {
     "live_state_wins": true,
     "checks": [
       "Re-fetch Pukujan/study-os-pedagogical-IR main, issue #1, and latest CI before mutation.",
       "Re-fetch Pukujan/study-os-benchmarker main, issues #1/#2, and latest CI before relying on evaluator state.",
-      "Re-fetch Pukujan/Study-os main and issue #65 before consuming learner-session evidence or changing adopter contracts.",
+      "Re-fetch Pukujan/Study-os at pinned source commit bef88216d9052eeb7e135916ea7fb6f8d84e0ccc before changing source-review claims.",
       "Verify PAM revision 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 before using its manifest or handoff validators."
     ],
     "stale_state_behavior": "refresh_and_revalidate"
@@ -139,9 +158,9 @@
   "handoff": {
     "created_from_identity": {
       "kind": "git_commit",
-      "value": "b077ec878fb872858ef48a8e0c49c56c7317f847"
+      "value": "90606c4587069c59d32de8abec2df80eaa80d344"
     },
-    "created_at": "2026-09-05T15:56:00Z",
+    "created_at": "2026-09-05T16:39:00Z",
     "reason": "validation_transition"
   }
 }
