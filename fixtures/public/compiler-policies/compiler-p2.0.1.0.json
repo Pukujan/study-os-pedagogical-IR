@@ -1,0 +1,8 @@
+{
+  "schema_version": "pir.compiler-policy.v0",
+  "policy_id": "compiler-p2",
+  "policy_version": "0.1.0",
+  "strategy": "explicit_constraints",
+  "prompt_template": "Produce a structured pedagogical decomposition with at most one new concept per microstep. Prefer concrete state before symbols, observable transition before algebra, algebra before code, preserve the current representation unless an explicit bridge authorizes a change, and do not reveal assessment answers.",
+  "max_new_concepts_per_step": 1
+}
