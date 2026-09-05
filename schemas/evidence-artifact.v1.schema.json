@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://study-os.local/schemas/pir.evidence-artifact.v1.schema.json",
+  "title": "PIR EvidenceArtifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_id", "sha256", "byte_length", "source_status"],
+  "properties": {
+    "schema_version": {"const": "pir.evidence-artifact.v1"},
+    "artifact_id": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "byte_length": {"type": "integer", "minimum": 0},
+    "source_status": {"enum": ["verbatim", "reconstructed"]},
+    "media_type": {"type": "string", "minLength": 1},
+    "source_label": {"type": "string", "minLength": 1}
+  }
+}
