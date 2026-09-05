@@ -1,0 +1,41 @@
+name: PAM assurance
+
+on:
+  push:
+    paths:
+      - "assurance/**"
+      - ".github/workflows/pam-assurance.yml"
+  pull_request:
+    paths:
+      - "assurance/**"
+      - ".github/workflows/pam-assurance.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PIR
+        uses: actions/checkout@v4
+
+      - name: Checkout pinned PAM
+        uses: actions/checkout@v4
+        with:
+          repository: Pukujan/project-assurance-modules
+          ref: a10ad56b7088c1e101e80914a9e00357dbef9120
+          path: .pam
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned PAM validator
+        run: python -m pip install -e '.pam[dev]'
+
+      - name: Validate project assurance manifest
+        working-directory: .pam
+        run: python -m scripts.pam_validate ../assurance/PROJECT_ASSURANCE.json
+
+      - name: Validate structured handoff
+        working-directory: .pam
+        run: python -m scripts.pam_handoff ../assurance/HANDOFF_STATE.json
