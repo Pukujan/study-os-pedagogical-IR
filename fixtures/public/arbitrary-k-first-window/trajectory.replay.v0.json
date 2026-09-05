@@ -1,0 +1,269 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.arbitrary-k-first-window.replay.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part08.md",
+  "entry_step_id": "preserve_existing_s",
+  "representations": [
+    {
+      "representation_id": "r.preserve_s",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 4},
+      "annotations": ["i = 0", "k = 4", "S already stores the box sums", "build the first S[i] directly for arbitrary k"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "existing_sum_state"]
+    },
+    {
+      "representation_id": "r.seed_s",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 4},
+      "annotations": ["i = 0", "k = 4", "S.append(0)", "S[i] = 0"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "current_s_before"]
+    },
+    {
+      "representation_id": "r.range_bridge",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 4},
+      "annotations": ["i = 0 stays fixed", "k = 4 stays fixed", "range(k) -> 0, 1, 2, 3", "x moves: 0 -> 1 -> 2 -> 3", "a[i+x] points to each number inside the same box"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "range_sequence", "x_sequence"]
+    },
+    {
+      "representation_id": "r.range_contrast",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "4", "3", "7", "2", "6"]}
+      ],
+      "box": {"start_index": 0, "width": 4},
+      "annotations": ["k = 4", "j = k - 1 = 3", "range(k) -> 0, 1, 2, 3", "j is one number: the last value in range(k)", "a[k] is one array number, not the sequence of x positions", "for x in range(k):"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "k_annotation", "j_annotation", "range_sequence", "x_sequence"]
+    },
+    {
+      "representation_id": "r.inner_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "6", "4", "1", "8"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "k = 3", "S.append(0) already created S[i]", "x moves through 0, 1, 2", "for x in range(k):", "    [update the same S[i]]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "range_sequence", "current_s_before", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.append_inside_correction",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "6", "4", "1", "8"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "k = 3", "S.append(0) happens once before x moves", "do not append a new S value for every x", "the same S[i] is updated each x turn", "S[i] = S[i] + a[i+x]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "current_s_before", "same_s_update_bridge"]
+    },
+    {
+      "representation_id": "r.inner_retry",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["2", "6", "4", "1", "8"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "k = 3", "S[i] starts at 0", "x moves: 0 -> 1 -> 2", "for x in range(k):", "    [update the existing S[i]]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "range_sequence", "current_s_before", "code_skeleton"]
+    },
+    {
+      "representation_id": "r.x0",
+      "rows": [
+        {"row_id": "index_row", "label": "index", "values": ["0", "1", "2"]},
+        {"row_id": "numbers_row", "label": "numbers", "values": ["2", "6", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "k = 3", "x = 0", "S[i] = 0", "a[i+x] = a[0+0] = 2", "S[i]: 0 + 2 -> 2"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_marker", "current_s_before", "current_number", "state_transition"]
+    },
+    {
+      "representation_id": "r.x1",
+      "rows": [
+        {"row_id": "index_row", "label": "index", "values": ["0", "1", "2"]},
+        {"row_id": "numbers_row", "label": "numbers", "values": ["2", "6", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "k = 3", "x = 1", "S[i] = 2", "a[i+x] = a[0+1] = 6", "S[i]: 2 + 6 -> 8"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_marker", "current_s_before", "current_number", "state_transition"]
+    },
+    {
+      "representation_id": "r.x2",
+      "rows": [
+        {"row_id": "index_row", "label": "index", "values": ["0", "1", "2"]},
+        {"row_id": "numbers_row", "label": "numbers", "values": ["2", "6", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i = 0", "k = 3", "x = 2", "S[i] = 8", "a[i+x] = a[0+2] = 4", "S[i]: 8 + 4 -> 12"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_marker", "current_s_before", "current_number", "state_transition"]
+    },
+    {
+      "representation_id": "r.inner_valid",
+      "rows": [
+        {"row_id": "index_row", "label": "index", "values": ["0", "1", "2"]},
+        {"row_id": "numbers_row", "label": "numbers", "values": ["2", "6", "4"]}
+      ],
+      "box": {"start_index": 0, "width": 3},
+      "annotations": ["i stays 0", "k stays 3", "x: 0 -> 1 -> 2", "S[i]: 0 -> 2 -> 8 -> 12", "for x in range(k):", "    S[i] = S[i] + a[i+x]"],
+      "visible_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_sequence", "same_s_state_trace", "inner_loop_code"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "preserve_existing_s",
+      "kind": "bridge",
+      "goal": "Generalize the first-box calculation without inventing a second sum variable.",
+      "representation_id": "r.preserve_s",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "existing_sum_state"],
+      "active_delta": "keep the existing S notation while changing only the first-box calculation from fixed k=3 to arbitrary k",
+      "disclosed_concepts": ["arbitrary_k_first_window", "reuse_existing_s_state"],
+      "forbidden_concepts": ["new_accumulator_variable", "slice_sum_shortcut", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:reject-window-sum-and-preserve-S"]
+    },
+    {
+      "step_id": "seed_same_s",
+      "kind": "explain",
+      "goal": "Create exactly one S[i] value before the inner loop starts.",
+      "representation_id": "r.seed_s",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "current_s_before"],
+      "active_delta": "use S.append(0) once so the existing S[i] can be updated repeatedly",
+      "disclosed_concepts": ["same_s_seed"],
+      "forbidden_concepts": ["new_accumulator_variable", "append_per_x", "slice_sum_shortcut", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:S-append-zero-introduced"]
+    },
+    {
+      "step_id": "range_k_bridge",
+      "kind": "bridge",
+      "goal": "Ground range(k) and x through the existing box representation.",
+      "representation_id": "r.range_bridge",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "range_sequence", "x_sequence"],
+      "active_delta": "hold i and k fixed while x takes 0 through k-1 inside the box",
+      "disclosed_concepts": ["range_k", "x_inner_index"],
+      "forbidden_concepts": ["new_accumulator_variable", "slice_sum_shortcut", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:range-k-and-x-grounded"]
+    },
+    {
+      "step_id": "range_contrast_bridge",
+      "kind": "bridge",
+      "goal": "Distinguish range(k) from j and a[k] before constructing the update line.",
+      "representation_id": "r.range_contrast",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "k_annotation", "j_annotation", "range_sequence", "x_sequence"],
+      "active_delta": "show that j is the final number in the range and a[k] is one array value, while range(k) is the sequence x traverses",
+      "disclosed_concepts": ["range_vs_j", "range_vs_array_value"],
+      "forbidden_concepts": ["new_accumulator_variable", "slice_sum_shortcut", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:range-vs-j", "part08:range-vs-a-k"]
+    },
+    {
+      "step_id": "inner_loop_probe",
+      "kind": "probe",
+      "goal": "Have the learner update the same S[i] as x moves rather than appending once per x.",
+      "representation_id": "r.inner_probe",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "range_sequence", "current_s_before", "code_skeleton"],
+      "active_delta": "write the inner x loop and one update line for the existing S[i]",
+      "disclosed_concepts": ["same_s_update"],
+      "forbidden_concepts": ["new_accumulator_variable", "append_per_x", "slice_sum_shortcut", "final_combined_loop"],
+      "probe": {
+        "target": "inner x loop that updates the existing S[i]",
+        "prompt": "S.append(0) already created S[i]. Write the x loop that updates that same S[i] as x moves through range(k).",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[i] = S[i] + a[i+x]"]
+      },
+      "evidence_turn_refs": ["part08:inner-loop-construction"]
+    },
+    {
+      "step_id": "append_inside_correction",
+      "kind": "explain",
+      "goal": "Repair the source-shaped mistake of appending inside the x loop without reteaching range(k).",
+      "representation_id": "r.append_inside_correction",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "current_s_before", "same_s_update_bridge"],
+      "active_delta": "preserve the correct x loop and isolate that S.append(0) happens once while the same S[i] changes each x turn",
+      "disclosed_concepts": ["same_s_update_repair"],
+      "forbidden_concepts": ["new_accumulator_variable", "reteach_range_k", "slice_sum_shortcut", "final_combined_loop"],
+      "evidence_turn_refs": ["part08:do-not-append-inside-x-loop"]
+    },
+    {
+      "step_id": "inner_loop_retry_probe",
+      "kind": "probe",
+      "goal": "Retry only the repaired same-S[i] inner-loop construction.",
+      "representation_id": "r.inner_retry",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "range_sequence", "current_s_before", "code_skeleton"],
+      "active_delta": "write the inner loop again after the append-per-x repair",
+      "disclosed_concepts": ["same_s_update"],
+      "forbidden_concepts": ["new_accumulator_variable", "append_per_x", "slice_sum_shortcut", "final_combined_loop"],
+      "probe": {
+        "target": "inner x loop that updates the existing S[i]",
+        "prompt": "Retry the inner x loop: x moves through range(k), and the existing S[i] changes each turn.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[i] = S[i] + a[i+x]"]
+      },
+      "evidence_turn_refs": ["part08:learner-produces-x-loop-update"]
+    },
+    {
+      "step_id": "render_x0_state",
+      "kind": "validate",
+      "goal": "Render the first inner-loop state with current S[i] visible before the chart.",
+      "representation_id": "r.x0",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_marker", "current_s_before", "current_number", "state_transition"],
+      "active_delta": "show x=0 selecting 2 and the same S[i] changing from 0 to 2",
+      "disclosed_concepts": ["same_s_state_transition"],
+      "forbidden_concepts": ["final_combined_loop"],
+      "evidence_turn_refs": ["part08:accepted-x0-chart"]
+    },
+    {
+      "step_id": "render_x1_state",
+      "kind": "validate",
+      "goal": "Render the second inner-loop state without moving i or changing the box.",
+      "representation_id": "r.x1",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_marker", "current_s_before", "current_number", "state_transition"],
+      "active_delta": "show current S[i]=2 before x=1 selects 6 and changes it to 8",
+      "disclosed_concepts": ["same_s_state_transition"],
+      "forbidden_concepts": ["final_combined_loop"],
+      "evidence_turn_refs": ["part08:accepted-x1-chart-current-S-before"]
+    },
+    {
+      "step_id": "render_x2_state",
+      "kind": "validate",
+      "goal": "Render the third inner-loop state with the accumulated S[i] carried forward.",
+      "representation_id": "r.x2",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_marker", "current_s_before", "current_number", "state_transition"],
+      "active_delta": "show current S[i]=8 before x=2 selects 4 and changes it to 12",
+      "disclosed_concepts": ["same_s_state_transition"],
+      "forbidden_concepts": ["final_combined_loop"],
+      "evidence_turn_refs": ["part08:accepted-x2-chart-current-S-before"]
+    },
+    {
+      "step_id": "inner_loop_validate",
+      "kind": "validate",
+      "goal": "Validate the arbitrary-k first-window inner loop without claiming final-loop mastery.",
+      "representation_id": "r.inner_valid",
+      "preserve_components": ["index_row", "numbers_row", "window_box", "i_marker", "k_annotation", "x_sequence", "same_s_state_trace", "inner_loop_code"],
+      "active_delta": "lock in i fixed, k fixed, x moving, and the same S[i] accumulating across x turns",
+      "disclosed_concepts": ["arbitrary_k_first_window", "range_k", "x_inner_index", "same_s_update"],
+      "forbidden_concepts": ["mastery_claim"],
+      "evidence_turn_refs": ["part08:inner-loop-state-model-accepted", "part08:learner-asks-for-full-loop-next"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.preserve.seed", "from_step_id": "preserve_existing_s", "next_step_id": "seed_same_s", "exit_target": null, "evidence_turn_refs": ["part08:preserve-S-then-seed"]},
+    {"transition_id": "auto.seed.range", "from_step_id": "seed_same_s", "next_step_id": "range_k_bridge", "exit_target": null, "evidence_turn_refs": ["part08:seed-before-range"]},
+    {"transition_id": "auto.range.contrast", "from_step_id": "range_k_bridge", "next_step_id": "range_contrast_bridge", "exit_target": null, "evidence_turn_refs": ["part08:learner-asks-range-vs-j"]},
+    {"transition_id": "auto.contrast.probe", "from_step_id": "range_contrast_bridge", "next_step_id": "inner_loop_probe", "exit_target": null, "evidence_turn_refs": ["part08:range-contrasts-before-inner-update"]},
+    {"transition_id": "auto.append-repair.retry", "from_step_id": "append_inside_correction", "next_step_id": "inner_loop_retry_probe", "exit_target": null, "evidence_turn_refs": ["part08:repair-append-per-x"]},
+    {"transition_id": "auto.x0.x1", "from_step_id": "render_x0_state", "next_step_id": "render_x1_state", "exit_target": null, "evidence_turn_refs": ["part08:x0-to-x1"]},
+    {"transition_id": "auto.x1.x2", "from_step_id": "render_x1_state", "next_step_id": "render_x2_state", "exit_target": null, "evidence_turn_refs": ["part08:x1-to-x2"]},
+    {"transition_id": "auto.x2.validate", "from_step_id": "render_x2_state", "next_step_id": "inner_loop_validate", "exit_target": null, "evidence_turn_refs": ["part08:x2-to-inner-loop-summary"]},
+    {"transition_id": "auto.validate.exit", "from_step_id": "inner_loop_validate", "next_step_id": null, "exit_target": "final_combined_loop_exposure", "evidence_turn_refs": ["part08:learner-asks-full-loop-after-inner-state-model"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.inner.correct", "after_step_id": "inner_loop_probe", "outcome": "correct", "next_step_id": "render_x0_state", "exit_target": null, "evidence_turn_refs": ["part08:correct-inner-loop-form"]},
+    {"route_id": "route.inner.partial", "after_step_id": "inner_loop_probe", "outcome": "partial", "next_step_id": "append_inside_correction", "exit_target": null, "evidence_turn_refs": ["part08:append-inside-x-loop-attempt"]},
+    {"route_id": "route.retry.correct", "after_step_id": "inner_loop_retry_probe", "outcome": "correct", "next_step_id": "render_x0_state", "exit_target": null, "evidence_turn_refs": ["part08:learner-produces-correct-inner-update"]}
+  ]
+}
