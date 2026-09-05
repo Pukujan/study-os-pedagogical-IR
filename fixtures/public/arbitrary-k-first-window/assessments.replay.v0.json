@@ -1,0 +1,26 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.arbitrary-k-first-window.replay.v0",
+  "assessments": [
+    {
+      "step_id": "inner_loop_probe",
+      "kind": "text",
+      "expected_text": [
+        "for x in range(k):\n    S[i] = S[i] + a[i+x]",
+        "for x in range(k):\n    s[i] = s[i] + a[i+x]"
+      ],
+      "partial_text": [
+        "for x in range(k):\n    S.append(???",
+        "for x in range(k):\n    s.append(???"
+      ]
+    },
+    {
+      "step_id": "inner_loop_retry_probe",
+      "kind": "text",
+      "expected_text": [
+        "for x in range(k):\n    S[i] = S[i] + a[i+x]",
+        "for x in range(k):\n    s[i] = s[i] + a[i+x]"
+      ]
+    }
+  ]
+}
