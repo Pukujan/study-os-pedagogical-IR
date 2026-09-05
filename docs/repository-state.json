@@ -16,16 +16,18 @@
     "enumerate(a) vertical proof with visual answer-leak constraints",
     "branching foundations trajectory with correction/retry paths",
     "controller-only assessment registry separated from renderer-safe turn contracts",
-    "deterministic local grading for current integer and integer-sequence probes",
+    "deterministic local grading for integer, integer-sequence, and source-backed PARTIAL probes",
     "generic local trajectory replay command",
-    "persistent full-problem replay context artifact"
+    "persistent full-problem context rendered on learner-visible replay turns",
+    "source-backed i-as-box-start through sum[i] replay with same-chart validation, wrong-answer recovery, and PARTIAL rejoin",
+    "experimental source-backed lexical/register profiles with deterministic learner-visible surface validation"
   ],
   "not_yet_proven": [
-    "persistent full-problem context is visibly rendered on every required learner turn",
-    "executable i-moves-box and sum[i] section with PARTIAL routing",
+    "explicit source-restoration register transition from grounded box language to authentic window terminology",
+    "executable trajectory beyond sum[i] into successive sums and later sliding-window bridges",
     "complete canonical September-4 golden",
     "automatic raw problem plus learner state to PIR decomposition",
-    "lexical/register state as a required PIR primitive",
+    "lexical/register profile generalization beyond the evidenced September-4 acquisition trajectory",
     "Luna masked, sealed, or prospective generalization results",
     "production tutoring or learning efficacy"
   ],
