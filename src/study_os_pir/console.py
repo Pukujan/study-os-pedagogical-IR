@@ -12,8 +12,10 @@ def _window_boxes(representation: VerticalRepresentation) -> tuple[VerticalWindo
 def render_representation_text(representation: VerticalRepresentation) -> str:
     boxes = _window_boxes(representation)
     label_width = max(
-        *(len(row.label) for row in representation.rows),
-        *(len(box.label) for box in boxes),
+        [
+            *(len(row.label) for row in representation.rows),
+            *(len(box.label) for box in boxes),
+        ]
     )
     lines = [
         f"{row.label:<{label_width}}: " + " ".join(f"{value:>5}" for value in row.values)
