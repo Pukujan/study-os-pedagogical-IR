@@ -15,11 +15,6 @@ class TrajectoryOutcomeKind(StrEnum):
     META = "meta"
 
 
-class TrajectoryAssessmentKind(StrEnum):
-    INTEGER = "integer"
-    INTEGER_SEQUENCE = "integer_sequence"
-
-
 class TrajectoryViolationCode(StrEnum):
     DUPLICATE_STEP_ID = "DUPLICATE_STEP_ID"
     DUPLICATE_REPRESENTATION_ID = "DUPLICATE_REPRESENTATION_ID"
@@ -33,9 +28,6 @@ class TrajectoryViolationCode(StrEnum):
     ANSWER_LITERAL_LEAKED = "ANSWER_LITERAL_LEAKED"
     MISSING_PROBE_CONTRACT = "MISSING_PROBE_CONTRACT"
     UNEXPECTED_PROBE_CONTRACT = "UNEXPECTED_PROBE_CONTRACT"
-    MISSING_ASSESSMENT_CONTRACT = "MISSING_ASSESSMENT_CONTRACT"
-    UNEXPECTED_ASSESSMENT_CONTRACT = "UNEXPECTED_ASSESSMENT_CONTRACT"
-    INVALID_ASSESSMENT_SHAPE = "INVALID_ASSESSMENT_SHAPE"
     INVALID_AUTO_ROUTE = "INVALID_AUTO_ROUTE"
     INVALID_OUTCOME_ROUTE = "INVALID_OUTCOME_ROUTE"
     UNKNOWN_AUTO_SOURCE = "UNKNOWN_AUTO_SOURCE"
@@ -46,11 +38,6 @@ class TrajectoryViolationCode(StrEnum):
     DUPLICATE_OUTCOME_KIND = "DUPLICATE_OUTCOME_KIND"
     UNREACHABLE_STEP = "UNREACHABLE_STEP"
     CYCLE_DETECTED = "CYCLE_DETECTED"
-
-
-class TrajectoryAssessment(StrictFrozenModel):
-    kind: TrajectoryAssessmentKind
-    expected_values: tuple[int, ...] = Field(min_length=1)
 
 
 class TrajectoryStep(StrictFrozenModel):
@@ -64,7 +51,6 @@ class TrajectoryStep(StrictFrozenModel):
     disclosed_concepts: tuple[str, ...] = ()
     forbidden_concepts: tuple[str, ...] = ()
     probe: VerticalProbe | None = None
-    assessment: TrajectoryAssessment | None = None
     evidence_turn_refs: tuple[str, ...] = Field(min_length=1)
 
 
@@ -263,47 +249,18 @@ def validate_trajectory(trajectory: ExperimentalTrajectory) -> tuple[TrajectoryV
                     ),
                 )
             )
-        if step.kind == VerticalStepKind.PROBE:
-            if step.probe is None:
-                violations.append(
-                    TrajectoryViolation(
-                        code=TrajectoryViolationCode.MISSING_PROBE_CONTRACT,
-                        detail=f"{step.step_id} is a probe without a probe contract",
-                    )
-                )
-            if step.assessment is None:
-                violations.append(
-                    TrajectoryViolation(
-                        code=TrajectoryViolationCode.MISSING_ASSESSMENT_CONTRACT,
-                        detail=f"{step.step_id} is a probe without an assessment contract",
-                    )
-                )
-        else:
-            if step.probe is not None:
-                violations.append(
-                    TrajectoryViolation(
-                        code=TrajectoryViolationCode.UNEXPECTED_PROBE_CONTRACT,
-                        detail=f"{step.step_id} is not a probe but carries a probe contract",
-                    )
-                )
-            if step.assessment is not None:
-                violations.append(
-                    TrajectoryViolation(
-                        code=TrajectoryViolationCode.UNEXPECTED_ASSESSMENT_CONTRACT,
-                        detail=(
-                            f"{step.step_id} is not a probe but carries an assessment contract"
-                        ),
-                    )
-                )
-        if (
-            step.assessment is not None
-            and step.assessment.kind == TrajectoryAssessmentKind.INTEGER
-            and len(step.assessment.expected_values) != 1
-        ):
+        if step.kind == VerticalStepKind.PROBE and step.probe is None:
             violations.append(
                 TrajectoryViolation(
-                    code=TrajectoryViolationCode.INVALID_ASSESSMENT_SHAPE,
-                    detail=f"{step.step_id} integer assessment must have one expected value",
+                    code=TrajectoryViolationCode.MISSING_PROBE_CONTRACT,
+                    detail=f"{step.step_id} is a probe without a probe contract",
+                )
+            )
+        if step.kind != VerticalStepKind.PROBE and step.probe is not None:
+            violations.append(
+                TrajectoryViolation(
+                    code=TrajectoryViolationCode.UNEXPECTED_PROBE_CONTRACT,
+                    detail=f"{step.step_id} is not a probe but carries a probe contract",
                 )
             )
         if step.probe is not None and not step.probe.answer_reveal_allowed:
