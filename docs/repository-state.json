@@ -1,0 +1,44 @@
+{
+  "schema_version": "study-os-pir-repository-state/1.0.0",
+  "program_label": "Study OS v2 Pedagogical IR",
+  "stability": "experimental evidence-backed runtime/schema falsification",
+  "evidence": {
+    "sep4_total_turns": 887,
+    "sep4_learner_turns": 443,
+    "sep4_tutor_turns": 444,
+    "sep4_candidate_events": 36,
+    "sep4_failure_repair_regions": 18,
+    "sep4_unresolved_questions": 4
+  },
+  "landed_capabilities": [
+    "byte-exact evidence and extraction accounting",
+    "max-sum S[0] to S[i] vertical proof",
+    "enumerate(a) vertical proof with visual answer-leak constraints",
+    "branching foundations trajectory with correction/retry paths",
+    "controller-only assessment registry separated from renderer-safe turn contracts",
+    "deterministic local grading for current integer and integer-sequence probes",
+    "generic local trajectory replay command",
+    "persistent full-problem replay context artifact"
+  ],
+  "not_yet_proven": [
+    "persistent full-problem context is visibly rendered on every required learner turn",
+    "executable i-moves-box and sum[i] section with PARTIAL routing",
+    "complete canonical September-4 golden",
+    "automatic raw problem plus learner state to PIR decomposition",
+    "lexical/register state as a required PIR primitive",
+    "Luna masked, sealed, or prospective generalization results",
+    "production tutoring or learning efficacy"
+  ],
+  "documentation_policy": {
+    "generated_status_source": "docs/repository-state.json + assurance/HANDOFF_STATE.json + assurance/checkpoints/*.json",
+    "generated_targets": [
+      "README.md"
+    ],
+    "human_reviewed_targets": [
+      "specs/PDD.md",
+      "specs/SDD.md",
+      "specs/THREAT_MODEL.md",
+      "specs/VERIFICATION.md"
+    ]
+  }
+}
