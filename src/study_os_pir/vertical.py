@@ -193,7 +193,9 @@ def validate_vertical_slice(slice_: ExperimentalVerticalSlice) -> tuple[Vertical
                 )
             )
 
-        forbidden_present = sorted(set(step.forbidden_components).intersection(representation_features))
+        forbidden_present = sorted(
+            set(step.forbidden_components).intersection(representation_features)
+        )
         if forbidden_present:
             violations.append(
                 VerticalViolation(
