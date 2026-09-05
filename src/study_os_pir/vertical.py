@@ -140,7 +140,9 @@ def _representation_surface_text(representation: VerticalRepresentation) -> str:
     parts = [row.label for row in representation.rows]
     for row in representation.rows:
         parts.extend(row.values)
-    parts.extend(box.label for box in _window_boxes(representation))
+    if representation.box is not None:
+        parts.append("window")
+    parts.extend(box.label for box in representation.boxes)
     parts.extend(representation.annotations)
     return "\n".join(parts)
 
@@ -342,17 +344,24 @@ def validate_vertical_execution(
 
 
 def _render_representation(representation: VerticalRepresentation) -> str:
-    boxes = _window_boxes(representation)
-    label_width = max(
-        *(len(row.label) for row in representation.rows),
-        *(len(box.label) for box in boxes),
-    )
+    label_lengths = [len(row.label) for row in representation.rows]
+    if representation.box is not None:
+        label_lengths.append(len("window"))
+    label_lengths.extend(len(box.label) for box in representation.boxes)
+    label_width = max(label_lengths)
     lines = [
         f"{row.label:<{label_width}}: " + " ".join(f"{value:>3}" for value in row.values)
         for row in representation.rows
     ]
     value_count = max(len(row.values) for row in representation.rows)
-    for box in boxes:
+    if representation.box is not None:
+        end = representation.box.start_index + representation.box.width
+        markers = [
+            "^^^" if representation.box.start_index <= index < end else "   "
+            for index in range(value_count)
+        ]
+        lines.append(f"{'window':<{label_width}}: " + " ".join(markers))
+    for box in representation.boxes:
         end = box.start_index + box.width
         markers = [
             "^^^" if box.start_index <= index < end else "   " for index in range(value_count)
