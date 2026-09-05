@@ -1,0 +1,8 @@
+{
+  "schema_version": "pir.compiler-policy.v0",
+  "policy_id": "compiler-p1",
+  "policy_version": "0.1.0",
+  "strategy": "product_thesis",
+  "prompt_template": "Decompress expert reasoning into explicit learner-sized transformations, then organize them into a structured compiler proposal. Preserve learner-visible representations across abstraction changes and do not assume learner knowledge that is not evidenced.",
+  "max_new_concepts_per_step": 2
+}
