@@ -50,7 +50,7 @@ class AssessmentSpec(StrictFrozenModel):
 class AssessmentRegistry(StrictFrozenModel):
     schema_version: str = Field(pattern=r"^pir\.experimental-assessment-registry\.v0$")
     trajectory_id: str = Field(min_length=1)
-    assessments: tuple[AssessmentSpec, ...] = Field(min_length=1)
+    assessments: tuple[AssessmentSpec, ...] = ()
 
 
 class ReplayContext(StrictFrozenModel):
