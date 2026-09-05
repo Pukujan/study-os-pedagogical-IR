@@ -1,0 +1,147 @@
+{
+  "schema_version": "pam-manifest/0.1.0",
+  "project": {
+    "name": "Study OS Pedagogical IR Program",
+    "repository": "Pukujan/study-os-pedagogical-IR",
+    "phase": "PIR-0 extraction and benchmark proof"
+  },
+  "methodology": {
+    "repository": "Pukujan/project-assurance-modules",
+    "revision": "a10ad56b7088c1e101e80914a9e00357dbef9120"
+  },
+  "project_facts": {
+    "software": true,
+    "agent_assisted": true,
+    "multi_session": true,
+    "multi_repository": true,
+    "empirical_quality_claims": true,
+    "benchmark_or_dataset_use": true,
+    "hidden_confirmatory_evaluation": true
+  },
+  "profiles": [],
+  "modules": [
+    {
+      "module_id": "continuity.structured-handoff",
+      "version": "0.1.0",
+      "disposition": "required",
+      "rationale": "PIR work spans multiple agents, sessions, and repositories, and hidden evaluation state must not depend on conversational memory.",
+      "requirements": [
+        {
+          "requirement_id": "HANDOFF-001",
+          "state": "satisfied",
+          "evidence": [
+            {
+              "kind": "file",
+              "locator": "assurance/HANDOFF_STATE.json",
+              "note": "Current handoff defines live-state authority, reconciliation checks, scope exclusions, and next action."
+            }
+          ],
+          "rationale": null
+        },
+        {
+          "requirement_id": "HANDOFF-002",
+          "state": "satisfied",
+          "evidence": [
+            {
+              "kind": "file",
+              "locator": "assurance/HANDOFF_STATE.json",
+              "note": "Versioned machine-readable current state packet for PIR, benchmarker, Study OS, and PAM identities."
+            }
+          ],
+          "rationale": null
+        },
+        {
+          "requirement_id": "HANDOFF-003",
+          "state": "pending",
+          "evidence": [],
+          "rationale": null
+        },
+        {
+          "requirement_id": "HANDOFF-004",
+          "state": "satisfied",
+          "evidence": [
+            {
+              "kind": "file",
+              "locator": "assurance/HANDOFF_STATE.json",
+              "note": "Resume policy requires re-fetching live repository, issue, CI, and component identities before mutation."
+            }
+          ],
+          "rationale": null
+        },
+        {
+          "requirement_id": "HANDOFF-005",
+          "state": "pending",
+          "evidence": [],
+          "rationale": null
+        },
+        {
+          "requirement_id": "HANDOFF-006",
+          "state": "satisfied",
+          "evidence": [
+            {
+              "kind": "issue",
+              "locator": "Pukujan/study-os-benchmarker#2",
+              "note": "Blind/masked/sealed protocol forbids oracle material in candidate or agent-visible workspaces."
+            },
+            {
+              "kind": "file",
+              "locator": "assurance/HANDOFF_STATE.json",
+              "note": "Current handoff records hidden-evaluation policy without hidden labels, answers, seeds, or reports."
+            }
+          ],
+          "rationale": null
+        }
+      ]
+    },
+    {
+      "module_id": "benchmark.integrity",
+      "version": "0.1.0",
+      "disposition": "required",
+      "rationale": "The program uses visible regressions, masked tests, sealed holdouts, fresh Luna subagents, and empirical model/compiler comparisons.",
+      "requirements": [
+        {
+          "requirement_id": "BENCH_INT_001",
+          "state": "satisfied",
+          "evidence": [
+            {
+              "kind": "issue",
+              "locator": "Pukujan/study-os-benchmarker#1",
+              "note": "Defines historical fidelity, mutation, ablation, prospective, and holdout claims separately."
+            }
+          ],
+          "rationale": null
+        },
+        {
+          "requirement_id": "BENCH_INT_002",
+          "state": "pending",
+          "evidence": [],
+          "rationale": null
+        },
+        {
+          "requirement_id": "BENCH_INT_003",
+          "state": "satisfied",
+          "evidence": [
+            {
+              "kind": "issue",
+              "locator": "Pukujan/study-os-benchmarker#2",
+              "note": "Defines visible regression, masked regression, sealed withheld calibration, prospective unseen, and contamination retirement lanes."
+            }
+          ],
+          "rationale": null
+        },
+        {
+          "requirement_id": "BENCH_INT_004",
+          "state": "pending",
+          "evidence": [],
+          "rationale": null
+        },
+        {
+          "requirement_id": "BENCH_INT_005",
+          "state": "pending",
+          "evidence": [],
+          "rationale": null
+        }
+      ]
+    }
+  ]
+}
