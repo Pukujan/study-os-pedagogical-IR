@@ -243,7 +243,8 @@ def main() -> None:
             + paths
         )
     if args.write:
-        print("synchronized: " + ", ".join(stale) if stale else "documentation already synchronized")
+        message = "synchronized: " + ", ".join(stale) if stale else "documentation already synchronized"
+        print(message)
     else:
         print("documentation synchronization: PASS")
 
