@@ -7,7 +7,7 @@
     "phase": "PIR-0 extraction and benchmark proof",
     "observed_identity": {
       "kind": "git_commit",
-      "value": "8dcb12a156706fe7f4c90c315064660bb9793b56"
+      "value": "b077ec878fb872858ef48a8e0c49c56c7317f847"
     },
     "active_issue": 1
   },
@@ -39,11 +39,11 @@
       "locator": "Pukujan/study-os-benchmarker",
       "observed_identity": {
         "kind": "git_commit",
-        "value": "d7b55a359fe98315ca9878c655c195e1ad5ead86"
+        "value": "d5d76e0fb0dc798e5a40b879029220e96c7cf67c"
       },
       "tested_identity": {
         "kind": "git_commit",
-        "value": "d7b55a359fe98315ca9878c655c195e1ad5ead86"
+        "value": "d5d76e0fb0dc798e5a40b879029220e96c7cf67c"
       },
       "issue": 2,
       "pr": null
@@ -68,16 +68,20 @@
         "evidence": "GitHub Actions run 33969394677 succeeded at 5635effae507e25fcb16ec53b6e3812fd4972448 with the extraction-coverage slice."
       },
       {
-        "name": "Independent benchmarker holdout-protocol CI",
-        "evidence": "GitHub Actions run 33974284702 succeeded at d7b55a359fe98315ca9878c655c195e1ad5ead86."
-      },
-      {
         "name": "Selected PAM revision CI",
         "evidence": "PAM GitHub Actions run 33700449457 succeeded at 03fc55ae4036a9704cdb929fb3ae6dc520ae2183 and that revision supports pam-handoff/0.2.0 dispatch."
       },
       {
         "name": "PIR PAM assurance validation",
         "evidence": "GitHub Actions PAM assurance run 33974598291 succeeded at 8dcb12a156706fe7f4c90c315064660bb9793b56, validating both PROJECT_ASSURANCE.json and HANDOFF_STATE.json."
+      },
+      {
+        "name": "Experimental max-sum vertical PIR proof",
+        "evidence": "GitHub Actions run 33976147313 succeeded at b077ec878fb872858ef48a8e0c49c56c7317f847: Ruff clean, strict mypy clean, 57 tests passed, and 100-percent statement plus branch coverage across the PIR package."
+      },
+      {
+        "name": "Independent max-sum vertical benchmark proof",
+        "evidence": "GitHub Actions run 33976070445 succeeded at d5d76e0fb0dc798e5a40b879029220e96c7cf67c: Ruff clean, strict mypy clean, 27 tests passed. New cases reject premature exercise/comparison, bridge deletion, answer leakage, chart loss, redundant S0 repetition, and comparison before Si validation."
       }
     ],
     "failed": [],
@@ -91,12 +95,13 @@
   "next_action": {
     "repository": "Pukujan/study-os-pedagogical-IR",
     "issue": 1,
-    "action": "Produce the first real proof artifact: compile the complete authorized September-4 source into the extraction ledger, require exact source-turn coverage, and emit a source-backed golden/UNRESOLVED report before expanding G2 schemas.",
-    "acceptance": "The authorized run reports exact source artifact identities, N source turns = N dispositions, zero missing/duplicate/unknown turns, every accepted golden event resolves to source evidence, unsupported edges remain UNRESOLVED, and the receipt pins PIR/compiler/input revisions."
+    "action": "Return to the complete authorized September-4 source and produce the extraction ledger plus source-backed golden/UNRESOLVED receipt. Reuse the experimental max-sum slice only as a behavior probe; do not promote its v0 types into stable G2 merely because the vertical proof passed.",
+    "acceptance": "The authorized run reports exact source artifact identities, N source turns = N dispositions, zero missing/duplicate/unknown turns, every accepted golden event resolves to source evidence, unsupported edges remain UNRESOLVED, and the receipt pins PIR/compiler/input revisions. The resulting golden must still preserve the max-sum validation/bridge sequence demonstrated by the vertical proof."
   },
   "blockers": [],
   "scope": {
     "do_not_start": [
+      "Promote experimental vertical.py types into stable G2 without full-extraction pressure showing they are the right primitives",
       "Broad G2 pedagogy ontology expansion before the September-4 extraction receipt exists",
       "Production tutoring controller or renderer integration",
       "Donor-model/package integration before the common compiler/runtime benchmark exists",
@@ -110,7 +115,9 @@
     "PAM is a pinned assurance methodology and validation shell, not a runtime dependency and not pedagogy logic.",
     "Visible regression, masked regression, sealed holdout, and prospective evaluation are distinct evidence classes.",
     "A hidden case opened for debugging is permanently contaminated and must be retired into regression.",
-    "The immediate program objective is proof-producing extraction and benchmark output, not additional architecture for its own sake."
+    "The immediate program objective is proof-producing extraction and benchmark output, not additional architecture for its own sake.",
+    "The experimental max-sum vertical proof is a falsification/fit test, not permission to freeze a general pedagogy ontology.",
+    "A passing structural test may prove only its stated narrow claim; it does not imply compiler generalization or learning efficacy."
   ],
   "open_questions": [
     "Identify and hash the exact authorized local/private September-4 source bundle that will be treated as authoritative for the first full extraction run."
@@ -132,9 +139,9 @@
   "handoff": {
     "created_from_identity": {
       "kind": "git_commit",
-      "value": "8dcb12a156706fe7f4c90c315064660bb9793b56"
+      "value": "b077ec878fb872858ef48a8e0c49c56c7317f847"
     },
-    "created_at": "2026-09-05T15:24:00Z",
+    "created_at": "2026-09-05T15:56:00Z",
     "reason": "validation_transition"
   }
 }
