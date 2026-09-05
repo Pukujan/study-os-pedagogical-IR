@@ -36,6 +36,16 @@ jobs:
         working-directory: .pam
         run: python -m scripts.pam_validate ../assurance/PROJECT_ASSURANCE.json
 
-      - name: Validate structured handoff
+      - name: Validate current structured handoff
         working-directory: .pam
         run: python -m scripts.pam_handoff ../assurance/HANDOFF_STATE.json
+
+      - name: Validate historical checkpoints
+        working-directory: .pam
+        run: |
+          shopt -s nullglob
+          checkpoints=(../assurance/checkpoints/*.json)
+          for checkpoint in "${checkpoints[@]}"; do
+            echo "validating $checkpoint"
+            python -m scripts.pam_handoff "$checkpoint"
+          done
