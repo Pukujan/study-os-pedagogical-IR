@@ -28,6 +28,12 @@ def test_artifact_length_mismatch_fails_before_hash_acceptance() -> None:
         verify_artifact_bytes(artifact, b"abcd")
 
 
+def test_same_length_artifact_tamper_fails_digest_verification() -> None:
+    artifact = artifact_from_bytes(artifact_id="a", data=b"abc")
+    with pytest.raises(ValueError, match="artifact sha256 mismatch"):
+        verify_artifact_bytes(artifact, b"abd")
+
+
 def test_negative_span_start_fails_closed() -> None:
     data = b"abc"
     artifact = artifact_from_bytes(artifact_id="a", data=data)
