@@ -1,0 +1,10 @@
+{
+  "schema_version": "pir.experimental-replay-context.v0",
+  "trajectory_id": "sep4.final-combined-loop.replay.v0",
+  "persistent_text": [
+    "Find the largest sum of any k numbers next to each other in the array.",
+    "The outer control flow, stop boundary, first/later-box split, max update, arbitrary-k first-box loop, and x-state trace have all been grounded.",
+    "The learner has now asked to see the full loop assembled from those pieces.",
+    "Historical replay must not convert solution exposure into an independent mastery claim."
+  ]
+}
