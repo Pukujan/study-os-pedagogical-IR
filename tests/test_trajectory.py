@@ -29,7 +29,9 @@ def load_trajectory() -> ExperimentalTrajectory:
     return ExperimentalTrajectory.model_validate_json(FIXTURE.read_text())
 
 
-def violation_codes(trajectory: ExperimentalTrajectory) -> tuple[TrajectoryViolationCode, ...]:
+def violation_codes(
+    trajectory: ExperimentalTrajectory,
+) -> tuple[TrajectoryViolationCode, ...]:
     return tuple(violation.code for violation in validate_trajectory(trajectory))
 
 
@@ -57,6 +59,16 @@ def replace_representation(
         for representation in trajectory.representations
     )
     return trajectory.model_copy(update={"representations": representations})
+
+
+def replace_first_outcome_route(
+    trajectory: ExperimentalTrajectory,
+    **updates: object,
+) -> ExperimentalTrajectory:
+    first = trajectory.outcome_routes[0].model_copy(update=updates)
+    return trajectory.model_copy(
+        update={"outcome_routes": (first, *trajectory.outcome_routes[1:])}
+    )
 
 
 def test_foundations_branching_trajectory_is_valid() -> None:
@@ -94,13 +106,15 @@ def test_incorrect_position_branch_repairs_retries_and_rejoins_before_index() ->
     assert "position_retry9" in simulation.visited_step_ids
     assert "position_validate9" in simulation.visited_step_ids
     assert "position_confirm7" in simulation.visited_step_ids
-    assert simulation.visited_step_ids.index("position_validate7") < simulation.visited_step_ids.index(
-        "index_intro"
-    )
-    assert simulation.visited_step_ids.index("index_validate9") < simulation.visited_step_ids.index(
-        "k_intro"
-    )
-    assert simulation.visited_step_ids.index("k_validate5") == len(simulation.visited_step_ids) - 1
+    position_gate = simulation.visited_step_ids.index("position_validate7")
+    index_intro = simulation.visited_step_ids.index("index_intro")
+    index_gate = simulation.visited_step_ids.index("index_validate9")
+    k_intro = simulation.visited_step_ids.index("k_intro")
+    assert position_gate < index_intro
+    assert index_gate < k_intro
+    assert simulation.visited_step_ids.index("k_validate5") == len(
+        simulation.visited_step_ids
+    ) - 1
 
 
 def test_initial_correct_position_branch_skips_error_only_retry() -> None:
@@ -179,7 +193,9 @@ def test_duplicate_step_id_is_rejected() -> None:
 
 def test_duplicate_representation_id_is_rejected() -> None:
     trajectory = load_trajectory()
-    duplicate = trajectory.representations[0].model_copy(update={"annotations": ("duplicate",)})
+    duplicate = trajectory.representations[0].model_copy(
+        update={"annotations": ("duplicate",)}
+    )
     mutated = trajectory.model_copy(
         update={"representations": (*trajectory.representations, duplicate)}
     )
@@ -202,7 +218,9 @@ def test_duplicate_outcome_route_id_is_rejected() -> None:
     duplicate = trajectory.outcome_routes[0].model_copy(
         update={"after_step_id": "position_retry9"}
     )
-    mutated = trajectory.model_copy(update={"outcome_routes": (*trajectory.outcome_routes, duplicate)})
+    mutated = trajectory.model_copy(
+        update={"outcome_routes": (*trajectory.outcome_routes, duplicate)}
+    )
     assert TrajectoryViolationCode.DUPLICATE_OUTCOME_ROUTE_ID in violation_codes(mutated)
 
 
@@ -226,7 +244,9 @@ def test_missing_preserved_representation_is_rejected() -> None:
         step.step_id,
         preserve_components=(*step.preserve_components, "missing_component"),
     )
-    assert TrajectoryViolationCode.MISSING_PRESERVED_REPRESENTATION in violation_codes(mutated)
+    assert TrajectoryViolationCode.MISSING_PRESERVED_REPRESENTATION in violation_codes(
+        mutated
+    )
 
 
 def test_forbidden_representation_feature_is_rejected() -> None:
@@ -235,7 +255,9 @@ def test_forbidden_representation_feature_is_rejected() -> None:
         "position_probe6",
         forbidden_components=("numbers_row",),
     )
-    assert TrajectoryViolationCode.FORBIDDEN_REPRESENTATION_PRESENT in violation_codes(mutated)
+    assert TrajectoryViolationCode.FORBIDDEN_REPRESENTATION_PRESENT in violation_codes(
+        mutated
+    )
 
 
 def test_forbidden_concept_disclosure_is_rejected() -> None:
@@ -316,7 +338,9 @@ def test_invalid_automatic_route_is_rejected() -> None:
 
 def test_unknown_automatic_source_is_rejected() -> None:
     trajectory = load_trajectory()
-    first = trajectory.automatic_transitions[0].model_copy(update={"from_step_id": "missing"})
+    first = trajectory.automatic_transitions[0].model_copy(
+        update={"from_step_id": "missing"}
+    )
     mutated = trajectory.model_copy(
         update={"automatic_transitions": (first, *trajectory.automatic_transitions[1:])}
     )
@@ -325,7 +349,9 @@ def test_unknown_automatic_source_is_rejected() -> None:
 
 def test_unknown_automatic_target_is_rejected() -> None:
     trajectory = load_trajectory()
-    first = trajectory.automatic_transitions[0].model_copy(update={"next_step_id": "missing"})
+    first = trajectory.automatic_transitions[0].model_copy(
+        update={"next_step_id": "missing"}
+    )
     mutated = trajectory.model_copy(
         update={"automatic_transitions": (first, *trajectory.automatic_transitions[1:])}
     )
@@ -333,25 +359,21 @@ def test_unknown_automatic_target_is_rejected() -> None:
 
 
 def test_invalid_outcome_route_is_rejected() -> None:
-    trajectory = load_trajectory()
-    first = trajectory.outcome_routes[0].model_copy(
-        update={"next_step_id": None, "exit_target": None}
+    mutated = replace_first_outcome_route(
+        load_trajectory(),
+        next_step_id=None,
+        exit_target=None,
     )
-    mutated = trajectory.model_copy(update={"outcome_routes": (first, *trajectory.outcome_routes[1:])})
     assert TrajectoryViolationCode.INVALID_OUTCOME_ROUTE in violation_codes(mutated)
 
 
 def test_unknown_outcome_source_is_rejected() -> None:
-    trajectory = load_trajectory()
-    first = trajectory.outcome_routes[0].model_copy(update={"after_step_id": "missing"})
-    mutated = trajectory.model_copy(update={"outcome_routes": (first, *trajectory.outcome_routes[1:])})
+    mutated = replace_first_outcome_route(load_trajectory(), after_step_id="missing")
     assert TrajectoryViolationCode.UNKNOWN_OUTCOME_SOURCE in violation_codes(mutated)
 
 
 def test_unknown_outcome_target_is_rejected() -> None:
-    trajectory = load_trajectory()
-    first = trajectory.outcome_routes[0].model_copy(update={"next_step_id": "missing"})
-    mutated = trajectory.model_copy(update={"outcome_routes": (first, *trajectory.outcome_routes[1:])})
+    mutated = replace_first_outcome_route(load_trajectory(), next_step_id="missing")
     assert TrajectoryViolationCode.UNKNOWN_OUTCOME_TARGET in violation_codes(mutated)
 
 
@@ -386,21 +408,29 @@ def test_duplicate_outcome_kind_for_same_probe_is_rejected() -> None:
     original = next(
         route
         for route in trajectory.outcome_routes
-        if route.after_step_id == "position_probe6" and route.outcome == TrajectoryOutcomeKind.CORRECT
+        if (
+            route.after_step_id == "position_probe6"
+            and route.outcome == TrajectoryOutcomeKind.CORRECT
+        )
     )
-    duplicate = original.model_copy(update={"route_id": "route.position6.correct.duplicate"})
-    mutated = trajectory.model_copy(update={"outcome_routes": (*trajectory.outcome_routes, duplicate)})
+    duplicate = original.model_copy(
+        update={"route_id": "route.position6.correct.duplicate"}
+    )
+    mutated = trajectory.model_copy(
+        update={"outcome_routes": (*trajectory.outcome_routes, duplicate)}
+    )
     assert TrajectoryViolationCode.DUPLICATE_OUTCOME_KIND in violation_codes(mutated)
 
 
 def test_skipped_state_becomes_unreachable() -> None:
     trajectory = load_trajectory()
-    first = trajectory.automatic_transitions[0].model_copy(update={"next_step_id": "position_probe6"})
+    first = trajectory.automatic_transitions[0].model_copy(
+        update={"next_step_id": "position_probe6"}
+    )
     mutated = trajectory.model_copy(
         update={"automatic_transitions": (first, *trajectory.automatic_transitions[1:])}
     )
-    codes = violation_codes(mutated)
-    assert TrajectoryViolationCode.UNREACHABLE_STEP in codes
+    assert TrajectoryViolationCode.UNREACHABLE_STEP in violation_codes(mutated)
 
 
 def test_cycle_is_rejected() -> None:
@@ -415,15 +445,15 @@ def test_cycle_is_rejected() -> None:
 
 
 def test_outcome_route_with_both_targets_is_rejected() -> None:
-    trajectory = load_trajectory()
-    first = trajectory.outcome_routes[0].model_copy(update={"exit_target": "also-exit"})
-    mutated = trajectory.model_copy(update={"outcome_routes": (first, *trajectory.outcome_routes[1:])})
+    mutated = replace_first_outcome_route(load_trajectory(), exit_target="also-exit")
     assert TrajectoryViolationCode.INVALID_OUTCOME_ROUTE in violation_codes(mutated)
 
 
 def test_automatic_route_with_both_targets_is_rejected() -> None:
     trajectory = load_trajectory()
-    first = trajectory.automatic_transitions[0].model_copy(update={"exit_target": "also-exit"})
+    first = trajectory.automatic_transitions[0].model_copy(
+        update={"exit_target": "also-exit"}
+    )
     mutated = trajectory.model_copy(
         update={"automatic_transitions": (first, *trajectory.automatic_transitions[1:])}
     )
@@ -432,5 +462,9 @@ def test_automatic_route_with_both_targets_is_rejected() -> None:
 
 def test_non_probe_kind_still_requires_automatic_control() -> None:
     trajectory = load_trajectory()
-    mutated = replace_step(trajectory, "position_validate7", kind=VerticalStepKind.BRIDGE)
+    mutated = replace_step(
+        trajectory,
+        "position_validate7",
+        kind=VerticalStepKind.BRIDGE,
+    )
     assert TrajectoryViolationCode.AMBIGUOUS_STEP_CONTROL not in violation_codes(mutated)
