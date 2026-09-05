@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://study-os.local/schemas/pir.evidence-span.v1.schema.json",
+  "title": "PIR EvidenceSpan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "span_id",
+    "artifact_id",
+    "byte_start",
+    "byte_end",
+    "evidence_status"
+  ],
+  "properties": {
+    "schema_version": {"const": "pir.evidence-span.v1"},
+    "span_id": {"type": "string", "minLength": 1},
+    "artifact_id": {"type": "string", "minLength": 1},
+    "byte_start": {"type": "integer", "minimum": 0},
+    "byte_end": {"type": "integer", "minimum": 0},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_status": {"enum": ["verbatim", "reconstructed"]}
+  }
+}
