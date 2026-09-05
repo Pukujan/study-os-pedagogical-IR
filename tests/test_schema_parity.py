@@ -2,32 +2,49 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 
 import pytest
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
+from referencing import Registry, Resource
 
 from study_os_pir import (
     ContextKind,
     EvidenceStatus,
+    ExtractionLedger,
+    PrimaryDisposition,
     Turn,
     TurnActor,
+    TurnDisposition,
     artifact_from_bytes,
     build_context_frame,
+    evaluate_extraction_coverage,
     span_from_artifact,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def load_schema(filename: str) -> dict[str, object]:
+def load_schema(filename: str) -> dict[str, Any]:
     raw = json.loads((ROOT / "schemas" / filename).read_text(encoding="utf-8"))
-    return cast(dict[str, object], raw)
+    return cast(dict[str, Any], raw)
+
+
+def schema_registry() -> Registry[Any]:
+    registry: Registry[Any] = Registry()
+    for schema_path in sorted((ROOT / "schemas").glob("*.schema.json")):
+        schema = load_schema(schema_path.name)
+        schema_id = cast(str, schema["$id"])
+        registry = registry.with_resource(schema_id, Resource.from_contents(schema))
+    return registry
 
 
 def validate(filename: str, instance: dict[str, object]) -> None:
-    Draft202012Validator(load_schema(filename)).validate(instance)
+    Draft202012Validator(
+        load_schema(filename),
+        registry=schema_registry(),
+    ).validate(instance)
 
 
 def test_valid_runtime_models_also_validate_against_wire_schemas() -> None:
@@ -71,6 +88,39 @@ def test_valid_runtime_models_also_validate_against_wire_schemas() -> None:
     )
 
 
+def test_extraction_runtime_models_validate_with_cross_schema_refs() -> None:
+    item = TurnDisposition(
+        schema_version="pir.turn-disposition.v1",
+        disposition_id="d1",
+        extraction_revision="r1",
+        turn_id="t1",
+        primary_disposition=PrimaryDisposition.GOLDEN,
+    )
+    ledger = ExtractionLedger(
+        schema_version="pir.extraction-ledger.v1",
+        ledger_id="ledger-1",
+        extraction_revision="r1",
+        dispositions=(item,),
+    )
+    report = evaluate_extraction_coverage(
+        authoritative_turn_ids=("t1",),
+        ledger=ledger,
+    )
+
+    validate(
+        "turn-disposition.v1.schema.json",
+        item.model_dump(mode="json"),
+    )
+    validate(
+        "extraction-ledger.v1.schema.json",
+        ledger.model_dump(mode="json"),
+    )
+    validate(
+        "coverage-report.v1.schema.json",
+        report.model_dump(mode="json"),
+    )
+
+
 @pytest.mark.parametrize(
     ("filename", "bad_instance"),
     [
@@ -93,6 +143,16 @@ def test_valid_runtime_models_also_validate_against_wire_schemas() -> None:
                 "actor": "learner",
                 "evidence_status": "verbatim",
                 "source_span_refs": ["s"],
+            },
+        ),
+        (
+            "turn-disposition.v1.schema.json",
+            {
+                "schema_version": "pir.turn-disposition.v999",
+                "disposition_id": "d",
+                "extraction_revision": "r1",
+                "turn_id": "t",
+                "primary_disposition": "golden",
             },
         ),
     ],
