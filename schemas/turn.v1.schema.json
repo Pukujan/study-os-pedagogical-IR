@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://study-os.local/schemas/pir.turn.v1.schema.json",
+  "title": "PIR Turn v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "turn_id",
+    "sequence",
+    "actor",
+    "evidence_status",
+    "source_span_refs"
+  ],
+  "properties": {
+    "schema_version": {"const": "pir.turn.v1"},
+    "turn_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 0},
+    "actor": {"enum": ["learner", "tutor", "system", "tool", "other"]},
+    "evidence_status": {"enum": ["verbatim", "reconstructed"]},
+    "source_span_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "parent_turn_id": {"type": "string", "minLength": 1}
+  }
+}
