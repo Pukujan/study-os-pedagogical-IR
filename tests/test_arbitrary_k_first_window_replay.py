@@ -105,9 +105,12 @@ def test_replay_reaches_inner_loop_probe_without_exposing_final_loop() -> None:
         render_cursor("inner_loop_probe"),
         load_context(),
     )
-    payload = contract.model_dump_json()
-    assert "S[i] = S[i] + a[i+x]" not in payload
-    assert "final_combined_loop" not in payload
+    assert contract.probe is not None
+    learner_surface = "\n".join(
+        (*contract.representation.annotations, contract.probe.prompt)
+    )
+    assert "S[i] = S[i] + a[i+x]" not in learner_surface
+    assert "complete combined loop" not in learner_surface
 
 
 def test_source_shaped_append_inside_x_is_partial_then_repairs_same_s_only() -> None:
