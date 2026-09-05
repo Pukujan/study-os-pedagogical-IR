@@ -9,6 +9,7 @@ from study_os_pir.language import (
     validate_lexical_register,
 )
 from study_os_pir.trajectory import ExperimentalTrajectory, validate_trajectory
+from study_os_pir.vertical import VerticalWindowBox
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_DIR = ROOT / "fixtures" / "public" / "sliding-window-foundations"
@@ -112,3 +113,35 @@ def test_lexical_validator_skips_missing_representation_already_owned_by_semanti
     violations = validate_lexical_register(mutated, load_register())
     assert violations == ()
     assert validate_trajectory(mutated) != ()
+
+
+def test_lexical_validator_includes_multi_box_labels_in_visible_surface() -> None:
+    trajectory = load_trajectory()
+    target = next(
+        representation
+        for representation in trajectory.representations
+        if representation.representation_id == "r.i_intro0"
+    )
+    mutated_representation = target.model_copy(
+        update={
+            "box": None,
+            "boxes": (
+                VerticalWindowBox(start_index=0, width=2, label="box"),
+                VerticalWindowBox(start_index=1, width=2, label="window"),
+            ),
+        }
+    )
+    representations = tuple(
+        mutated_representation
+        if representation.representation_id == target.representation_id
+        else representation
+        for representation in trajectory.representations
+    )
+    mutated = trajectory.model_copy(update={"representations": representations})
+
+    violations = validate_lexical_register(mutated, load_register())
+    assert any(
+        violation.code == LexicalViolationCode.FORBIDDEN_TERM_PRESENT
+        and "'window'" in violation.detail
+        for violation in violations
+    )
