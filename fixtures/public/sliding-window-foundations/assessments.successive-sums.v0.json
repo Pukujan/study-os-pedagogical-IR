@@ -1,0 +1,11 @@
+{
+  "schema_version": "pir.experimental-assessment-registry.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.successive-sums.v0",
+  "assessments": [
+    {"step_id": "successive_probe_i1", "kind": "integer", "expected_values": [14]},
+    {"step_id": "successive_probe_i2", "kind": "integer", "expected_values": [8]},
+    {"step_id": "successive_probe_i3", "kind": "integer", "expected_values": [14]},
+    {"step_id": "successive_i_delta_probe", "kind": "integer", "expected_values": [1]},
+    {"step_id": "recurrence_three_values_probe", "kind": "integer_sequence", "expected_values": [14, 8, 14]}
+  ]
+}
