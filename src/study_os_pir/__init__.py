@@ -1,4 +1,5 @@
 from .canonical import canonical_json_bytes, canonical_sha256, sha256_hex
+from .coverage import assert_extraction_complete, evaluate_extraction_coverage
 from .evidence import (
     artifact_from_bytes,
     build_context_frame,
@@ -11,26 +12,36 @@ from .evidence import (
 from .models import (
     ContextFrame,
     ContextKind,
+    CoverageReport,
     EvidenceArtifact,
     EvidenceSpan,
     EvidenceStatus,
+    ExtractionLedger,
+    PrimaryDisposition,
     Turn,
     TurnActor,
+    TurnDisposition,
 )
 
 __all__ = [
     "ContextFrame",
     "ContextKind",
+    "CoverageReport",
     "EvidenceArtifact",
     "EvidenceSpan",
     "EvidenceStatus",
+    "ExtractionLedger",
+    "PrimaryDisposition",
     "Turn",
     "TurnActor",
+    "TurnDisposition",
     "artifact_from_bytes",
+    "assert_extraction_complete",
     "build_context_frame",
     "canonical_json_bytes",
     "canonical_sha256",
     "context_frame_payload",
+    "evaluate_extraction_coverage",
     "reconstruct_turn",
     "resolve_span",
     "sha256_hex",
