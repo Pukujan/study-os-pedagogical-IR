@@ -19,7 +19,11 @@ from study_os_pir.runtime import (
     submit_response,
     validate_assessment_registry,
 )
-from study_os_pir.trajectory import ExperimentalTrajectory, TrajectoryOutcomeKind, validate_trajectory
+from study_os_pir.trajectory import (
+    ExperimentalTrajectory,
+    TrajectoryOutcomeKind,
+    validate_trajectory,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_DIR = ROOT / "fixtures" / "public" / "sliding-window-foundations"
