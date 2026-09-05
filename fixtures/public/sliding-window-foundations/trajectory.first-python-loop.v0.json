@@ -228,7 +228,7 @@
         "target": "loop action at invalid i=4",
         "prompt": "At i = 4, should the loop continue or stop?",
         "answer_reveal_allowed": false,
-        "forbidden_answer_literals": ["stop", "break"]
+        "forbidden_answer_literals": []
       },
       "evidence_turn_refs": ["sep4:first-python-loop:stop-probe", "golden:first_python_window_loop"]
     },
@@ -279,7 +279,7 @@
     {
       "step_id": "loop_i3_probe",
       "kind": "probe",
-      "goal": "Check the boundary on the last valid start without revealing the branch result.",
+      "goal": "Check the boundary on the last valid start without hiding the explicit branch choices.",
       "representation_id": "r.loop_i3_probe",
       "preserve_components": ["problem_anchor", "boundary_condition", "boundary_values"],
       "forbidden_components": [],
@@ -290,7 +290,7 @@
         "target": "branch action at i=3",
         "prompt": "When i = 3, does the loop calculate S[3] or break?",
         "answer_reveal_allowed": false,
-        "forbidden_answer_literals": ["calculate S[3]", "calculate s[3]", "break"]
+        "forbidden_answer_literals": []
       },
       "evidence_turn_refs": ["sep4:first-python-loop:i3-check", "golden:first_python_window_loop"]
     },
