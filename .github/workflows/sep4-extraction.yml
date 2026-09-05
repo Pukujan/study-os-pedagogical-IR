@@ -1,0 +1,57 @@
+name: Sep-4 extraction receipt
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/study_os_pir/transcript.py"
+      - "tools/extract_sep4.py"
+      - "tests/test_transcript.py"
+      - ".github/workflows/sep4-extraction.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extract:
+    runs-on: ubuntu-24.04
+    env:
+      STUDY_OS_SOURCE_SHA: bef88216d9052eeb7e135916ea7fb6f8d84e0ccc
+    steps:
+      - name: Checkout PIR
+        uses: actions/checkout@v4
+
+      - name: Checkout pinned Study OS evidence
+        uses: actions/checkout@v4
+        with:
+          repository: Pukujan/Study-os
+          ref: ${{ env.STUDY_OS_SOURCE_SHA }}
+          path: _study_os_source
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: python -m pip install -e '.[dev]'
+
+      - name: Verify trust kernel
+        run: make check
+
+      - name: Produce full-source accounting receipt
+        run: |
+          python tools/extract_sep4.py \
+            --source-root _study_os_source \
+            --source-commit "$STUDY_OS_SOURCE_SHA" \
+            --output-dir _receipts/sep4
+
+      - name: Upload receipt bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: sep4-extraction-receipt
+          path: _receipts/sep4
+          if-no-files-found: error
+          retention-days: 90
