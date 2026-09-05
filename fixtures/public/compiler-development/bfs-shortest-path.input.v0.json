@@ -1,0 +1,20 @@
+{
+  "schema_version": "pir.compiler-input.v0",
+  "case_id": "dev.dsa.bfs-shortest-path.v0",
+  "domain": "dsa",
+  "problem_text": "Given an unweighted graph, a start node, and a target node, return the minimum number of edges from start to target if a path exists.",
+  "learner_evidence": [
+    {"concept_id": "graph_node", "level": "seen", "evidence_refs": ["synthetic-dev-evidence"]},
+    {"concept_id": "graph_edge", "level": "seen", "evidence_refs": ["synthetic-dev-evidence"]},
+    {"concept_id": "queue", "level": "unknown", "evidence_refs": []},
+    {"concept_id": "frontier", "level": "unknown", "evidence_refs": []},
+    {"concept_id": "visited_state", "level": "unknown", "evidence_refs": []}
+  ],
+  "current_representation": ["graph_nodes", "graph_edges"],
+  "public_constraints": [
+    "do not assume unknown prerequisites are known",
+    "preserve graph state while introducing queue/frontier state",
+    "do not reveal probe answers"
+  ],
+  "policy_ref": "compiler-p4@0.1.0"
+}
