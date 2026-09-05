@@ -72,7 +72,10 @@ def validate_lexical_text(
             violations.append(
                 LexicalViolation(
                     code=LexicalViolationCode.MISSING_REQUIRED_TERM,
-                    detail=f"{step_policy.step_id} is missing required learner-facing term {term!r}",
+                    detail=(
+                        f"{step_policy.step_id} is missing required "
+                        f"learner-facing term {term!r}"
+                    ),
                 )
             )
     for term in step_policy.forbidden_terms:
