@@ -175,9 +175,18 @@ def main() -> None:
         "semantic_review": semantic_review,
         "claim_boundary": [
             "This receipt proves byte-addressed turn accounting for the pinned source bundle.",
-            "A resolved semantic review proves only that its claimed evidence ranges resolve to real turns.",
-            "It does not prove pedagogical correctness, compiler discovery, or a canonical golden trajectory.",
-            "Turn dispositions remain UNRESOLVED until a separate source-inspected promotion ledger is frozen.",
+            (
+                "A resolved semantic review proves only that its claimed evidence ranges "
+                "resolve to real turns."
+            ),
+            (
+                "It does not prove pedagogical correctness, compiler discovery, "
+                "or a canonical golden trajectory."
+            ),
+            (
+                "Turn dispositions remain UNRESOLVED until a separate source-inspected "
+                "promotion ledger is frozen."
+            ),
         ],
     }
 
