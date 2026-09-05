@@ -1,0 +1,290 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.enumerate-append.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part05.md",
+  "entry_step_id": "enumerate_explain",
+  "representations": [
+    {
+      "representation_id": "r.enumerate_explain",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["4", "7", "2", "6", "1", "9"]},
+        {"row_id": "pair_row", "label": "enumerate gives", "values": ["(0,4)", "(1,7)", "(2,2)", "(3,6)", "(4,1)", "(5,9)"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["enumerate(a): each loop turn gives the current index and number", "for i, num in enumerate(a)"],
+      "visible_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation"]
+    },
+    {
+      "representation_id": "r.enumerate_probe6",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "6", "1", "9"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["4", "7", "2", "6", "1", "9"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["target number: 6", "for i, num in enumerate(a)"],
+      "visible_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "enumerate_relation"]
+    },
+    {
+      "representation_id": "r.enumerate_validate6",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["4", "7", "2", "[6]", "1", "9"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "[3]", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["4", "7", "2", "[6]", "1", "9"]},
+        {"row_id": "pair_row", "label": "enumerate gives", "values": ["(0,4)", "(1,7)", "(2,2)", "[(3,6)]", "(4,1)", "(5,9)"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["index 3 lines up with number 6, so enumerate gives (3,6)"],
+      "visible_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"]
+    },
+    {
+      "representation_id": "r.enumerate_probe7",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "2", "8", "4", "7", "1"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["5", "2", "8", "4", "7", "1"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["target number: 7", "for i, num in enumerate(a)"],
+      "visible_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "enumerate_relation"]
+    },
+    {
+      "representation_id": "r.enumerate_validate7",
+      "rows": [
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["5", "2", "8", "4", "[7]", "1"]},
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "[4]", "5"]},
+        {"row_id": "number_row", "label": "number(num)", "values": ["5", "2", "8", "4", "[7]", "1"]},
+        {"row_id": "pair_row", "label": "enumerate gives", "values": ["(0,5)", "(1,2)", "(2,8)", "(3,4)", "[(4,7)]", "(5,1)"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["index 4 lines up with number 7, so enumerate gives (4,7)"],
+      "visible_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"]
+    },
+    {
+      "representation_id": "r.append_explain",
+      "rows": [
+        {"row_id": "algebra_row", "label": "algebra", "values": ["S[i] = S[i-1] - a[i-1] + a[i+j]"]},
+        {"row_id": "append_row", "label": "append", "values": ["S.append(S[i-1] - a[i-1] + a[i+j])"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["only the storage form changes", "the right side stays the same"],
+      "visible_components": ["problem_anchor", "storage_mapping", "rhs_preserved", "append_form"]
+    },
+    {
+      "representation_id": "r.append_probe_simple",
+      "rows": [
+        {"row_id": "algebra_row", "label": "algebra", "values": ["S[i] = S[i-1] + a[i]"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["change only how the new value is stored"],
+      "visible_components": ["problem_anchor", "storage_mapping", "rhs_preserved"]
+    },
+    {
+      "representation_id": "r.append_validate_simple",
+      "rows": [
+        {"row_id": "algebra_row", "label": "algebra", "values": ["S[i] = S[i-1] + a[i]"]},
+        {"row_id": "append_row", "label": "append", "values": ["S.append(S[i-1] + a[i])"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["same right side; only S[i] = becomes S.append(...)"],
+      "visible_components": ["problem_anchor", "storage_mapping", "rhs_preserved", "append_form"]
+    },
+    {
+      "representation_id": "r.append_probe_changed",
+      "rows": [
+        {"row_id": "algebra_row", "label": "algebra", "values": ["S[i] = S[i-1] - a[i-1] + a[i+2]"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["same conversion on a changed expression"],
+      "visible_components": ["problem_anchor", "storage_mapping", "rhs_preserved"]
+    },
+    {
+      "representation_id": "r.append_validate_changed",
+      "rows": [
+        {"row_id": "algebra_row", "label": "algebra", "values": ["S[i] = S[i-1] - a[i-1] + a[i+2]"]},
+        {"row_id": "append_row", "label": "append", "values": ["S.append(S[i-1] - a[i-1] + a[i+2])"]}
+      ],
+      "box": null,
+      "boxes": [],
+      "annotations": ["the entire right side is preserved"],
+      "visible_components": ["problem_anchor", "storage_mapping", "rhs_preserved", "append_form"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "enumerate_explain",
+      "kind": "explain",
+      "goal": "Explain enumerate(a) as one current index plus one current number on each loop turn in the aligned chart.",
+      "representation_id": "r.enumerate_explain",
+      "preserve_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "introduce only the enumerate index-number pair relation",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:588-591", "golden:enumerate_chart_and_probes"]
+    },
+    {
+      "step_id": "enumerate_probe6",
+      "kind": "probe",
+      "goal": "Ask for the pair corresponding to number 6 without displaying that pair first.",
+      "representation_id": "r.enumerate_probe6",
+      "preserve_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "enumerate_relation"],
+      "forbidden_components": ["window_box", "pair_row"],
+      "active_delta": "apply the enumerate relation to one number",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "max_sum"],
+      "probe": {
+        "target": "enumerate pair for number 6",
+        "prompt": "When the loop reaches a = 6, what pair does enumerate(a) give us?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["(3,6)", "(3, 6)", "3,6", "3, 6"]
+      },
+      "evidence_turn_refs": ["sep4:592", "golden:enumerate_chart_and_probes"]
+    },
+    {
+      "step_id": "enumerate_validate6",
+      "kind": "validate",
+      "goal": "Validate (3,6) in the same chart before changing the example.",
+      "representation_id": "r.enumerate_validate6",
+      "preserve_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "show why index 3 and number 6 form the returned pair",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:593-595", "golden:answer_validation_chart_contract"]
+    },
+    {
+      "step_id": "enumerate_probe7_changed",
+      "kind": "probe",
+      "goal": "Probe enumerate on a changed array without exposing the target pair.",
+      "representation_id": "r.enumerate_probe7",
+      "preserve_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "enumerate_relation"],
+      "forbidden_components": ["window_box", "pair_row"],
+      "active_delta": "hold the relation constant while changing the array and target number",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "max_sum"],
+      "probe": {
+        "target": "enumerate pair for number 7 in changed array",
+        "prompt": "In this changed array, when the loop reaches a = 7, what pair does enumerate(a) give us?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["(4,7)", "(4, 7)", "4,7", "4, 7"]
+      },
+      "evidence_turn_refs": ["sep4:596", "golden:enumerate_chart_and_probes"]
+    },
+    {
+      "step_id": "enumerate_validate7_changed",
+      "kind": "validate",
+      "goal": "Validate (4,7) in the same changed chart, then stop enumerate practice after two successful probes.",
+      "representation_id": "r.enumerate_validate7",
+      "preserve_components": ["problem_anchor", "numbers_row", "index_row", "number_row", "pair_row", "enumerate_relation", "current_pair_highlight"],
+      "forbidden_components": ["window_box"],
+      "active_delta": "show why index 4 and number 7 form the pair",
+      "disclosed_concepts": ["enumerate_relation"],
+      "forbidden_concepts": ["append", "max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:597-598", "golden:enumerate_chart_and_probes"]
+    },
+    {
+      "step_id": "append_explain",
+      "kind": "bridge",
+      "goal": "Change only the storage form from S[i] = expression to S.append(expression), preserving the right side.",
+      "representation_id": "r.append_explain",
+      "preserve_components": ["problem_anchor", "storage_mapping", "rhs_preserved", "append_form"],
+      "forbidden_components": [],
+      "active_delta": "introduce append only as a storage-form transformation",
+      "disclosed_concepts": ["append"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:599-600", "golden:append_conversion"]
+    },
+    {
+      "step_id": "append_probe_simple",
+      "kind": "probe",
+      "goal": "Apply the storage-form conversion to one small expression without revealing the append result.",
+      "representation_id": "r.append_probe_simple",
+      "preserve_components": ["problem_anchor", "storage_mapping", "rhs_preserved"],
+      "forbidden_components": ["append_form"],
+      "active_delta": "convert only the left-side storage form",
+      "disclosed_concepts": ["append"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": {
+        "target": "append conversion of S[i] = S[i-1] + a[i]",
+        "prompt": "Turn S[i] = S[i-1] + a[i] into append form.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S.append(S[i-1] + a[i])"]
+      },
+      "evidence_turn_refs": ["sep4:599-600", "golden:append_conversion"]
+    },
+    {
+      "step_id": "append_validate_simple",
+      "kind": "validate",
+      "goal": "Show that the right side stayed identical and only storage syntax changed.",
+      "representation_id": "r.append_validate_simple",
+      "preserve_components": ["problem_anchor", "storage_mapping", "rhs_preserved", "append_form"],
+      "forbidden_components": [],
+      "active_delta": "validate the storage-only transformation",
+      "disclosed_concepts": ["append"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:602-607", "golden:append_conversion"]
+    },
+    {
+      "step_id": "append_probe_changed",
+      "kind": "probe",
+      "goal": "Verify the same append conversion on a changed expression.",
+      "representation_id": "r.append_probe_changed",
+      "preserve_components": ["problem_anchor", "storage_mapping", "rhs_preserved"],
+      "forbidden_components": ["append_form"],
+      "active_delta": "hold storage conversion constant while changing the right-side expression",
+      "disclosed_concepts": ["append"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": {
+        "target": "append conversion on changed recurrence-shaped expression",
+        "prompt": "Turn S[i] = S[i-1] - a[i-1] + a[i+2] into append form.",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S.append(S[i-1] - a[i-1] + a[i+2])"]
+      },
+      "evidence_turn_refs": ["sep4:602-607", "golden:append_conversion"]
+    },
+    {
+      "step_id": "append_validate_changed",
+      "kind": "validate",
+      "goal": "Validate the changed append conversion before advancing to the first Python window-loop pieces.",
+      "representation_id": "r.append_validate_changed",
+      "preserve_components": ["problem_anchor", "storage_mapping", "rhs_preserved", "append_form"],
+      "forbidden_components": [],
+      "active_delta": "confirm the right side is unchanged in the changed example",
+      "disclosed_concepts": ["append"],
+      "forbidden_concepts": ["max_sum"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:602-607", "golden:append_conversion", "golden:first_python_window_loop"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.enumerate.explain.probe6", "from_step_id": "enumerate_explain", "next_step_id": "enumerate_probe6", "exit_target": null, "evidence_turn_refs": ["sep4:591-592"]},
+    {"transition_id": "auto.enumerate.validate6.probe7", "from_step_id": "enumerate_validate6", "next_step_id": "enumerate_probe7_changed", "exit_target": null, "evidence_turn_refs": ["sep4:595-596"]},
+    {"transition_id": "auto.enumerate.validate7.append", "from_step_id": "enumerate_validate7_changed", "next_step_id": "append_explain", "exit_target": null, "evidence_turn_refs": ["sep4:598-599"]},
+    {"transition_id": "auto.append.explain.probe", "from_step_id": "append_explain", "next_step_id": "append_probe_simple", "exit_target": null, "evidence_turn_refs": ["sep4:599-600"]},
+    {"transition_id": "auto.append.validate.changed", "from_step_id": "append_validate_simple", "next_step_id": "append_probe_changed", "exit_target": null, "evidence_turn_refs": ["sep4:602-607"]},
+    {"transition_id": "auto.append.validate.exit", "from_step_id": "append_validate_changed", "next_step_id": null, "exit_target": "first_python_window_loop", "evidence_turn_refs": ["golden:first_python_window_loop"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.enumerate6.correct", "after_step_id": "enumerate_probe6", "outcome": "correct", "next_step_id": "enumerate_validate6", "exit_target": null, "evidence_turn_refs": ["sep4:592-595"]},
+    {"route_id": "route.enumerate7.correct", "after_step_id": "enumerate_probe7_changed", "outcome": "correct", "next_step_id": "enumerate_validate7_changed", "exit_target": null, "evidence_turn_refs": ["sep4:596-598"]},
+    {"route_id": "route.append.simple.correct", "after_step_id": "append_probe_simple", "outcome": "correct", "next_step_id": "append_validate_simple", "exit_target": null, "evidence_turn_refs": ["sep4:599-600"]},
+    {"route_id": "route.append.changed.correct", "after_step_id": "append_probe_changed", "outcome": "correct", "next_step_id": "append_validate_changed", "exit_target": null, "evidence_turn_refs": ["sep4:602-607"]}
+  ]
+}

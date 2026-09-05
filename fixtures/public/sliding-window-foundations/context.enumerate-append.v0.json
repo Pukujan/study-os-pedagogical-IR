@@ -1,0 +1,8 @@
+{
+  "schema_version": "pir.experimental-replay-context.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.enumerate-append.v0",
+  "persistent_text": [
+    "Given an array of numbers, find the maximum sum of any 3 consecutive numbers.",
+    "k = 3; j = k - 1"
+  ]
+}
