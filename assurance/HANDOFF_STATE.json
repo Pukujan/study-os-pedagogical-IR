@@ -163,6 +163,6 @@
       "value": "c31fe82690765a86248ccc65469b2583690c3d36"
     },
     "created_at": "2026-09-05T18:44:00Z",
-    "reason": "session_boundary"
+    "reason": "session_end"
   }
 }
