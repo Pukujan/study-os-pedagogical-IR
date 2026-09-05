@@ -1,0 +1,19 @@
+{
+  "schema_version": "pir.experimental-lexical-register.v0",
+  "register_id": "sep4.arbitrary-k-preserve-s.v0",
+  "description": "Source-backed acquisition register for arbitrary-k first-window construction. Reuses S and box vocabulary and rejects new accumulator aliases that were explicitly confusing in the September-4 calibration.",
+  "rules": [
+    {
+      "concept_id": "box_sum_state",
+      "preferred_term": "S[i]",
+      "allowed_terms": ["S[i]", "S[0]"],
+      "forbidden_terms": ["window_sum", "accumulator", "running_total", "total"]
+    },
+    {
+      "concept_id": "selected_group",
+      "preferred_term": "box",
+      "allowed_terms": ["box"],
+      "forbidden_terms": ["window", "slice", "segment"]
+    }
+  ]
+}
