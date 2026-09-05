@@ -28,11 +28,69 @@ def _one_line_preview(body: bytes, limit: int = 120) -> str:
     return compact if len(compact) <= limit else compact[: limit - 1] + "…"
 
 
+def _expand_evidence(specs: list[str]) -> tuple[int, ...]:
+    values: list[int] = []
+    for spec in specs:
+        if "-" in spec:
+            start_text, end_text = spec.split("-", 1)
+            start = int(start_text)
+            end = int(end_text)
+            if end < start:
+                raise ValueError(f"invalid evidence range: {spec}")
+            values.extend(range(start, end + 1))
+        else:
+            values.append(int(spec))
+    return tuple(values)
+
+
+def _resolve_semantic_review(
+    *,
+    path: Path,
+    source_commit: str,
+    turns: list[object],
+) -> dict[str, object]:
+    review = json.loads(path.read_text(encoding="utf-8"))
+    if review["source_commit"] != source_commit:
+        raise ValueError("semantic review source_commit does not match extraction source")
+
+    by_sequence = {turn.sequence: turn for turn in turns}  # type: ignore[attr-defined]
+    candidate = review["golden_candidate"]
+    orders = [item["order"] for item in candidate]
+    if orders != list(range(1, len(candidate) + 1)):
+        raise ValueError("semantic review event order is not contiguous")
+
+    resolved: dict[str, list[str]] = {}
+    sections = (
+        ("event_id", candidate),
+        ("trajectory_id", review["observed_failure_repair_trajectories"]),
+        ("id", review["unresolved_questions"]),
+    )
+    for id_field, items in sections:
+        for item in items:
+            sequences = _expand_evidence(item["evidence"])
+            unknown = [sequence for sequence in sequences if sequence not in by_sequence]
+            if unknown:
+                raise ValueError(f"semantic review references unknown sequence(s): {unknown}")
+            resolved[item[id_field]] = [by_sequence[sequence].turn_id for sequence in sequences]  # type: ignore[attr-defined]
+
+    return {
+        "schema_version": "pir.sep4-resolved-source-review.v0",
+        "source_commit": source_commit,
+        "review_path": str(path),
+        "candidate_event_count": len(candidate),
+        "failure_repair_trajectory_count": len(review["observed_failure_repair_trajectories"]),
+        "unresolved_question_count": len(review["unresolved_questions"]),
+        "resolved_evidence_turn_refs": resolved,
+        "claim_boundary": review["claim_boundary"],
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--semantic-ledger", type=Path)
     args = parser.parse_args()
 
     output_dir: Path = args.output_dir
@@ -91,6 +149,15 @@ def main() -> None:
         ledger=ledger,
     )
 
+    semantic_review = None
+    if args.semantic_ledger is not None:
+        semantic_review = _resolve_semantic_review(
+            path=args.semantic_ledger,
+            source_commit=args.source_commit,
+            turns=turns,
+        )
+        _json_dump(output_dir / "resolved-semantic-review.json", semantic_review)
+
     actor_counts = Counter(turn.actor.value for turn in turns)
     disposition_counts = Counter(item.primary_disposition.value for item in dispositions)
     receipt = {
@@ -104,11 +171,13 @@ def main() -> None:
         "actor_counts": dict(sorted(actor_counts.items())),
         "disposition_counts": dict(sorted(disposition_counts.items())),
         "coverage": coverage.model_dump(mode="json"),
-        "golden_status": "not_compiled",
+        "golden_status": "source_review_candidate" if semantic_review else "not_compiled",
+        "semantic_review": semantic_review,
         "claim_boundary": [
             "This receipt proves byte-addressed turn accounting for the pinned source bundle.",
-            "It does not prove pedagogical correctness or a complete golden trajectory.",
-            "All turns remain UNRESOLVED until source-inspected semantic promotion occurs.",
+            "A resolved semantic review proves only that its claimed evidence ranges resolve to real turns.",
+            "It does not prove pedagogical correctness, compiler discovery, or a canonical golden trajectory.",
+            "Turn dispositions remain UNRESOLVED until a separate source-inspected promotion ledger is frozen.",
         ],
     }
 
@@ -145,7 +214,7 @@ def main() -> None:
         f"Turns: **{len(turns)}**",
         f"Coverage complete: **{coverage.complete}**",
         f"Unresolved turns: **{disposition_counts[PrimaryDisposition.UNRESOLVED.value]}**",
-        "Golden status: **not compiled**",
+        f"Golden status: **{receipt['golden_status']}**",
         "",
         "This is deliberately a source-accounting receipt, not a pedagogy-success claim.",
         "",
