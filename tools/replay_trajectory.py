@@ -6,6 +6,7 @@ from pathlib import Path
 from study_os_pir.console import render_turn_text
 from study_os_pir.lexical import (
     ExperimentalLexicalPolicy,
+    LexicalViolation,
     validate_lexical_policy,
     validate_rendered_turn,
 )
@@ -37,8 +38,8 @@ def _load_lexical_policy(path: Path) -> ExperimentalLexicalPolicy:
     return ExperimentalLexicalPolicy.model_validate_json(path.read_text())
 
 
-def _violation_details(violations: tuple[object, ...]) -> str:
-    return "; ".join(str(getattr(violation, "detail")) for violation in violations)
+def _violation_details(violations: tuple[LexicalViolation, ...]) -> str:
+    return "; ".join(violation.detail for violation in violations)
 
 
 def main() -> int:
@@ -60,7 +61,8 @@ def main() -> int:
     if lexical_policy is not None:
         lexical_violations = validate_lexical_policy(trajectory, lexical_policy)
         if lexical_violations:
-            print(f"Replay blocked: invalid lexical policy: {_violation_details(lexical_violations)}")
+            details = _violation_details(lexical_violations)
+            print(f"Replay blocked: invalid lexical policy: {details}")
             return 2
 
     cursor = start_replay(trajectory, registry)
