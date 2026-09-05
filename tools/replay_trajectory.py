@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from study_os_pir.console import render_turn_text
+from study_os_pir.language import LexicalRegister, validate_lexical_register
 from study_os_pir.runtime import (
     AssessmentRegistry,
     ReplayContext,
@@ -28,6 +29,10 @@ def _load_context(path: Path) -> ReplayContext:
     return ReplayContext.model_validate_json(path.read_text())
 
 
+def _load_lexical_register(path: Path) -> LexicalRegister:
+    return LexicalRegister.model_validate_json(path.read_text())
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run an approved experimental PIR trajectory in a local terminal."
@@ -35,11 +40,26 @@ def main() -> int:
     parser.add_argument("--trajectory", type=Path, required=True)
     parser.add_argument("--assessments", type=Path, required=True)
     parser.add_argument("--context", type=Path)
+    parser.add_argument("--lexical-register", type=Path)
     args = parser.parse_args()
 
     trajectory = _load_trajectory(args.trajectory)
     registry = _load_registry(args.assessments)
     context = None if args.context is None else _load_context(args.context)
+    lexical_register = (
+        None if args.lexical_register is None else _load_lexical_register(args.lexical_register)
+    )
+    if lexical_register is not None:
+        persistent_text = () if context is None else context.persistent_text
+        violations = validate_lexical_register(
+            trajectory,
+            lexical_register,
+            persistent_text=persistent_text,
+        )
+        if violations:
+            for violation in violations:
+                print(f"Replay blocked: {violation.code.value}: {violation.detail}")
+            return 2
     cursor = start_replay(trajectory, registry)
 
     while cursor.phase != ReplayPhase.EXITED:
