@@ -165,7 +165,7 @@ def _parse_integer(response: str) -> tuple[int, ...]:
 
 def _parse_integer_sequence(response: str) -> tuple[int, ...]:
     normalized = response.strip()
-    for character in "[],()":
+    for character in "[],(),":
         normalized = normalized.replace(character, " ")
     tokens = normalized.split()
     if not tokens:
@@ -173,10 +173,9 @@ def _parse_integer_sequence(response: str) -> tuple[int, ...]:
 
     values: list[int] = []
     for token in tokens:
-        clean = token[:-1] if token.endswith(",") else token
-        if re.fullmatch(r"[+-]?\d+", clean) is None:
+        if re.fullmatch(r"[+-]?\d+", token) is None:
             raise ValueError("response is not a supported integer sequence")
-        values.append(int(clean))
+        values.append(int(token))
     return tuple(values)
 
 
