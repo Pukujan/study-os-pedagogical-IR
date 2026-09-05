@@ -8,9 +8,18 @@ from study_os_pir.runtime import (
     classify_response,
     validate_assessment_registry,
 )
-from study_os_pir.trajectory import ExperimentalTrajectory, TrajectoryOutcomeKind
-from study_os_pir.vertical import VerticalProbe, VerticalRepresentation, VerticalRow, VerticalStepKind
-from study_os_pir.trajectory import OutcomeRoute, TrajectoryStep
+from study_os_pir.trajectory import (
+    ExperimentalTrajectory,
+    OutcomeRoute,
+    TrajectoryOutcomeKind,
+    TrajectoryStep,
+)
+from study_os_pir.vertical import (
+    VerticalProbe,
+    VerticalRepresentation,
+    VerticalRow,
+    VerticalStepKind,
+)
 
 
 def make_trajectory() -> ExperimentalTrajectory:
