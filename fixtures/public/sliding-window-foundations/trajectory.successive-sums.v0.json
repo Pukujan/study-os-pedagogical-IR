@@ -1,0 +1,348 @@
+{
+  "schema_version": "pir.experimental-trajectory.v0",
+  "trajectory_id": "sep4.sliding-window-foundations.successive-sums.v0",
+  "source_locator": "Pukujan/Study-os@bef88216d9052eeb7e135916ea7fb6f8d84e0ccc:sessions/2026-09-04/sliding-window-pedagogy-calibration/raw/chat-visible-transcript-part05.md",
+  "entry_step_id": "successive_compare_i1",
+  "representations": [
+    {
+      "representation_id": "r.successive_i1_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "sum[i]"},
+      "boxes": [{"start_index": 1, "width": 3, "label": "sum[i+1]"}],
+      "annotations": ["k = 3", "sum[i] = 12", "same box moves one place right"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_comparison", "sum_i_label", "sum_i_plus_1_label"]
+    },
+    {
+      "representation_id": "r.successive_i1_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "sum[i]"},
+      "boxes": [{"start_index": 1, "width": 3, "label": "sum[i+1]"}],
+      "annotations": ["sum[i] = 12", "sum[i+1] = 14", "12 - 3 + 5 = 14"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_comparison", "sum_i_label", "sum_i_plus_1_label"]
+    },
+    {
+      "representation_id": "r.successive_i2_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 1, "width": 3, "label": "sum[i+1]"},
+      "boxes": [{"start_index": 2, "width": 3, "label": "sum[i+2]"}],
+      "annotations": ["k = 3", "sum[i+1] = 14"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_comparison", "successive_sum_labels"]
+    },
+    {
+      "representation_id": "r.successive_i2_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 1, "width": 3, "label": "sum[i+1]"},
+      "boxes": [{"start_index": 2, "width": 3, "label": "sum[i+2]"}],
+      "annotations": ["sum[i+1] = 14", "sum[i+2] = 8", "14 - 8 + 2 = 8"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_comparison", "successive_sum_labels"]
+    },
+    {
+      "representation_id": "r.successive_i3_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 2, "width": 3, "label": "sum[i+2]"},
+      "boxes": [{"start_index": 3, "width": 3, "label": "sum[i+3]"}],
+      "annotations": ["k = 3", "sum[i+2] = 8"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_comparison", "successive_sum_labels"]
+    },
+    {
+      "representation_id": "r.successive_i3_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 2, "width": 3, "label": "sum[i+2]"},
+      "boxes": [{"start_index": 3, "width": 3, "label": "sum[i+3]"}],
+      "annotations": ["sum[i+2] = 8", "sum[i+3] = 14", "8 - 1 + 7 = 14"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "k_label", "box_comparison", "successive_sum_labels"]
+    },
+    {
+      "representation_id": "r.successive_labels_probe",
+      "rows": [
+        {"row_id": "sum_label_row", "label": "labels", "values": ["sum[i]", "sum[i+1]", "sum[i+2]", "sum[i+3]"]},
+        {"row_id": "sum_value_row", "label": "sums", "values": ["12", "14", "8", "14"]}
+      ],
+      "box": null,
+      "annotations": ["look only at i, i+1, i+2, i+3"],
+      "visible_components": ["problem_anchor", "successive_sum_labels", "successive_sum_values"]
+    },
+    {
+      "representation_id": "r.successive_labels_validate",
+      "rows": [
+        {"row_id": "sum_label_row", "label": "labels", "values": ["sum[i]", "sum[i+1]", "sum[i+2]", "sum[i+3]"]},
+        {"row_id": "sum_value_row", "label": "sums", "values": ["12", "14", "8", "14"]}
+      ],
+      "box": null,
+      "annotations": ["i moves +1 each turn", "i = 0 -> 1 -> 2 -> 3"],
+      "visible_components": ["problem_anchor", "successive_sum_labels", "successive_sum_values", "i_progression"]
+    },
+    {
+      "representation_id": "r.recurrence_formula",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "S[0]"},
+      "annotations": ["k = 3", "j = k - 1 = 2", "S[i] is the same box sum", "Formula: S[i] = S[i-1] - a[i-1] + a[i+j]", "S[0] = 12"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "box_label", "recurrence_formula", "j_label"]
+    },
+    {
+      "representation_id": "r.recurrence_three_probe",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "S[0]"},
+      "annotations": ["k = 3", "j = k - 1 = 2", "Formula: S[i] = S[i-1] - a[i-1] + a[i+j]", "i=1: S[1] = S[0] - a[0] + a[1+2]", "i=2: S[2] = S[1] - a[1] + a[2+2]", "i=3: S[3] = S[2] - a[2] + a[3+2]"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "box_label", "recurrence_formula", "recurrence_instances", "j_label"]
+    },
+    {
+      "representation_id": "r.recurrence_three_validate",
+      "rows": [
+        {"row_id": "index_row", "label": "index(i)", "values": ["0", "1", "2", "3", "4", "5"]},
+        {"row_id": "numbers_row", "label": "numbers(a)", "values": ["3", "8", "1", "5", "2", "7"]}
+      ],
+      "box": {"start_index": 0, "width": 3, "label": "S[0]"},
+      "annotations": ["Formula: S[i] = S[i-1] - a[i-1] + a[i+j]", "S[1] = 14", "S[2] = 8", "S[3] = 14"],
+      "visible_components": ["problem_anchor", "index_row", "numbers_row", "box_label", "recurrence_formula", "recurrence_instances", "j_label"]
+    },
+    {
+      "representation_id": "r.recurrence_repeats",
+      "rows": [
+        {"row_id": "recurrence_i", "label": "i = 1", "values": ["S[1]", "=", "S[0]", "-", "a[0]", "+", "a[1+j]"]},
+        {"row_id": "recurrence_i2", "label": "i = 2", "values": ["S[2]", "=", "S[1]", "-", "a[1]", "+", "a[2+j]"]},
+        {"row_id": "recurrence_i3", "label": "i = 3", "values": ["S[3]", "=", "S[2]", "-", "a[2]", "+", "a[3+j]"]}
+      ],
+      "box": null,
+      "annotations": ["Formula: S[i] = S[i-1] - a[i-1] + a[i+j]", "same formula -> new i each turn -> repeat"],
+      "visible_components": ["problem_anchor", "recurrence_formula", "recurrence_instances", "i_progression"]
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "successive_compare_i1",
+      "kind": "explain",
+      "goal": "Keep the same array and compare the current box with the next box before generalizing.",
+      "representation_id": "r.successive_i1_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "add only the next box beside the already-grounded current box",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_probe_i1",
+      "kind": "probe",
+      "goal": "Use the same two-box chart to compute the next sum without showing its answer.",
+      "representation_id": "r.successive_i1_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "ask only for sum[i+1]",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": {
+        "target": "sum[i+1] after moving the same k=3 box one position right",
+        "prompt": "Using the same idea, 12 - 3 + 5 = ?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i+1] = 14", "answer is 14"]
+      },
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_validate_i1",
+      "kind": "validate",
+      "goal": "Validate sum[i+1] in the same two-box chart.",
+      "representation_id": "r.successive_i1_validate",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "show only why the next box sum is 14",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_probe_i2",
+      "kind": "probe",
+      "goal": "Advance to sum[i+2] instead of repeating another sum[i+1] exercise.",
+      "representation_id": "r.successive_i2_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "move the same box one more place and ask for sum[i+2]",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": {
+        "target": "sum[i+2] after the next one-position box move",
+        "prompt": "What is sum[i+2]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i+2] = 8", "answer is 8"]
+      },
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_validate_i2",
+      "kind": "validate",
+      "goal": "Validate sum[i+2] using the same chart and same update idea.",
+      "representation_id": "r.successive_i2_validate",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "show 14 - 8 + 2 = 8 without introducing a new abstraction",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_probe_i3",
+      "kind": "probe",
+      "goal": "Advance the same relation once more to sum[i+3].",
+      "representation_id": "r.successive_i3_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "move the same box one more place and ask for sum[i+3]",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": {
+        "target": "sum[i+3] after the next one-position box move",
+        "prompt": "What is sum[i+3]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["sum[i+3] = 14", "answer is 14"]
+      },
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_validate_i3",
+      "kind": "validate",
+      "goal": "Validate sum[i+3] in the same two-box representation.",
+      "representation_id": "r.successive_i3_validate",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "box_comparison"],
+      "forbidden_components": [],
+      "active_delta": "show 8 - 1 + 7 = 14",
+      "disclosed_concepts": ["sum_i", "successive_sum"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_i_delta_probe",
+      "kind": "probe",
+      "goal": "Only after successive sums are stable, ask how i changes each turn.",
+      "representation_id": "r.successive_labels_probe",
+      "preserve_components": ["problem_anchor", "successive_sum_labels", "successive_sum_values"],
+      "forbidden_components": [],
+      "active_delta": "focus only on i, i+1, i+2, i+3",
+      "disclosed_concepts": ["sum_i", "successive_sum", "i_progression"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": {
+        "target": "amount i changes on each successive box move",
+        "prompt": "How much is i moving each turn?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["+1 each turn", "answer is 1"]
+      },
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "successive_i_delta_validate",
+      "kind": "validate",
+      "goal": "Validate that i advances by one on each already-observed box move.",
+      "representation_id": "r.successive_labels_validate",
+      "preserve_components": ["problem_anchor", "successive_sum_labels", "successive_sum_values", "i_progression"],
+      "forbidden_components": [],
+      "active_delta": "show i = 0 -> 1 -> 2 -> 3",
+      "disclosed_concepts": ["sum_i", "successive_sum", "i_progression"],
+      "forbidden_concepts": ["general_recurrence", "python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums", "sep4:turns:515-524"]
+    },
+    {
+      "step_id": "recurrence_formula_bridge",
+      "kind": "bridge",
+      "goal": "Introduce the general recurrence only after the same update has been exercised repeatedly.",
+      "representation_id": "r.recurrence_formula",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "recurrence_formula"],
+      "forbidden_components": [],
+      "active_delta": "name j = k - 1 and write the already-observed box update as one formula",
+      "disclosed_concepts": ["sum_i", "successive_sum", "i_progression", "j", "general_recurrence"],
+      "forbidden_concepts": ["python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes", "sep4:turns:542-553"]
+    },
+    {
+      "step_id": "recurrence_three_values_probe",
+      "kind": "probe",
+      "goal": "Exercise the same general formula at i=1, i=2, and i=3 while the original chart remains visible.",
+      "representation_id": "r.recurrence_three_probe",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "recurrence_formula", "recurrence_instances"],
+      "forbidden_components": [],
+      "active_delta": "instantiate only i while keeping k and j fixed",
+      "disclosed_concepts": ["sum_i", "successive_sum", "i_progression", "j", "general_recurrence"],
+      "forbidden_concepts": ["python_loop"],
+      "probe": {
+        "target": "S[1], S[2], and S[3] from the same recurrence",
+        "prompt": "What are S[1], S[2], and S[3]?",
+        "answer_reveal_allowed": false,
+        "forbidden_answer_literals": ["S[1] = 14", "S[2] = 8", "S[3] = 14"]
+      },
+      "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes", "sep4:turns:542-553"]
+    },
+    {
+      "step_id": "recurrence_three_values_validate",
+      "kind": "validate",
+      "goal": "Validate the three recurrence instances before describing them as repetition.",
+      "representation_id": "r.recurrence_three_validate",
+      "preserve_components": ["problem_anchor", "index_row", "numbers_row", "recurrence_formula", "recurrence_instances"],
+      "forbidden_components": [],
+      "active_delta": "show S[1] = 14, S[2] = 8, S[3] = 14",
+      "disclosed_concepts": ["sum_i", "successive_sum", "i_progression", "j", "general_recurrence"],
+      "forbidden_concepts": ["python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes", "sep4:turns:542-553"]
+    },
+    {
+      "step_id": "recurrence_repetition_bridge",
+      "kind": "bridge",
+      "goal": "Make the loop bridge visible as the same recurrence repeated while i changes.",
+      "representation_id": "r.recurrence_repeats",
+      "preserve_components": ["problem_anchor", "recurrence_formula", "recurrence_instances", "i_progression"],
+      "forbidden_components": [],
+      "active_delta": "show same formula -> new i each turn -> repeat",
+      "disclosed_concepts": ["sum_i", "successive_sum", "i_progression", "j", "general_recurrence", "repetition_as_loop_bridge"],
+      "forbidden_concepts": ["python_loop"],
+      "probe": null,
+      "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes", "sep4:turns:542-553", "sep4:failure:loop_bridge_skipped"]
+    }
+  ],
+  "automatic_transitions": [
+    {"transition_id": "auto.compare.probe1", "from_step_id": "successive_compare_i1", "next_step_id": "successive_probe_i1", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"transition_id": "auto.validate1.probe2", "from_step_id": "successive_validate_i1", "next_step_id": "successive_probe_i2", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"transition_id": "auto.validate2.probe3", "from_step_id": "successive_validate_i2", "next_step_id": "successive_probe_i3", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"transition_id": "auto.validate3.delta", "from_step_id": "successive_validate_i3", "next_step_id": "successive_i_delta_probe", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"transition_id": "auto.delta_validate.formula", "from_step_id": "successive_i_delta_validate", "next_step_id": "recurrence_formula_bridge", "exit_target": null, "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes"]},
+    {"transition_id": "auto.formula.exercise", "from_step_id": "recurrence_formula_bridge", "next_step_id": "recurrence_three_values_probe", "exit_target": null, "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes"]},
+    {"transition_id": "auto.recurrence_validate.repeat", "from_step_id": "recurrence_three_values_validate", "next_step_id": "recurrence_repetition_bridge", "exit_target": null, "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes"]},
+    {"transition_id": "auto.repeat.exit", "from_step_id": "recurrence_repetition_bridge", "next_step_id": null, "exit_target": "python_translation", "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes"]}
+  ],
+  "outcome_routes": [
+    {"route_id": "route.successive1.correct", "after_step_id": "successive_probe_i1", "outcome": "correct", "next_step_id": "successive_validate_i1", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"route_id": "route.successive2.correct", "after_step_id": "successive_probe_i2", "outcome": "correct", "next_step_id": "successive_validate_i2", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"route_id": "route.successive3.correct", "after_step_id": "successive_probe_i3", "outcome": "correct", "next_step_id": "successive_validate_i3", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"route_id": "route.delta.correct", "after_step_id": "successive_i_delta_probe", "outcome": "correct", "next_step_id": "successive_i_delta_validate", "exit_target": null, "evidence_turn_refs": ["sep4:event:sum_i_to_successive_sums"]},
+    {"route_id": "route.recurrence.correct", "after_step_id": "recurrence_three_values_probe", "outcome": "correct", "next_step_id": "recurrence_three_values_validate", "exit_target": null, "evidence_turn_refs": ["sep4:event:repeated_recurrence_as_i_changes"]}
+  ]
+}

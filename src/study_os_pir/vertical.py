@@ -49,12 +49,14 @@ class VerticalRow(StrictFrozenModel):
 class VerticalWindowBox(StrictFrozenModel):
     start_index: int = Field(ge=0)
     width: int = Field(gt=0)
+    label: str = Field(default="box", min_length=1)
 
 
 class VerticalRepresentation(StrictFrozenModel):
     representation_id: str = Field(min_length=1)
     rows: tuple[VerticalRow, ...] = Field(min_length=1)
     box: VerticalWindowBox | None = None
+    boxes: tuple[VerticalWindowBox, ...] = ()
     annotations: tuple[str, ...] = ()
     visible_components: tuple[str, ...] = Field(min_length=1)
 
@@ -122,9 +124,14 @@ def _route_is_exclusive(first: str | None, second: str | None) -> bool:
     return (first is None) != (second is None)
 
 
+def _window_boxes(representation: VerticalRepresentation) -> tuple[VerticalWindowBox, ...]:
+    legacy = () if representation.box is None else (representation.box,)
+    return (*legacy, *representation.boxes)
+
+
 def _representation_features(representation: VerticalRepresentation) -> set[str]:
     features = set(representation.visible_components)
-    if representation.box is not None:
+    if _window_boxes(representation):
         features.add("window_box")
     return features
 
@@ -133,6 +140,9 @@ def _representation_surface_text(representation: VerticalRepresentation) -> str:
     parts = [row.label for row in representation.rows]
     for row in representation.rows:
         parts.extend(row.values)
+    if representation.box is not None:
+        parts.append("window")
+    parts.extend(box.label for box in representation.boxes)
     parts.extend(representation.annotations)
     return "\n".join(parts)
 
@@ -334,19 +344,29 @@ def validate_vertical_execution(
 
 
 def _render_representation(representation: VerticalRepresentation) -> str:
-    label_width = max(len(row.label) for row in representation.rows)
+    label_lengths = [len(row.label) for row in representation.rows]
+    if representation.box is not None:
+        label_lengths.append(len("window"))
+    label_lengths.extend(len(box.label) for box in representation.boxes)
+    label_width = max(label_lengths)
     lines = [
         f"{row.label:<{label_width}}: " + " ".join(f"{value:>3}" for value in row.values)
         for row in representation.rows
     ]
+    value_count = max(len(row.values) for row in representation.rows)
     if representation.box is not None:
-        value_count = max(len(row.values) for row in representation.rows)
         end = representation.box.start_index + representation.box.width
         markers = [
             "^^^" if representation.box.start_index <= index < end else "   "
             for index in range(value_count)
         ]
         lines.append(f"{'window':<{label_width}}: " + " ".join(markers))
+    for box in representation.boxes:
+        end = box.start_index + box.width
+        markers = [
+            "^^^" if box.start_index <= index < end else "   " for index in range(value_count)
+        ]
+        lines.append(f"{box.label:<{label_width}}: " + " ".join(markers))
     lines.extend(f"{'':<{label_width}}  {annotation}" for annotation in representation.annotations)
     return "\n".join(lines)
 

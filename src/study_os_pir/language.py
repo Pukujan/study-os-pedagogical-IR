@@ -45,6 +45,9 @@ def _representation_surface(representation: VerticalRepresentation) -> str:
     for row in representation.rows:
         values.append(row.label)
         values.extend(row.values)
+    if representation.box is not None:
+        values.append(representation.box.label)
+    values.extend(box.label for box in representation.boxes)
     values.extend(representation.annotations)
     return "\n".join(values)
 
