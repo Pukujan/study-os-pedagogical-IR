@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://study-os.local/schemas/pir.context-frame.v1.schema.json",
+  "title": "PIR ContextFrame v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "context_frame_id",
+    "before_turn_id",
+    "context_kind",
+    "ordered_turn_refs",
+    "source_span_refs",
+    "sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "pir.context-frame.v1"},
+    "context_frame_id": {"type": "string", "minLength": 1},
+    "before_turn_id": {"type": "string", "minLength": 1},
+    "context_kind": {
+      "enum": ["visible_verbatim_context", "complete_runtime_context", "derived_context"]
+    },
+    "ordered_turn_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "source_span_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
