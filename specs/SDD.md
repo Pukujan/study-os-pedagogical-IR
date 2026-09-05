@@ -20,9 +20,15 @@ Operation / Probe / LearnerOutcome
 Transition / CorrectionBranch
    ↓
 Trajectory
+   ↓
+experimental deterministic replay/controller
+   ├─ controller-only assessment oracle
+   └─ renderer-safe turn contract
+              ↓
+       learner-visible output
 ```
 
-The implementation must preserve the evidence/derived boundary throughout this pipeline.
+The implementation must preserve the evidence/derived boundary throughout this pipeline. The experimental replay layer exists to falsify the proposed IR semantics before stable G2 promotion; it is not the production Study OS runtime.
 
 ## Trust layers
 
@@ -45,6 +51,26 @@ Canonical evidence identity is SHA-256 over original bytes. L0 has no text norma
 ### L4/L5 — executable pedagogy
 
 Operations, probes, outcomes, transitions, correction branches and trajectories are deterministic IR objects. They are source-backed constraints, not generated prose.
+
+### Experimental replay layer
+
+The current experimental trajectory/runtime implementation tests whether the proposed L3-L5 contracts are sufficient to produce the learner-visible behavior that was calibrated.
+
+The replay layer must preserve this authority split:
+
+```text
+approved pedagogical trajectory
+        ↓
+deterministic controller
+        ├─ assessment registry     (controller only)
+        └─ renderer turn contract  (safe to expose)
+                  ↓
+            renderer / console
+                  ↓
+               learner
+```
+
+The renderer cannot choose an unauthorized next pedagogical node. The renderer-safe contract cannot contain hidden expected answers or other grading-oracle material when answer reveal is forbidden.
 
 ## Identity
 
@@ -98,6 +124,16 @@ Representation state is structured and must support at least:
 
 The schema should not hardcode sliding-window fields such as `box_start`; domain-specific values belong in typed/keyed state fields until a repeated cross-domain primitive is demonstrated.
 
+The full transcript has already falsified a mandatory-window-box assumption: `enumerate(a)` is a valid aligned index/number/pair representation without a window box. Representation contracts therefore must permit non-window visual states and may explicitly forbid irrelevant representation components.
+
+## Persistent learner-visible context
+
+A component marked as preserved in internal state is not necessarily visible to the learner. The replay runtime must distinguish persistent learner-visible context from hidden controller state.
+
+The motivating failure is the full difficult problem anchor: a trajectory can say `preserve problem_anchor` while a console renderer stops showing the problem. That must be treated as a realization failure.
+
+The current frontier is to wire the explicit replay-context artifact into renderer-safe output and test the actual rendered surface.
+
 ## PedagogicalState
 
 A pedagogical state captures:
@@ -143,7 +179,7 @@ A probe/question contract declares:
 - forbidden concepts/information;
 - success evidence rule.
 
-The exact target answer must not be exposed to a runtime renderer when the contract forbids answer reveal.
+The exact target answer must not be exposed to a runtime renderer when the contract forbids answer reveal. Answer-leak checks must inspect the whole learner-visible structured surface where applicable, not just prompt text.
 
 ## Learner outcomes
 
@@ -157,6 +193,10 @@ Initial bounded enum:
 - `unresolved`
 
 Outcomes are observations/classifications tied to actual learner evidence. A tutor message cannot create a learner outcome.
+
+The current runtime deterministically classifies bounded structured integer/integer-sequence probes. Open natural-language classification remains a future bounded adapter problem; it must not silently become controller authority.
+
+`partial` is a real control outcome, not a synonym for incorrect. The next source-backed runtime extension must represent the case where the learner identifies the correct `sum[i]` box contents but has not performed the arithmetic; that path should preserve the correct sub-result and ask only the missing arithmetic step.
 
 ## Transition
 
@@ -189,11 +229,38 @@ probe
 
 The exact branch sequence is represented as trajectory structure, not prose notes.
 
+Historical learner meta-turns may establish runtime policy without becoming literal future runtime gates. For example, a historical learner saying that two exercises are enough can justify a stopping policy without requiring every future learner to reproduce that exact phrase.
+
 ## Trajectory
 
 A trajectory is an ordered/branching set of state and transition refs with explicit entry states and path requirements.
 
 v0.1 does not use generic graph reachability to authorize runtime shortcuts. Required path order is explicit.
+
+The experimental trajectory validator currently treats unknown refs, ambiguous control, duplicate outcome routes, unreachable states and cycles as fail-closed errors. Repeated-error behavior is not invented when the source does not establish it.
+
+## Language/register abstraction — unresolved design question
+
+Representation abstraction and learner-facing language abstraction may be distinct pedagogical dimensions.
+
+Examples under investigation include:
+
+```text
+number → number at an index → element → a[i]
+box → selected group → window
+box total → window sum → S[i]
+```
+
+A renderer can preserve the correct chart while still prematurely replacing grounded learner language with disciplinary jargon. That would be semantically valid but may be pedagogically invalid.
+
+No first-class lexical/register schema is accepted yet. Before adding one, run a source-backed mutation/falsification test:
+
+1. show that the current contracts permit an unwanted terminology switch;
+2. show that existing `disclosed_concepts` / `forbidden_concepts` cannot express the constraint cleanly;
+3. add only the smallest experimental lexical state/bridge required;
+4. reject premature-term mutations while preserving existing trajectory regressions.
+
+Educational frameworks such as progressive formalization or semantic density may motivate the experiment but are not themselves IR schemas.
 
 ## Canonical serialization
 
@@ -203,6 +270,19 @@ Canonical JSON is defined in `specs/CANONICALIZATION.md`. Semantic digests must 
 
 The core library must not require a database. Persistence adapters may use SQLite/FOSSIL later. In-memory validated objects and JSON fixtures are sufficient for v0.1 correctness testing.
 
+## Documentation and checkpoint state
+
+PAM is pinned assurance methodology, not project state storage.
+
+- `assurance/HANDOFF_STATE.json` is the one mutable `current` handoff.
+- `assurance/checkpoints/*.json` are immutable PAM `historical_checkpoint` snapshots.
+- `docs/repository-state.json` contains bounded shared facts for generated status documentation.
+- `make docs-sync` rewrites machine-owned README/status content.
+- `make docs-check` is part of `make check` and fails on drift.
+- design specs remain human-reviewed; generated status cannot silently change architectural semantics.
+
+Every current handoff and archived checkpoint is validated against the pinned PAM revision in assurance CI. Live repository and CI observations supersede stale checkpoint observations.
+
 ## Validation layers
 
 1. JSON Schema Draft 2020-12 contracts;
@@ -211,7 +291,9 @@ The core library must not require a database. Persistence adapters may use SQLit
 4. fixture tests;
 5. property/metamorphic tests;
 6. mutation testing of critical validators/compiler;
-7. independent `study-os-benchmarker` evaluation.
+7. independent `study-os-benchmarker` evaluation;
+8. learner-visible deterministic replay used as an intended-use falsification surface;
+9. PAM/documentation drift validation for project continuity rather than pedagogy correctness.
 
 ## Failure behavior
 
@@ -226,7 +308,10 @@ Fail closed on:
 - incomplete coverage when extraction claims completion;
 - unsupported direct transition bypassing required state;
 - unresolved edge compiled as accepted;
-- non-deterministic canonical output.
+- non-deterministic canonical output;
+- hidden grading answer exposed to a renderer-safe contract;
+- required learner-visible context lost in a replay fixture;
+- generated project documentation drifting from its durable state sources.
 
 No automatic repair is performed in the trust kernel.
 
@@ -237,3 +322,4 @@ No automatic repair is performed in the trust kernel.
 - Readers support explicit versions; unknown versions fail.
 - Writers emit one declared current version per object family.
 - Migration produces new derived objects; it does not rewrite original evidence or historical compiled artifacts.
+- Historical PAM checkpoints are never rewritten to match newer project state.
