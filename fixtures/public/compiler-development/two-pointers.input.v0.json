@@ -1,19 +1,13 @@
 {
-  "schema_version": "pir.compiler-input.v0",
+  "schema_version": "pir.problem-compiler-input.v0",
   "case_id": "dev.dsa.two-pointers.v0",
   "domain": "dsa",
-  "problem_text": "Given a sorted array of integers and a target sum, return whether two distinct values add to the target using one pointer from each end.",
-  "learner_evidence": [
-    {"concept_id": "array_value_lookup", "level": "unaided_success", "evidence_refs": ["synthetic-dev-evidence"]},
-    {"concept_id": "index", "level": "unaided_success", "evidence_refs": ["synthetic-dev-evidence"]},
-    {"concept_id": "pointer_role", "level": "unknown", "evidence_refs": []},
-    {"concept_id": "coordinated_pointer_move", "level": "unknown", "evidence_refs": []}
-  ],
-  "current_representation": ["array", "indexes"],
+  "problem_text": "Given a sorted array of integers and a target sum, determine whether two numbers in the array add up to the target using a two-pointer strategy.",
   "public_constraints": [
-    "do not assume unknown prerequisites are known",
-    "keep left and right roles distinct",
-    "do not reveal probe answers"
+    "compile the complete prerequisite-respecting canonical teaching graph independent of learner state",
+    "preserve the distinct left-pointer and right-pointer roles across every movement",
+    "attach stable representation and exercise requirements to canonical microsteps",
+    "do not reveal evaluator oracle information"
   ],
   "policy_ref": "compiler-p4@0.1.0"
 }
