@@ -3,6 +3,6 @@
   "policy_id": "compiler-p0",
   "policy_version": "0.1.0",
   "strategy": "weak_baseline",
-  "prompt_template": "Decompose the problem for a beginner step by step. Return only the requested structured compiler proposal.",
+  "prompt_template": "Decompose the raw problem into a complete beginner-oriented canonical sequence of teaching steps. Return only the requested structured compiler proposal; do not personalize or omit prerequisites based on a learner profile.",
   "max_new_concepts_per_step": 3
 }

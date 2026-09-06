@@ -8,27 +8,40 @@ The September-4 sliding-window calibration is now a rich source-backed public re
 
 That work does **not** by itself prove that the PIR generalizes to unseen problems. Continuing to add sliding-window-specific states would increase historical fidelity while also increasing the risk of test overfitting.
 
-The next success criterion is therefore not more sliding-window replay. It is demonstrating that a versioned compiler policy can propose useful PIR structure for structurally different problems without receiving their expected pedagogical graph.
+The next success criterion is therefore not more sliding-window replay. It is demonstrating that a versioned compiler policy can produce a useful **canonical problem decomposition** for structurally different problems without receiving their expected pedagogical graph.
 
-## Immediate product question
+## Architectural decision: decomposition first, traversal later
 
-> Given a raw problem plus an evidence-bounded learner state, can an LLM compiler produce a candidate pedagogical decomposition that survives deterministic PIR validation and independent evaluation across multiple problem families?
+The problem compiler does **not** receive learner state.
 
-The LLM is a **proposal/compiler component**, not the runtime authority.
+Its job is to answer:
+
+> For this problem, what is the complete prerequisite-respecting sequence, representation grammar, assessment structure, and optional repair/expansion structure that a novice could require?
+
+Personalization is a separate traversal problem. Learner evidence may later select an entry point, skip strongly evidenced concepts, request an expansion, or enter a repair path, but it must not cause the canonical decomposition itself to omit nodes.
 
 ```text
-raw problem + learner evidence
+raw problem
         ↓
-versioned LLM compiler policy
+versioned LLM problem-compiler policy
         ↓
-candidate PIR proposal
+CanonicalProblemPIR
         ↓
 schema + semantic + pedagogy + representation + language validators
         ↓
-accepted candidate
+accepted canonical teaching graph
+
+accepted canonical teaching graph + learner evidence + learner request/session state
+        ↓
+TraversalDecision
         ↓
 deterministic controller/runtime/renderer/verifier
 ```
+
+This separation lets us evaluate two questions independently:
+
+1. **Decomposition accuracy:** did the compiler construct the right complete teaching graph?
+2. **Adaptation accuracy:** given evidence, did traversal choose the right path through that graph?
 
 ## What is already proven enough to freeze as regression
 
@@ -55,48 +68,68 @@ New sliding-window schema changes require evidence that a compiler/generalizatio
 
 ## Missing pieces now
 
-### 1. Minimal compiler contract
+### 1. Canonical problem-compiler contract
 
-Add strict, versioned models for compiler input and compiler proposal.
-
-Compiler input must include only legitimate candidate-visible information, such as:
+The compiler input contains only legitimate problem-side information:
 
 - raw problem text / structured problem data;
-- learner evidence snapshot with `UNKNOWN` permitted by default;
-- known/current representation when applicable;
+- domain;
 - public PIR/compiler constraints;
 - compiler policy identity/version.
 
-Compiler proposal should describe structure, not a finished lesson. Initial proposal fields should be limited to reusable concepts such as:
+It must **not** contain learner knowledge/evidence, a personalized current step, or evaluator-only expected bridges/answers.
+
+The canonical proposal should describe structure, not a finished lesson. Initial proposal fields are limited to reusable concepts such as:
 
 - problem objects and roles;
-- prerequisite concepts;
+- all prerequisite concepts a novice could require;
 - candidate state variables;
 - dependencies;
-- candidate microsteps/transitions;
+- canonical microsteps/transitions;
 - invariants/conditions;
 - representation requirements;
 - assessment targets;
+- exercise requirements;
+- optional expansion/repair hooks;
 - candidate misconception/failure classes;
 - abstraction/generalization path.
 
-Do not encode evaluator-only expected bridges or answers in the candidate input.
+A canonical graph should be deliberately fine-grained enough that later traversal can safely compress it. Skipping is a traversal operation, not a compiler omission.
 
-### 2. Prompt-policy versioning
+### 2. Separate traversal contract
 
-Prompt/model configuration is part of the compiler identity and must be versioned independently from PIR.
+Traversal receives:
+
+- accepted `CanonicalProblemPIR`;
+- learner evidence, with `UNKNOWN` permitted by default;
+- learner request/session state when relevant.
+
+Traversal may:
+
+- follow the canonical path;
+- skip a concept with sufficiently strong evidence;
+- enter an authored repair path;
+- enter an authored optional example/explanation branch.
+
+The initial deterministic policy is conservative: `SUPPORTED_SUCCESS` is not enough to skip a canonical concept. Unaided, transferred, or retained evidence may authorize skipping. This policy is experimental and can later be calibrated independently from the problem compiler.
+
+### 3. Prompt-policy versioning
+
+Prompt/model configuration is part of the problem-compiler identity and must be versioned independently from PIR.
 
 Initial experimental policies:
 
-- `compiler-p0@0.1.0`: weak natural-language decomposition baseline;
-- `compiler-p1@0.1.0`: product-thesis / detailed pedagogical framing;
+- `compiler-p0@0.1.0`: weak natural-language canonical decomposition baseline;
+- `compiler-p1@0.1.0`: product-thesis / expertise-decompression framing;
 - `compiler-p2@0.1.0`: explicit decomposition constraints;
-- `compiler-p3@0.1.0`: one-transition structured proposal;
-- `compiler-p4@0.1.0`: PIR-only structured compiler output.
+- `compiler-p3@0.1.0`: one canonical microstep proposal at a time;
+- `compiler-p4@0.1.0`: structured canonical PIR-only compiler output.
+
+P3 is an incremental compiler ablation, not a learner-personalization mode. Repeated P3 calls would construct the same canonical graph one step at a time.
 
 Every run receipt must pin prompt policy, model identity/revision, PIR revision, benchmarker revision, settings, and candidate-visible input hashes.
 
-### 3. Diverse development DSA problems
+### 4. Diverse development DSA problems
 
 Use structurally different visible-development problems rather than many array variants.
 
@@ -108,9 +141,9 @@ Initial development set:
 
 These are development cases: failures may be inspected and may guide compiler/PIR improvements. They cannot later count as sealed generalization evidence.
 
-A reusable PIR should express these primarily through generic constructs such as object, role, state, transition, invariant, dependency, condition, iteration, representation, prerequisite, misconception, assessment, and evidence. If each problem requires bespoke problem-family-specific control fields, treat that as evidence the abstraction is overfit.
+A reusable PIR should express these primarily through generic constructs such as object, role, state, transition, invariant, dependency, condition, iteration, representation, prerequisite, misconception, assessment, exercise, repair, and evidence. If each problem requires bespoke problem-family-specific control fields, treat that as evidence the abstraction is overfit.
 
-### 4. Repeated-run compiler evaluation
+### 5. Repeated-run compiler evaluation
 
 Do not judge a prompt/model from one impressive completion.
 
@@ -119,32 +152,34 @@ For each candidate configuration, run multiple fresh independent generations per
 - schema-valid proposal rate;
 - legal/accepted proposal rate;
 - prerequisite coverage;
+- canonical microstep coverage/order;
 - required bridge preservation;
-- representation persistence;
+- representation continuity;
+- exercise/assessment objective coverage;
 - answer/future-information leakage;
-- unsupported learner-knowledge assumptions;
-- unsupported mastery claims;
 - concept/variable complexity per step;
 - semantic convergence across runs;
 - surface terminology variance.
 
 Retain failed runs. Do not cherry-pick the best sample.
 
-### 5. Smaller-model calibration
+Learner-state routing metrics belong to the separate traversal benchmark rather than the decomposition score.
 
-Evaluate model size and task granularity separately.
+### 6. Smaller-model calibration
+
+Evaluate model size and decomposition granularity separately.
 
 Compare at least:
 
-- stronger model, full/coarse PIR proposal;
-- smaller model, full/coarse PIR proposal;
-- smaller model, one-next-transition proposal.
+- stronger model, full canonical PIR proposal;
+- smaller model, full canonical PIR proposal;
+- smaller model, one canonical microstep proposal at a time.
 
 The goal is to discover the smallest approved model for each bounded compiler operation, not to require one model to do the whole teaching job.
 
-A smaller model may be acceptable for local transition proposals even if it is inadequate for unfamiliar-problem semantic decomposition.
+Traversal should remain deterministic wherever evidence and authored graph structure are sufficient. LLM use in traversal is a later fallback question, not part of the PIR-1 compiler proof.
 
-### 6. Anti-overfitting lanes
+### 7. Anti-overfitting lanes
 
 Use the benchmarker's existing holdout protocol.
 
@@ -162,17 +197,19 @@ The development agent cannot manufacture a clean hidden claim by writing and the
 PIR-1 compiler feasibility is successful when all of the following are true:
 
 1. September-4 remains green as public regression without new problem-specific hacks.
-2. A strict compiler input/proposal contract exists and contains no evaluator oracle.
-3. Prompt policies are versioned and reproducible.
-4. At least three structurally different visible DSA development problems can be compiled into valid candidate PIR proposals.
-5. Repeated-run reports are produced; no result is based on one selected completion.
-6. At least one configuration demonstrates stable semantic decomposition across all development families while deterministic validators continue to catch illegal shortcuts, representation loss, answer leakage, and unsupported learner/mastery claims.
-7. Smaller-model performance is measured separately for coarse decomposition and local-transition generation.
-8. Systematic Lane B masked September-4 evaluation exists and is reported honestly as masked regression, not unseen generalization.
-9. A clean Lane C or Lane D evaluation boundary is prepared before any claim that the compiler works on unseen problems.
-10. At least one clean sealed/prospective evaluation is run before promoting the architecture as generalizing beyond development cases.
+2. A strict learner-independent problem-compiler input and canonical-PIR proposal contract exists and contains no evaluator oracle.
+3. A separate traversal contract exists; learner evidence cannot delete nodes from canonical compilation.
+4. Prompt policies are versioned and reproducible.
+5. At least three structurally different visible DSA development problems can be compiled into valid canonical PIR proposals.
+6. Repeated-run reports are produced; no result is based on one selected completion.
+7. At least one configuration demonstrates stable semantic decomposition across all development families while deterministic validators continue to catch illegal compression, representation loss, answer leakage, and structural invalidity.
+8. Smaller-model performance is measured separately for full canonical decomposition and incremental canonical-microstep generation.
+9. Traversal tests separately demonstrate that weak/unknown learner evidence cannot authorize skipping canonical concepts.
+10. Systematic Lane B masked September-4 evaluation exists and is reported honestly as masked regression, not unseen generalization.
+11. A clean Lane C or Lane D evaluation boundary is prepared before any claim that the compiler works on unseen problems.
+12. At least one clean sealed/prospective evaluation is run before promoting the architecture as generalizing beyond development cases.
 
-There is deliberately no population-level learning-efficacy claim in this gate. This phase tests compiler structure, authority boundaries, and generalization behavior—not whether the system improves student outcomes at scale.
+There is deliberately no population-level learning-efficacy claim in this gate. This phase tests compiler structure, authority boundaries, generalization behavior, and clean separation from adaptation—not whether the system improves student outcomes at scale.
 
 ## Hard failure signals
 
@@ -181,8 +218,9 @@ Stop and revise the abstraction if experiments show any of these patterns:
 - every new DSA family requires bespoke top-level PIR primitives;
 - prompt success depends on embedding expected golden bridges in the prompt;
 - good results occur only in selected runs while variance remains high;
-- candidate proposals routinely assume learner knowledge not supported by evidence;
+- canonical decomposition omits prerequisites because the model assumes an entry-level learner already knows them;
 - semantic correctness is achieved by dropping required representation/pedagogical bridges;
+- traversal skips weak/unknown concepts simply to shorten a lesson;
 - smaller or stronger models can only succeed when given evaluator-side expected answers;
 - sealed cases are repeatedly opened and tuned against, destroying the holdout boundary.
 
@@ -206,15 +244,17 @@ The intended future direction is a deterministic adaptive teaching engine with e
 
 ```text
 1. close/freeze September-4 public regression
-2. implement compiler input/proposal models
-3. implement prompt-policy identity/version registry
-4. define binary-search, two-pointers, BFS development inputs
+2. split learner-independent canonical problem compilation from learner traversal
+3. keep P0-P4 prompt policies learner-independent
+4. define binary-search, two-pointers, BFS canonical development inputs
 5. add candidate-run receipt/report format
-6. run strong-model and smaller-model prompt-policy matrix
-7. add systematic September-4 masked regressions
-8. select best policy by repeated-run metrics, not anecdotes
-9. prepare isolated sealed/prospective evaluation
-10. run clean unseen evaluation
+6. build evaluator-side canonical requirements for the three development families
+7. run strong-model and smaller-model prompt-policy matrix repeatedly
+8. benchmark traversal separately against learner-evidence mutations
+9. add systematic September-4 masked regressions
+10. select best policy by repeated-run metrics, not anecdotes
+11. prepare isolated sealed/prospective evaluation
+12. run clean unseen evaluation
 ```
 
-The next code change after this document should therefore be the minimal compiler contract and prompt-policy versioning surface, not another historical tutoring trajectory or production application feature.
+The next implementation after this split is the candidate runner/receipt plus independent canonical-decomposition evaluator, not another historical tutoring trajectory or production application feature.
