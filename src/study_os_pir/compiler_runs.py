@@ -19,6 +19,7 @@ class CandidateParseStatus(StrEnum):
     PARSED = "parsed"
     INVALID_JSON = "invalid_json"
     INVALID_SCHEMA = "invalid_schema"
+    EXECUTION_FAILED = "execution_failed"
 
 
 class GenerationSetting(StrictFrozenModel):
