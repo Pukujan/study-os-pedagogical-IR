@@ -15,6 +15,7 @@ from study_os_pir.compiler import (
 )
 from study_os_pir.compiler_runs import (
     CandidateParseStatus,
+    CompilerRunReceipt,
     GenerationSetting,
     build_compiler_run_receipt,
 )
@@ -65,7 +66,7 @@ def build(
     candidate_bytes: bytes,
     parse_status: CandidateParseStatus,
     candidate_proposal: CanonicalProblemPIR | None,
-):
+) -> CompilerRunReceipt:
     return build_compiler_run_receipt(
         run_id="run-001",
         attempt_index=0,
