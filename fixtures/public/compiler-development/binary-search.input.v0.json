@@ -1,19 +1,13 @@
 {
-  "schema_version": "pir.compiler-input.v0",
+  "schema_version": "pir.problem-compiler-input.v0",
   "case_id": "dev.dsa.binary-search.v0",
   "domain": "dsa",
   "problem_text": "Given a sorted array of integers and a target integer, return the index of the target if it exists, otherwise return -1.",
-  "learner_evidence": [
-    {"concept_id": "array_value_lookup", "level": "unaided_success", "evidence_refs": ["synthetic-dev-evidence"]},
-    {"concept_id": "index", "level": "unaided_success", "evidence_refs": ["synthetic-dev-evidence"]},
-    {"concept_id": "search_interval", "level": "unknown", "evidence_refs": []},
-    {"concept_id": "midpoint", "level": "unknown", "evidence_refs": []}
-  ],
-  "current_representation": ["array", "indexes"],
   "public_constraints": [
-    "do not assume unknown prerequisites are known",
-    "preserve existing representation unless a bridge authorizes change",
-    "do not reveal probe answers"
+    "compile the complete prerequisite-respecting canonical teaching graph independent of learner state",
+    "preserve representation continuity across abstraction changes",
+    "attach stable representation and exercise requirements to canonical microsteps",
+    "do not reveal evaluator oracle information"
   ],
   "policy_ref": "compiler-p4@0.1.0"
 }
