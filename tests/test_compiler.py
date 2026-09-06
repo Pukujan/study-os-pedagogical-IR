@@ -153,7 +153,9 @@ def traversal_decision() -> TraversalDecision:
         action=TraversalAction.SKIP_EVIDENCED,
         selected_step_ids=("introduce_search_region", "introduce_midpoint"),
         skipped_concepts=("index", "array_value_lookup"),
-        rationale="skip only concepts with strong evidence and enter at the first uncertain concept",
+        rationale=(
+            "skip only concepts with strong evidence and enter at the first uncertain concept"
+        ),
     )
 
 
