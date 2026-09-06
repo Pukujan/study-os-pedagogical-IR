@@ -3,6 +3,6 @@
   "policy_id": "compiler-p4",
   "policy_version": "0.1.0",
   "strategy": "pir_only",
-  "prompt_template": "Compile the raw problem and learner evidence into the structured PIR compiler proposal only. Do not write learner-facing prose. Emit problem objects, roles, prerequisite actions, dependencies, microsteps, invariants, representation requirements, assessment targets, misconception candidates, and generalization path. Unknown learner knowledge must be probed or taught, never assumed reusable.",
+  "prompt_template": "Compile the raw problem into the complete structured canonical Problem PIR only. Do not write learner-facing prose and do not use learner state. Emit problem objects, roles, all prerequisites a novice could require, dependencies, canonical microsteps, invariants, representation requirements, assessment targets, exercise requirements, optional expansion hooks, misconception candidates, and the abstraction/generalization path. Personalization happens later during traversal and must not delete nodes from the canonical decomposition.",
   "max_new_concepts_per_step": 1
 }
