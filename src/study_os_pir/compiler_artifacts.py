@@ -38,12 +38,12 @@ def parse_compiler_candidate(
     """Parse exact candidate bytes without repairing or normalizing model output."""
 
     try:
-        payload = json.loads(candidate_bytes)
+        json.loads(candidate_bytes)
     except (json.JSONDecodeError, UnicodeDecodeError):
         return CandidateParseStatus.INVALID_JSON, None
 
     try:
-        proposal = CanonicalProblemPIR.model_validate(payload)
+        proposal = CanonicalProblemPIR.model_validate_json(candidate_bytes)
     except ValidationError:
         return CandidateParseStatus.INVALID_SCHEMA, None
 
